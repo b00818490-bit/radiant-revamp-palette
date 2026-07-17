@@ -102,16 +102,6 @@
         { "type": "swatch", "settings": { "name": "N°06 Cocoa", "color": "#4a2a22" } }
       ]
     },
-    "trust": {
-      "type": "trust-badges",
-      "settings": { "background_color": "#f1ece5", "text_color": "#3b3b3d", "divider": true },
-      "blocks": [
-        { "type": "badge", "settings": { "icon": "sparkles", "title": "Dermatologist tested", "body": "Every formula, every batch." } },
-        { "type": "badge", "settings": { "icon": "leaf", "title": "Vegan · Cruelty-free", "body": "Leaping Bunny certified." } },
-        { "type": "badge", "settings": { "icon": "truck", "title": "Carbon-neutral shipping", "body": "Free over $50, always." } },
-        { "type": "badge", "settings": { "icon": "heart", "title": "30-day happy return", "body": "Try it. Keep it. Or don't." } }
-      ]
-    },
     "ingredient_cards": {
       "type": "ingredient-cards",
       "settings": {
