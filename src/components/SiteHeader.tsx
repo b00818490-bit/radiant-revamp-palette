@@ -788,12 +788,10 @@ function BottomLink({
   icon: React.ReactNode;
   label: string;
 }) {
+  const props = { to, params } as unknown as Record<string, unknown>;
   return (
     <Link
-      // @ts-expect-error dynamic path helpers
-      to={to}
-      // @ts-expect-error dynamic params
-      params={params}
+      {...props}
       activeOptions={{ exact: to === "/" }}
       className="flex flex-col items-center justify-center gap-1 py-2.5 text-[10px] uppercase tracking-widest text-[#3B3B3D]"
       activeProps={{ className: "text-[#9E2A5C]" }}
