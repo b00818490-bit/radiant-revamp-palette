@@ -143,7 +143,6 @@ export function Footer() {
                   WhatsApp · +91 93192 34233
                 </a>
               </p>
-              <p>Mon–Sat, 10am–7pm IST</p>
             </div>
           </div>
 
