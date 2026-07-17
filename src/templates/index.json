@@ -2,15 +2,11 @@
   "order": [
     "announcement",
     "hero",
-    "press",
     "bento_collections",
     "featured_products",
     "shade_finder",
-    "trust",
-    "ingredient_cards",
     "testimonials",
-    "image_with_text",
-    "newsletter"
+    "image_with_text"
   ],
   "sections": {
     "announcement": {
@@ -32,7 +28,7 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "eyebrow": "Autumn Edit · 2026",
+        "eyebrow": "",
         "heading_line_1": "Colour that",
         "heading_line_2": "",
         "heading_line_2_italic": "actually",
@@ -40,7 +36,7 @@
         "body": "Clinically-backed makeup and skincare made with pigment that performs and formulas your dermatologist would sign off on. Zero mystery. Zero compromise.",
         "primary_cta_label": "Shop Best Sellers",
         "primary_cta_url": "#bestsellers",
-        "secondary_cta_label": "Find Your Shade",
+        "secondary_cta_label": "",
         "secondary_cta_url": "#shade",
         "image": "__ASSET__hero",
         "image_alt": "Greyon hero — model with radiant skin and berry lipstick",
@@ -54,30 +50,7 @@
         "accent_color": "#9e2a5c",
         "show_video_button": true
       },
-      "blocks": [
-        { "type": "stat", "settings": { "value": "4.9★", "label": "12,400 reviews" } },
-        { "type": "stat", "settings": { "value": "28d", "label": "Visible glow" } },
-        { "type": "stat", "settings": { "value": "100%", "label": "Vegan" } }
-      ]
-    },
-    "press": {
-      "type": "press-marquee",
-      "settings": {
-        "eyebrow": "As seen in",
-        "speed_seconds": 45,
-        "background_color": "#faf6f1",
-        "text_color": "#3b3b3d",
-        "divider": true
-      },
-      "blocks": [
-        { "type": "logo", "settings": { "label": "VOGUE" } },
-        { "type": "logo", "settings": { "label": "ELLE" } },
-        { "type": "logo", "settings": { "label": "ALLURE" } },
-        { "type": "logo", "settings": { "label": "BAZAAR" } },
-        { "type": "logo", "settings": { "label": "REFINERY29" } },
-        { "type": "logo", "settings": { "label": "COSMO" } },
-        { "type": "logo", "settings": { "label": "GLAMOUR" } }
-      ]
+      "blocks": []
     },
     "bento_collections": {
       "type": "bento-collections",
@@ -129,29 +102,6 @@
         { "type": "swatch", "settings": { "name": "N°06 Cocoa", "color": "#4a2a22" } }
       ]
     },
-    "trust": {
-      "type": "trust-badges",
-      "settings": { "background_color": "#f1ece5", "text_color": "#3b3b3d", "divider": true },
-      "blocks": [
-        { "type": "badge", "settings": { "icon": "sparkles", "title": "Dermatologist tested", "body": "Every formula, every batch." } },
-        { "type": "badge", "settings": { "icon": "leaf", "title": "Vegan · Cruelty-free", "body": "Leaping Bunny certified." } },
-        { "type": "badge", "settings": { "icon": "truck", "title": "Carbon-neutral shipping", "body": "Free over $50, always." } },
-        { "type": "badge", "settings": { "icon": "heart", "title": "30-day happy return", "body": "Try it. Keep it. Or don't." } }
-      ]
-    },
-    "ingredient_cards": {
-      "type": "ingredient-cards",
-      "settings": {
-        "eyebrow": "Ingredient spotlight",
-        "heading": "Hero actives, at percentages that work."
-      },
-      "blocks": [
-        { "type": "ingredient", "settings": { "name": "Hyaluronic Acid", "note": "Plumps and holds up to 1,000x its weight in water.", "color": "#16a1d4" } },
-        { "type": "ingredient", "settings": { "name": "Niacinamide 5%", "note": "Evens tone, refines pores, calms redness.", "color": "#7cb342" } },
-        { "type": "ingredient", "settings": { "name": "Squalane", "note": "Weightless barrier repair that never clogs.", "color": "#df7e35" } },
-        { "type": "ingredient", "settings": { "name": "Peptide Complex", "note": "Firms and smooths over eight clinical weeks.", "color": "#f5c518" } }
-      ]
-    },
     "testimonials": {
       "type": "testimonials",
       "settings": {
@@ -179,20 +129,6 @@
         "image_position": "left",
         "background_color": "#faf6f1",
         "text_color": "#3b3b3d"
-      }
-    },
-    "newsletter": {
-      "type": "newsletter",
-      "settings": {
-        "eyebrow": "Join the list",
-        "heading": "10% off your first order.",
-        "body": "Early access to launches, shade drops, and editorial routines from our in-house dermatologists. No spam — unsubscribe anytime.",
-        "placeholder": "you@email.com",
-        "button_label": "Subscribe",
-        "disclaimer": "By subscribing you agree to receive marketing emails. See our Privacy Policy.",
-        "background_color": "#3b3b3d",
-        "text_color": "#faf6f1",
-        "accent_color": "#9e2a5c"
       }
     }
   }

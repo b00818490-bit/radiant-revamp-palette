@@ -1,59 +1,11 @@
 import { Link } from "@tanstack/react-router";
-import { useState } from "react";
-import { Instagram, Facebook, Youtube, Linkedin, MessageCircle, Mail } from "lucide-react";
+import { Instagram, Facebook, Youtube, Linkedin, MessageCircle } from "lucide-react";
 import logoAsset from "@/assets/greyon-logo.png.asset.json";
 
 
 export function Footer() {
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-
   return (
     <footer className="bg-charcoal text-ivory">
-      {/* Newsletter */}
-      <div className="border-b border-ivory/10">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 md:grid-cols-[1.2fr_1fr] md:items-center md:px-8 md:py-20">
-          <div>
-            <p className="text-[11px] uppercase tracking-[0.3em] text-gold">Join the list</p>
-            <h2 className="mt-3 font-display text-4xl leading-[1.05] text-ivory md:text-5xl">
-              10% off your first order.
-            </h2>
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-ivory/70">
-              Early access to launches, shade drops, and editorial routines from our in-house
-              dermatologists. No spam — unsubscribe anytime.
-            </p>
-          </div>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              if (email) setSubmitted(true);
-            }}
-            className="w-full"
-          >
-            <div className="flex items-stretch overflow-hidden rounded-sm border border-ivory/30 bg-transparent focus-within:border-ivory">
-              <div className="flex items-center pl-4 text-ivory/50">
-                <Mail className="h-4 w-4" />
-              </div>
-              <input
-                type="email"
-                required
-                placeholder="you@email.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 bg-transparent px-3 py-4 text-sm text-ivory placeholder:text-ivory/40 focus:outline-none"
-              />
-              <button className="bg-berry px-6 text-[11px] uppercase tracking-[0.25em] text-ivory transition-colors hover:bg-berry/90">
-                {submitted ? "Thanks ✓" : "Subscribe"}
-              </button>
-            </div>
-            <p className="mt-3 text-[11px] leading-relaxed text-ivory/50">
-              By subscribing you agree to receive marketing emails. See our{" "}
-              <a href="#" className="underline hover:text-ivory">Privacy Policy</a>.
-            </p>
-          </form>
-        </div>
-      </div>
-
       {/* Brand */}
       <div className="mx-auto max-w-7xl px-4 py-16 md:px-8">
         <Link to="/" aria-label="Greyon home" className="inline-block">
