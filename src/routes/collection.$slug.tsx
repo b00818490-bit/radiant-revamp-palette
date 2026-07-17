@@ -255,33 +255,8 @@ function CollectionPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Announcement */}
-      <div className="bg-charcoal text-ivory text-[11px] tracking-[0.2em] uppercase py-2.5 text-center">
-        Complimentary shipping over $50 · Free returns
-      </div>
+      <SiteHeader />
 
-      {/* Nav */}
-      <header className="sticky top-0 z-40 border-b border-border/60 bg-background/90 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:px-8">
-          <button className="md:hidden text-charcoal"><Menu className="h-5 w-5" /></button>
-          <Link to="/" className="font-display text-2xl tracking-tight text-charcoal">
-            greyon
-          </Link>
-          <nav className="hidden md:flex items-center gap-8 text-sm text-charcoal/80">
-            {["Shop", "Face", "Lips", "Eyes", "Skincare", "About"].map((n) => (
-              <a key={n} href="#" className="hover:text-berry transition-colors">
-                {n}
-              </a>
-            ))}
-          </nav>
-          <div className="flex items-center gap-4 text-charcoal">
-            <Search className="h-4 w-4" />
-            <User className="hidden md:block h-4 w-4" />
-            <Heart className="hidden md:block h-4 w-4" />
-            <ShoppingBag className="h-4 w-4" />
-          </div>
-        </div>
-      </header>
 
       {/* Breadcrumb + Hero intro */}
       <section className="border-b border-border/60 bg-[#f1ece5]">
