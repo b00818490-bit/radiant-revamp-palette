@@ -183,14 +183,16 @@ function PDP() {
   return (
     <div className="min-h-screen bg-white text-[color:var(--color-charcoal)]">
       <SiteHeader />
-      <Breadcrumb />
-      <ProductBlock />
-      <ShadeTools />
-      <RoutineUpsell />
-      <FBT />
-      <RatingsSummary />
-      <ReviewsList />
-      <DetailsBelow />
+      <main>
+        <Breadcrumb />
+        <ProductBlock />
+        <ShadeTools />
+        <RoutineUpsell />
+        <FBT />
+        <RatingsSummary />
+        <ReviewsList />
+        <DetailsBelow />
+      </main>
       <Footer />
     </div>
   );
@@ -342,9 +344,9 @@ function ProductBlock() {
         {/* Add to bag */}
         <div className="mt-6 flex gap-3">
           <div className="flex items-center border border-[color:var(--color-charcoal)]">
-            <button onClick={() => setQty(Math.max(1, qty - 1))} className="h-14 w-12 flex items-center justify-center hover:bg-[color:var(--color-muted)]"><Minus className="h-4 w-4" /></button>
+            <button aria-label="Decrease quantity" onClick={() => setQty(Math.max(1, qty - 1))} className="h-14 w-12 flex items-center justify-center hover:bg-[color:var(--color-muted)]"><Minus className="h-4 w-4" /></button>
             <span className="w-10 text-center text-sm">{qty}</span>
-            <button onClick={() => setQty(qty + 1)} className="h-14 w-12 flex items-center justify-center hover:bg-[color:var(--color-muted)]"><Plus className="h-4 w-4" /></button>
+            <button aria-label="Increase quantity" onClick={() => setQty(qty + 1)} className="h-14 w-12 flex items-center justify-center hover:bg-[color:var(--color-muted)]"><Plus className="h-4 w-4" /></button>
           </div>
           <button className="flex-1 bg-[color:var(--color-pink)] text-white text-[13px] uppercase tracking-[0.18em] hover:bg-[color:var(--color-pink)]/90 transition-colors flex items-center justify-center gap-2">
             Add to bag · ${(purchase === "sub" ? 22.4 : 28) * qty}
