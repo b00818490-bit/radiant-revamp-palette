@@ -31,27 +31,29 @@ export function Footer() {
   return (
     <footer className="bg-charcoal text-ivory">
       {/* Brand */}
-      <div className="mx-auto max-w-7xl px-4 py-16 text-center md:px-8">
-        <Link to="/" aria-label="Greyon home" className="inline-block">
-          <img src={logoAsset.url} alt="Greyon — produits de beauté" className="h-10 w-auto brightness-0 invert" />
-        </Link>
-        <p className="mx-auto mt-4 max-w-xs text-sm leading-relaxed text-ivory/60">
+      <div className="mx-auto max-w-7xl px-4 py-16 text-left md:px-8">
+        <div className="inline-flex flex-col items-center">
+          <Link to="/" aria-label="Greyon home" className="inline-block">
+            <img src={logoAsset.url} alt="Greyon — produits de beauté" className="h-10 w-auto brightness-0 invert" />
+          </Link>
+          <div className="mt-6 flex items-center gap-3">
+            {socials.map(({ Icon, href, label }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={label}
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-ivory/20 text-ivory/70 transition-colors hover:border-gold hover:text-gold"
+              >
+                <Icon className="h-4 w-4" />
+              </a>
+            ))}
+          </div>
+        </div>
+        <p className="mt-4 max-w-xs text-sm leading-relaxed text-ivory/60">
           Beauty For All. Dermatologist-tested formulas designed and made responsibly.
         </p>
-        <div className="mt-6 flex items-center justify-center gap-3">
-          {socials.map(({ Icon, href, label }) => (
-            <a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={label}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-ivory/20 text-ivory/70 transition-colors hover:border-gold hover:text-gold"
-            >
-              <Icon className="h-4 w-4" />
-            </a>
-          ))}
-        </div>
 
         {/* Contact */}
         <div className="mt-8 space-y-2 text-xs text-ivory/60">
