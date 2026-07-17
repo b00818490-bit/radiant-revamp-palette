@@ -49,7 +49,7 @@ export function Section({ settings, blocks = [] }: SectionProps<Settings, BlockS
       : blocks.map((b) => b.settings);
 
   return (
-    <section className="mx-auto max-w-[1440px] px-5 pt-10 pb-16 sm:px-8 lg:pt-14 lg:pb-24">
+    <section className="mx-auto max-w-[1440px] bg-[var(--color-charcoal)] px-5 pt-10 pb-16 sm:px-8 lg:pt-14 lg:pb-24">
       <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           {settings.eyebrow && (
@@ -57,15 +57,14 @@ export function Section({ settings, blocks = [] }: SectionProps<Settings, BlockS
               {settings.eyebrow}
             </div>
           )}
-          <h2 className="text-4xl leading-[0.95] sm:text-5xl lg:text-6xl">{settings.heading}</h2>
+          <h2 className="text-4xl leading-[0.95] text-[var(--color-ivory)] sm:text-5xl lg:text-6xl">{settings.heading}</h2>
         </div>
         {settings.cta_label && (
           <a
             href={settings.cta_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-[13px] uppercase tracking-[0.18em] transition-opacity hover:opacity-70"
-            style={{ color: "var(--color-foreground)" }}
+            className="inline-flex items-center gap-2 text-[13px] uppercase tracking-[0.18em] text-[var(--color-ivory)] transition-opacity hover:opacity-70"
           >
             <Instagram className="h-4 w-4" />
             {settings.cta_label}
