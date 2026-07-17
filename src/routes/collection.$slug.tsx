@@ -444,7 +444,7 @@ function CollectionPage() {
           <div className="absolute inset-y-0 left-0 w-[85%] max-w-sm overflow-y-auto bg-background p-6">
             <div className="mb-6 flex items-center justify-between">
               <p className="font-display text-2xl text-charcoal">Filters</p>
-              <button onClick={() => setFiltersOpen(false)}>
+              <button aria-label="Close filters" onClick={() => setFiltersOpen(false)}>
                 <X className="h-5 w-5 text-charcoal" />
               </button>
             </div>
@@ -660,6 +660,7 @@ function QuickView({ product, onClose }: { product: Product; onClose: () => void
       <div className="absolute inset-0 bg-charcoal/50" onClick={onClose} />
       <div className="relative z-10 grid w-full max-w-3xl grid-cols-1 overflow-hidden rounded-md bg-background md:grid-cols-2">
         <button
+          aria-label="Close quick view"
           onClick={onClose}
           className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-ivory text-charcoal"
         >
