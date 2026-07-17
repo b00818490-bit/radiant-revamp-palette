@@ -29,6 +29,7 @@ import catLips from "@/assets/cat-lips.jpg";
 import ugc1 from "@/assets/ugc1.jpg";
 import ugc3 from "@/assets/ugc3.jpg";
 import ugc4 from "@/assets/ugc4.jpg";
+import { SiteHeader } from "@/components/SiteHeader";
 
 export const Route = createFileRoute("/product/$slug")({
   component: PDP,
