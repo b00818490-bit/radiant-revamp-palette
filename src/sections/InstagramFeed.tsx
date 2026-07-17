@@ -49,7 +49,7 @@ export function Section({ settings, blocks = [] }: SectionProps<Settings, BlockS
       : blocks.map((b) => b.settings);
 
   return (
-    <section className="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 lg:py-24">
+    <section className="mx-auto max-w-[1440px] px-5 pt-10 pb-16 sm:px-8 lg:pt-14 lg:pb-24">
       <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           {settings.eyebrow && (
