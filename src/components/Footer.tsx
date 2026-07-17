@@ -30,9 +30,9 @@ export function Footer() {
 
   return (
     <footer className="bg-charcoal text-ivory">
-      <div className="mx-auto flex max-w-7xl flex-col items-start justify-start gap-12 px-4 py-16 text-left md:flex-row md:items-start md:gap-16 md:px-8">
+      <div className="mx-auto flex max-w-7xl flex-row flex-wrap items-start justify-start gap-12 px-4 py-16 text-left md:gap-16 md:px-8">
         {/* Brand */}
-        <div>
+        <div className="flex-shrink-0">
           <div className="inline-flex flex-col items-center">
             <Link to="/" aria-label="Greyon home" className="inline-block">
               <img src={logoAsset.url} alt="Greyon — produits de beauté" className="h-10 w-auto brightness-0 invert" />
@@ -77,7 +77,7 @@ export function Footer() {
         </div>
 
         {/* Company details */}
-        <div className="text-right text-xs leading-relaxed text-ivory/60 md:max-w-md">
+        <div className="flex-1 text-right text-xs leading-relaxed text-ivory/60 max-w-md">
           <div className="space-y-1">
             <p className="uppercase tracking-[0.25em] text-ivory">Marketed by</p>
             <p className="font-medium text-ivory">Greygon Cosmetics LLP</p>
