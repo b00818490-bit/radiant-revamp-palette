@@ -136,7 +136,7 @@ export function Section({ settings, blocks = [] }: SectionProps<Settings, BlockS
           )}
         </div>
 
-        <div className="relative min-h-[520px] lg:col-span-6 lg:min-h-full">
+        <div className="relative min-h-[520px] lg:col-span-7 lg:min-h-full">
           {settings.image && (
             /\.(mp4|webm|mov)(\?|$)/i.test(settings.image) ? (
               <video
