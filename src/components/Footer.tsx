@@ -3,53 +3,6 @@ import { useState } from "react";
 import { Instagram, Facebook, Youtube, Linkedin, MessageCircle, Mail } from "lucide-react";
 import logoAsset from "@/assets/greyon-logo.png.asset.json";
 
-const columns = [
-  {
-    title: "Shop",
-    links: [
-      { label: "New arrivals", href: "#" },
-      { label: "Bestsellers", href: "#" },
-      { label: "Face", to: "/collection/$slug", params: { slug: "face" } },
-      { label: "Lips", to: "/collection/$slug", params: { slug: "lips" } },
-      { label: "Eyes", to: "/collection/$slug", params: { slug: "eyes" } },
-      { label: "Skincare", to: "/collection/$slug", params: { slug: "skincare" } },
-      { label: "Gift cards", href: "#" },
-    ],
-  },
-  {
-    title: "Help",
-    links: [
-      { label: "Shipping", href: "#" },
-      { label: "Returns & exchanges", href: "#" },
-      { label: "Track your order", href: "#" },
-      { label: "FAQ", href: "#" },
-      { label: "Shade matching", href: "#" },
-      { label: "Contact us", href: "#" },
-    ],
-  },
-  {
-    title: "About",
-    links: [
-      { label: "Our story", href: "#" },
-      { label: "Journal", href: "#" },
-      { label: "Sustainability", href: "#" },
-      { label: "Ingredient transparency", href: "#" },
-      { label: "Clinical testing", href: "#" },
-      { label: "Careers", href: "#" },
-    ],
-  },
-  {
-    title: "Legal",
-    links: [
-      { label: "Terms of service", href: "#" },
-      { label: "Privacy policy", href: "#" },
-      { label: "Cookie preferences", href: "#" },
-      { label: "Accessibility", href: "#" },
-      { label: "CA Prop 65", href: "#" },
-      { label: "Do not sell my info", href: "#" },
-    ],
-  },
-] as const;
 
 export function Footer() {
   const [email, setEmail] = useState("");
