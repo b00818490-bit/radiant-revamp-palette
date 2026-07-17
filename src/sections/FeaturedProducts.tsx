@@ -108,9 +108,10 @@ function ProductCard({ product }: { product: ShopifyProduct }) {
   return (
     <Link to="/product/$slug" params={{ slug: node.handle }} className="group">
       <div
-        className="relative mb-4 overflow-hidden aspect-[4/5]"
+        className="relative mb-4 overflow-hidden aspect-[3/4]"
         style={{ backgroundColor: "rgba(130,130,132,0.2)" }}
       >
+
         {img && (
           <img
             src={img.url}
