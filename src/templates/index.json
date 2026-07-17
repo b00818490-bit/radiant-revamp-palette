@@ -28,7 +28,7 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "eyebrow": "Autumn Edit · 2026",
+        "eyebrow": "",
         "heading_line_1": "Colour that",
         "heading_line_2": "",
         "heading_line_2_italic": "actually",
@@ -36,7 +36,7 @@
         "body": "Clinically-backed makeup and skincare made with pigment that performs and formulas your dermatologist would sign off on. Zero mystery. Zero compromise.",
         "primary_cta_label": "Shop Best Sellers",
         "primary_cta_url": "#bestsellers",
-        "secondary_cta_label": "Find Your Shade",
+        "secondary_cta_label": "",
         "secondary_cta_url": "#shade",
         "image": "__ASSET__hero",
         "image_alt": "Greyon hero — model with radiant skin and berry lipstick",
@@ -50,11 +50,7 @@
         "accent_color": "#9e2a5c",
         "show_video_button": true
       },
-      "blocks": [
-        { "type": "stat", "settings": { "value": "4.9★", "label": "12,400 reviews" } },
-        { "type": "stat", "settings": { "value": "28d", "label": "Visible glow" } },
-        { "type": "stat", "settings": { "value": "100%", "label": "Vegan" } }
-      ]
+      "blocks": []
     },
     "press": {
       "type": "press-marquee",
