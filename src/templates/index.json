@@ -120,10 +120,10 @@
       "type": "image-with-text",
       "settings": {
         "eyebrow": "Our story",
-        "heading": "Made in Amsterdam. Tested where it matters.",
-        "body": "Every Greyon formula is developed with a panel of dermatologists and stress-tested on hundreds of skin tones before it earns a spot on your shelf. No mystery ingredients, no filler pigment.",
+        "heading": "Made in India. Tested where it matters.",
+        "body": "Every Greyon formula is made in India and lab-tested before it earns a spot on your shelf. Paraben-free, with no mystery ingredients and no filler pigment.",
         "cta_label": "Read our story",
-        "cta_url": "#",
+        "cta_url": "/about",
         "image": "__ASSET__ingredient",
         "image_alt": "Greyon laboratory ingredient close-up",
         "image_position": "left",
