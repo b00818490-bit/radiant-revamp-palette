@@ -102,19 +102,6 @@
         { "type": "swatch", "settings": { "name": "N°06 Cocoa", "color": "#4a2a22" } }
       ]
     },
-    "ingredient_cards": {
-      "type": "ingredient-cards",
-      "settings": {
-        "eyebrow": "Ingredient spotlight",
-        "heading": "Hero actives, at percentages that work."
-      },
-      "blocks": [
-        { "type": "ingredient", "settings": { "name": "Hyaluronic Acid", "note": "Plumps and holds up to 1,000x its weight in water.", "color": "#16a1d4" } },
-        { "type": "ingredient", "settings": { "name": "Niacinamide 5%", "note": "Evens tone, refines pores, calms redness.", "color": "#7cb342" } },
-        { "type": "ingredient", "settings": { "name": "Squalane", "note": "Weightless barrier repair that never clogs.", "color": "#df7e35" } },
-        { "type": "ingredient", "settings": { "name": "Peptide Complex", "note": "Firms and smooths over eight clinical weeks.", "color": "#f5c518" } }
-      ]
-    },
     "testimonials": {
       "type": "testimonials",
       "settings": {
