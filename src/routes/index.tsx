@@ -106,7 +106,7 @@ function Home() {
   return (
     <div className="min-h-screen bg-white text-[color:var(--color-charcoal)]">
       <AnnouncementBar />
-      <Header />
+      <SiteHeader announcement={false} />
       <Hero />
       <PressStrip />
       <CategoryTiles />
