@@ -53,7 +53,7 @@ export function Section({ settings }: SectionProps<Settings>) {
 
   const gridClass =
     settings.layout === "bento"
-      ? "grid grid-cols-2 gap-4 lg:grid-cols-12 lg:gap-6 auto-rows-fr"
+      ? "grid grid-cols-2 gap-4 lg:grid-cols-2 lg:gap-6"
       : "grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6";
 
   return (
@@ -89,13 +89,8 @@ export function Section({ settings }: SectionProps<Settings>) {
           </div>
         ) : (
           <div className={gridClass}>
-            {products.map((p, i) => (
-              <ProductCard
-                key={p.node.id}
-                product={p}
-                tall={settings.layout === "bento" && i === 0}
-                layout={settings.layout}
-              />
+            {products.map((p) => (
+              <ProductCard key={p.node.id} product={p} />
             ))}
           </div>
         )}
@@ -104,24 +99,15 @@ export function Section({ settings }: SectionProps<Settings>) {
   );
 }
 
-function ProductCard({
-  product,
-  tall,
-  layout,
-}: {
-  product: ShopifyProduct;
-  tall: boolean;
-  layout: "grid-4" | "bento";
-}) {
+function ProductCard({ product }: { product: ShopifyProduct }) {
   const node = product.node;
   const img = node.images?.edges?.[0]?.node;
   const price = node.priceRange.minVariantPrice;
-  const span = layout === "bento" ? (tall ? "lg:col-span-6 lg:row-span-2" : "lg:col-span-3") : "";
 
   return (
-    <Link to="/product/$slug" params={{ slug: node.handle }} className={`group ${span}`}>
+    <Link to="/product/$slug" params={{ slug: node.handle }} className="group">
       <div
-        className={`relative mb-4 overflow-hidden ${tall ? "aspect-[4/6]" : "aspect-[4/5]"}`}
+        className="relative mb-4 overflow-hidden aspect-[4/5]"
         style={{ backgroundColor: "rgba(130,130,132,0.2)" }}
       >
         {img && (
