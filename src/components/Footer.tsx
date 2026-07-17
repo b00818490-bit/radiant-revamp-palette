@@ -76,7 +76,7 @@ export function Footer() {
         </div>
 
         {/* Company details */}
-        <div className="flex-1 text-right text-xs leading-relaxed text-ivory/60 max-w-md">
+        <div className="ml-auto text-right text-xs leading-relaxed text-ivory/60 max-w-md">
           <div className="space-y-1">
             <p className="uppercase tracking-[0.25em] text-ivory">Marketed by</p>
             <p className="font-medium text-ivory">Greygon Cosmetics LLP</p>
