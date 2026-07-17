@@ -29,6 +29,7 @@ import catLips from "@/assets/cat-lips.jpg";
 import ugc1 from "@/assets/ugc1.jpg";
 import ugc3 from "@/assets/ugc3.jpg";
 import ugc4 from "@/assets/ugc4.jpg";
+import { SiteHeader } from "@/components/SiteHeader";
 
 export const Route = createFileRoute("/product/$slug")({
   component: PDP,
@@ -145,8 +146,7 @@ const fbt = [
 function PDP() {
   return (
     <div className="min-h-screen bg-white text-[color:var(--color-charcoal)]">
-      <Announce />
-      <MiniHeader />
+      <SiteHeader />
       <Breadcrumb />
       <ProductBlock />
       <ShadeTools />
@@ -157,44 +157,6 @@ function PDP() {
       <DetailsBelow />
       <Footer />
     </div>
-  );
-}
-
-function Announce() {
-  return (
-    <div className="bg-[color:var(--color-charcoal)] text-white text-[11px] uppercase tracking-[0.22em] py-2.5 text-center">
-      <span className="inline-flex items-center gap-3">
-        <span className="h-1 w-1 rounded-full bg-[color:var(--color-pink)]" />
-        Free shipping over $50 · Dermatologist tested
-      </span>
-    </div>
-  );
-}
-
-function MiniHeader() {
-  return (
-    <header className="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-[color:var(--color-border)]">
-      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 h-16 flex items-center justify-between">
-        <nav className="hidden md:flex items-center gap-7 text-[13px] uppercase tracking-[0.14em]">
-          <a href="#" className="hover:text-[color:var(--color-pink)]">Shop</a>
-          <a href="#" className="hover:text-[color:var(--color-pink)]">Face</a>
-          <Link to="/product/$slug" params={{ slug: "velvet-matte" }} className="text-[color:var(--color-pink)]">Lips</Link>
-          <a href="#" className="hover:text-[color:var(--color-pink)]">Eyes</a>
-        </nav>
-        <Link to="/" className="font-[family-name:var(--font-display)] text-2xl tracking-[-0.03em] font-medium">
-          greyon<span className="text-[color:var(--color-pink)]">.</span>
-        </Link>
-        <div className="flex items-center gap-6">
-          <a href="#shade-tools" className="hidden md:inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-[color:var(--color-pink)]">
-            <Wand2 className="h-4 w-4" /> Find your shade
-          </a>
-          <button className="relative">
-            <ShoppingBag className="h-4 w-4" />
-            <span className="absolute -top-2 -right-2 h-4 w-4 rounded-full bg-[color:var(--color-pink)] text-white text-[10px] flex items-center justify-center">2</span>
-          </button>
-        </div>
-      </div>
-    </header>
   );
 }
 

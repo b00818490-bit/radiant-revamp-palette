@@ -1,18 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
 import {
   ShoppingBag,
-  Search,
-  User,
-  Heart,
   Star,
   Truck,
   Sparkles,
   Leaf,
   ArrowRight,
-  Menu,
   ChevronRight,
   Play,
+  Heart,
 } from "lucide-react";
 
 import hero from "@/assets/hero.jpg";
@@ -28,6 +24,8 @@ import prod2 from "@/assets/prod2.jpg";
 import prod3 from "@/assets/prod3.jpg";
 import prod4 from "@/assets/prod4.jpg";
 import ingredient from "@/assets/ingredient.jpg";
+import { Footer } from "@/components/Footer";
+import { SiteHeader } from "@/components/SiteHeader";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -106,7 +104,7 @@ function Home() {
   return (
     <div className="min-h-screen bg-white text-[color:var(--color-charcoal)]">
       <AnnouncementBar />
-      <Header />
+      <SiteHeader announcement={false} />
       <Hero />
       <PressStrip />
       <CategoryTiles />
@@ -146,49 +144,6 @@ function AnnouncementBar() {
   );
 }
 
-function Header() {
-  const [open, setOpen] = useState(false);
-  return (
-    <header className="sticky top-0 z-40 bg-white/85 backdrop-blur border-b border-[color:var(--color-border)]">
-      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 h-16 flex items-center justify-between">
-        <button className="md:hidden" onClick={() => setOpen(!open)} aria-label="Menu">
-          <Menu className="h-5 w-5" />
-        </button>
-        <nav className="hidden md:flex items-center gap-7 text-[13px] uppercase tracking-[0.14em]">
-          {nav.slice(0, 4).map((n) => (
-            <a key={n} href="#" className="hover:text-[color:var(--color-pink)] transition-colors">
-              {n}
-            </a>
-          ))}
-        </nav>
-        <Link
-          to="/"
-          className="font-[family-name:var(--font-display)] text-2xl tracking-[-0.03em] font-medium"
-        >
-          greyon<span className="text-[color:var(--color-pink)]">.</span>
-        </Link>
-        <div className="flex items-center gap-5">
-          <nav className="hidden md:flex items-center gap-7 text-[13px] uppercase tracking-[0.14em]">
-            {nav.slice(4).map((n) => (
-              <a key={n} href="#" className="hover:text-[color:var(--color-pink)] transition-colors">
-                {n}
-              </a>
-            ))}
-          </nav>
-          <Search className="h-4 w-4 hidden sm:block cursor-pointer" />
-          <User className="h-4 w-4 hidden sm:block cursor-pointer" />
-          <Heart className="h-4 w-4 hidden sm:block cursor-pointer" />
-          <button className="relative">
-            <ShoppingBag className="h-4 w-4" />
-            <span className="absolute -top-2 -right-2 h-4 w-4 rounded-full bg-[color:var(--color-pink)] text-white text-[10px] flex items-center justify-center">
-              2
-            </span>
-          </button>
-        </div>
-      </div>
-    </header>
-  );
-}
 
 function Hero() {
   return (
@@ -718,6 +673,5 @@ function Newsletter() {
   );
 }
 
-import { Footer } from "@/components/Footer";
 export { Footer };
 
