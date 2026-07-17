@@ -2,9 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import {
   ShoppingBag,
-  Search,
-  User,
-  Heart,
   Star,
   ChevronDown,
   SlidersHorizontal,
@@ -12,9 +9,9 @@ import {
   Eye,
   X,
   Sparkles,
-  Menu,
 } from "lucide-react";
 import { Footer } from "@/components/Footer";
+import { SiteHeader } from "@/components/SiteHeader";
 
 import prod1 from "@/assets/prod1.jpg";
 import prod2 from "@/assets/prod2.jpg";
