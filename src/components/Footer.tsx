@@ -31,14 +31,14 @@ export function Footer() {
   return (
     <footer className="bg-charcoal text-ivory">
       {/* Brand */}
-      <div className="mx-auto max-w-7xl px-4 py-16 md:px-8">
+      <div className="mx-auto max-w-7xl px-4 py-16 text-center md:px-8">
         <Link to="/" aria-label="Greyon home" className="inline-block">
           <img src={logoAsset.url} alt="Greyon — produits de beauté" className="h-10 w-auto brightness-0 invert" />
         </Link>
-        <p className="mt-4 max-w-xs text-sm leading-relaxed text-ivory/60">
+        <p className="mx-auto mt-4 max-w-xs text-sm leading-relaxed text-ivory/60">
           Beauty For All. Dermatologist-tested formulas designed and made responsibly.
         </p>
-        <div className="mt-6 flex items-center gap-3">
+        <div className="mt-6 flex items-center justify-center gap-3">
           {socials.map(({ Icon, href, label }) => (
             <a
               key={label}
