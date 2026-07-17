@@ -8,6 +8,7 @@ import {
   ArrowRight,
   ChevronRight,
   Play,
+  Heart,
 } from "lucide-react";
 
 import hero from "@/assets/hero.jpg";
