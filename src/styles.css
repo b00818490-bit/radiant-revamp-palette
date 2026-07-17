@@ -37,6 +37,9 @@
   --color-yellow: #f5c518;
   --color-green: #7cb342;
   --color-blue: #16a1d4;
+  /* Legacy aliases — updated palette */
+  --color-pink: #9e2a5c;
+  --color-cream: #faf6f1;
 
   --radius-sm: 2px;
   --radius-md: 4px;
