@@ -101,20 +101,6 @@
         { "type": "swatch", "settings": { "name": "N°06 Cocoa", "color": "#4a2a22" } }
       ]
     },
-    "testimonials": {
-      "type": "testimonials",
-      "settings": {
-        "eyebrow": "In their words",
-        "heading": "12,400 five-star reviews and counting.",
-        "background_color": "#faf6f1",
-        "text_color": "#3b3b3d"
-      },
-      "blocks": [
-        { "type": "review", "settings": { "quote": "The Velvet Matte is the first lipstick that hasn't dried me out. Six shades in.", "author": "Lila M.", "source": "Verified buyer", "rating": 5 } },
-        { "type": "review", "settings": { "quote": "Rescue Glow made my skin look expensive. My derm asked what I switched to.", "author": "Rose B.", "source": "Verified buyer", "rating": 5 } },
-        { "type": "review", "settings": { "quote": "Cheek Cushion is idiot-proof. I never look overdone, always look awake.", "author": "Noor K.", "source": "Verified buyer", "rating": 5 } }
-      ]
-    },
     "image_with_text": {
       "type": "image-with-text",
       "settings": {
