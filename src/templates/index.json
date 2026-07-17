@@ -2,15 +2,11 @@
   "order": [
     "announcement",
     "hero",
-    "press",
     "bento_collections",
     "featured_products",
     "shade_finder",
-    "trust",
-    "ingredient_cards",
     "testimonials",
-    "image_with_text",
-    "newsletter"
+    "image_with_text"
   ],
   "sections": {
     "announcement": {
