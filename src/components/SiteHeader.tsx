@@ -732,72 +732,48 @@ function MobileBottomNav({
   cartCount: number;
   onSearch: () => void;
 }) {
+  const linkCls =
+    "flex flex-col items-center justify-center gap-1 py-2.5 text-[10px] uppercase tracking-widest text-[#3B3B3D]";
+  const activeCls = { className: `${linkCls} text-[#9E2A5C]` };
   return (
     <>
-      {/* spacer so page content isn't hidden under the bar */}
       <div className="h-16 lg:hidden" aria-hidden />
       <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-[#e6ded2] bg-[#FAF6F1]/95 backdrop-blur lg:hidden">
         <div className="mx-auto grid max-w-md grid-cols-5">
-          <BottomLink to="/" icon={<Home className="h-5 w-5" />} label="Home" />
-          <BottomLink
+          <Link to="/" activeOptions={{ exact: true }} className={linkCls} activeProps={activeCls}>
+            <Home className="h-5 w-5" />
+            Home
+          </Link>
+          <Link
             to="/collection/$slug"
             params={{ slug: "all" }}
-            icon={<Package className="h-5 w-5" />}
-            label="Shop"
-          />
-          <button
-            onClick={onSearch}
-            className="flex flex-col items-center justify-center gap-1 py-2.5 text-[10px] uppercase tracking-widest text-[#3B3B3D]"
+            className={linkCls}
+            activeProps={activeCls}
           >
+            <Package className="h-5 w-5" />
+            Shop
+          </Link>
+          <button onClick={onSearch} className={linkCls}>
             <Search className="h-5 w-5" />
             Search
           </button>
-          <BottomLink
-            to="/wholesale"
-            icon={<User className="h-5 w-5" />}
-            label="Account"
-          />
-          <BottomLink
-            to="/checkout"
-            icon={
-              <span className="relative">
-                <ShoppingBag className="h-5 w-5" />
-                {cartCount > 0 && (
-                  <span className="absolute -right-2 -top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-[#9E2A5C] text-[9px] font-medium text-white">
-                    {cartCount}
-                  </span>
-                )}
-              </span>
-            }
-            label="Cart"
-          />
+          <Link to="/wholesale" className={linkCls} activeProps={activeCls}>
+            <User className="h-5 w-5" />
+            Account
+          </Link>
+          <Link to="/checkout" className={linkCls} activeProps={activeCls}>
+            <span className="relative">
+              <ShoppingBag className="h-5 w-5" />
+              {cartCount > 0 && (
+                <span className="absolute -right-2 -top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-[#9E2A5C] text-[9px] font-medium text-white">
+                  {cartCount}
+                </span>
+              )}
+            </span>
+            Cart
+          </Link>
         </div>
       </nav>
     </>
-  );
-}
-
-function BottomLink({
-  to,
-  params,
-  icon,
-  label,
-}: {
-  to: string;
-  params?: Record<string, string>;
-  icon: React.ReactNode;
-  label: string;
-}) {
-  const props = { to, params } as unknown as Record<string, unknown>;
-  return (
-    <Link
-      {...props}
-      activeOptions={{ exact: to === "/" }}
-      className="flex flex-col items-center justify-center gap-1 py-2.5 text-[10px] uppercase tracking-widest text-[#3B3B3D]"
-      activeProps={{ className: "text-[#9E2A5C]" }}
-    >
-      {icon}
-      {label}
-    </Link>
   );
 }
