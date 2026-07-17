@@ -82,29 +82,22 @@ const MEGA: MegaConfig[] = [
     },
     columns: [
       {
-        heading: "Colour",
+        heading: "Shop lips",
         links: [
-          { label: "Matte lipstick", slug: "matte" },
-          { label: "Satin lipstick", slug: "satin" },
-          { label: "Lip stain", slug: "stain" },
-          { label: "Lip liner", slug: "liner" },
-        ],
-      },
-      {
-        heading: "Care",
-        links: [
-          { label: "Lip balm", slug: "balm" },
-          { label: "Plumping gloss", slug: "gloss" },
-          { label: "Overnight mask", slug: "mask" },
-          { label: "Exfoliator", slug: "scrub" },
+          { label: "Matte Liquid Lipstick", slug: "matte-liquid-lipstick" },
+          { label: "Moisturizing Lipstick", slug: "moisturizing-lipstick" },
+          { label: "Creme Bullet Lipstick", slug: "creme-bullet-lipstick" },
+          { label: "Liquid Lip Gloss", slug: "liquid-lip-gloss" },
+          { label: "Lip Gloss Stick", slug: "lip-gloss-stick" },
+          { label: "Lip Balm", slug: "lip-balm" },
         ],
       },
     ],
     feature: {
-      img: catLips,
+      img: "https://cdn.shopify.com/s/files/1/0727/7998/9300/files/LLS1_Premium_Matte_Liquid_Lipstick_Pearly_Pink.png?v=1775040862",
       tag: "Bestseller",
-      title: "Velvet Matte in Berry Noir",
-      href: "/product/velvet-matte",
+      title: "Premium Matte Liquid Lipstick",
+      href: "/product/premium-matte-liquid-lipcolor",
     },
   },
   {
@@ -458,7 +451,7 @@ function MegaPanel({
       ))}
       <Link
         to="/product/$slug"
-        params={{ slug: "velvet-matte" }}
+        params={{ slug: config.feature.href.split("/").pop() || "" }}
         onClick={onClose}
         className="group relative overflow-hidden rounded-sm"
       >
