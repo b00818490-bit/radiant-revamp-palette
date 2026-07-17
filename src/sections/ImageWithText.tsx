@@ -43,38 +43,52 @@ export function Section({ settings }: SectionProps<Settings>) {
   const reverse = settings.image_position === "right";
   return (
     <section
-      className="py-16 lg:py-24"
+      className="relative overflow-hidden py-12 lg:py-16"
       style={{ backgroundColor: settings.background_color, color: settings.text_color }}
     >
-      <div
-        className={`mx-auto grid max-w-[1440px] items-center gap-10 px-5 sm:px-8 lg:grid-cols-2 lg:gap-16 ${
-          reverse ? "lg:[&>*:first-child]:order-2" : ""
-        }`}
-      >
-        <div className="aspect-[4/5] overflow-hidden">
-          {settings.image && (
+      {settings.image && (
+        <>
+          <div
+            className={`pointer-events-none absolute inset-y-0 w-full opacity-15 sm:w-2/3 lg:w-1/2 ${
+              reverse ? "right-0" : "left-0"
+            }`}
+          >
             <img
               src={settings.image}
               alt={settings.image_alt}
               loading="lazy"
               className="h-full w-full object-cover"
             />
-          )}
-        </div>
-        <div>
+          </div>
+          <div
+            className={`pointer-events-none absolute inset-y-0 w-full sm:w-2/3 lg:w-1/2 ${
+              reverse ? "right-0" : "left-0"
+            }`}
+            style={{
+              background: reverse
+                ? `linear-gradient(to left, ${settings.background_color} 0%, ${settings.background_color}00 70%)`
+                : `linear-gradient(to right, ${settings.background_color} 0%, ${settings.background_color}00 70%)`,
+            }}
+          />
+        </>
+      )}
+      <div className="relative z-10 mx-auto max-w-[1440px] px-5 sm:px-8">
+        <div
+          className={`max-w-xl ${reverse ? "ml-auto text-right" : "ml-auto lg:ml-[50%] text-left"}`}
+        >
           {settings.eyebrow && (
             <div className="mb-3 text-[11px] uppercase tracking-[0.28em]" style={{ color: "var(--color-primary)" }}>
               {settings.eyebrow}
             </div>
           )}
           {settings.heading && (
-            <h2 className="mb-6 text-4xl leading-[0.95] sm:text-5xl">{settings.heading}</h2>
+            <h2 className="mb-5 text-3xl leading-[1] sm:text-4xl">{settings.heading}</h2>
           )}
-          {settings.body && <p className="mb-8 text-base leading-relaxed opacity-80">{settings.body}</p>}
+          {settings.body && <p className="mb-6 text-base leading-relaxed opacity-80">{settings.body}</p>}
           {settings.cta_label && (
             <a
               href={settings.cta_url}
-              className="inline-flex items-center gap-2 px-7 py-4 text-[13px] uppercase tracking-[0.18em] text-white"
+              className="inline-flex items-center gap-2 px-6 py-3 text-[12px] uppercase tracking-[0.18em] text-white"
               style={{ backgroundColor: "var(--color-primary)" }}
             >
               {settings.cta_label} <ArrowRight className="h-4 w-4" />
