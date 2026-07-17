@@ -8,6 +8,9 @@ import catLips from "@/assets/cat-lips.jpg";
 import catEyes from "@/assets/cat-eyes.jpg";
 import catSkin from "@/assets/cat-skin.jpg";
 import ingredient from "@/assets/ingredient.jpg";
+import ugc1 from "@/assets/ugc1.jpg";
+import ugc3 from "@/assets/ugc3.jpg";
+import ugc4 from "@/assets/ugc4.jpg";
 
 /**
  * Asset registry — maps the `__ASSET__<name>` placeholders in template JSONs
@@ -25,6 +28,9 @@ export const assetRegistry: Record<string, string> = {
   catEyes,
   catSkin,
   ingredient,
+  ugc1,
+  ugc3,
+  ugc4,
 };
 
 const ASSET_PREFIX = "__ASSET__";

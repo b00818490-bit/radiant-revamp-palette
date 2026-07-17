@@ -5,6 +5,7 @@
     "bento_collections",
     "featured_products",
     "shade_finder",
+    "instagram_feed",
     "image_with_text"
   ],
   "sections": {
@@ -98,6 +99,23 @@
         { "type": "swatch", "settings": { "name": "N°04 Radiant", "color": "#9e2a5c" } },
         { "type": "swatch", "settings": { "name": "N°05 Wine", "color": "#7a1f3d" } },
         { "type": "swatch", "settings": { "name": "N°06 Cocoa", "color": "#4a2a22" } }
+      ]
+    },
+    "instagram_feed": {
+      "type": "instagram-feed",
+      "settings": {
+        "eyebrow": "Follow us",
+        "heading": "Greyon on Instagram",
+        "cta_label": "@greyoncosmetics",
+        "cta_url": "https://www.instagram.com/greyoncosmetics"
+      },
+      "blocks": [
+        { "type": "post", "settings": { "image": "__ASSET__ugc1", "url": "https://www.instagram.com/greyoncosmetics", "alt": "Customer wearing Greyon velvet matte lipstick" } },
+        { "type": "post", "settings": { "image": "__ASSET__ugc3", "url": "https://www.instagram.com/greyoncosmetics", "alt": "Greyon skincare routine flat lay" } },
+        { "type": "post", "settings": { "image": "__ASSET__ugc4", "url": "https://www.instagram.com/greyoncosmetics", "alt": "Close-up of Greyon blush and lip colour" } },
+        { "type": "post", "settings": { "image": "__ASSET__ugc1", "url": "https://www.instagram.com/greyoncosmetics", "alt": "Greyon makeup look on model" } },
+        { "type": "post", "settings": { "image": "__ASSET__ugc3", "url": "https://www.instagram.com/greyoncosmetics", "alt": "Greyon products on vanity" } },
+        { "type": "post", "settings": { "image": "__ASSET__ugc4", "url": "https://www.instagram.com/greyoncosmetics", "alt": "Swatches of Greyon lip shades" } }
       ]
     },
     "image_with_text": {
