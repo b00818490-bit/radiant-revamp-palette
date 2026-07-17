@@ -69,7 +69,7 @@ export function Footer() {
                 className="inline-flex items-center gap-2 hover:text-ivory"
               >
                 <WhatsAppLogo className="h-4 w-4" />
-                <span>WhatsApp · +91 93192 34233</span>
+                <span>+91 93192 34233</span>
               </a>
             </p>
           </div>
