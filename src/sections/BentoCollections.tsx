@@ -52,10 +52,10 @@ export const schema: SectionSchema = {
 };
 
 const sizeMap: Record<BlockSettings["size"], string> = {
-  sm: "col-span-2 row-span-2",
-  md: "col-span-3 row-span-3",
-  lg: "col-span-3 row-span-4",
-  xl: "col-span-4 row-span-4",
+  sm: "col-span-1 row-span-3 sm:row-span-2 lg:col-span-2",
+  md: "col-span-1 row-span-3 lg:col-span-4",
+  lg: "col-span-1 row-span-4 lg:col-span-4",
+  xl: "col-span-1 row-span-4 lg:col-span-4",
 };
 
 export function Section({ settings, blocks = [] }: SectionProps<Settings, BlockSettings>) {
@@ -82,7 +82,7 @@ export function Section({ settings, blocks = [] }: SectionProps<Settings, BlockS
         )}
       </div>
 
-      <div className="grid auto-rows-[60px] grid-cols-6 gap-3 sm:gap-4 lg:grid-cols-12">
+      <div className="grid auto-rows-[60px] grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-12">
         {blocks.map((b, i) => (
           <a
             key={i}
