@@ -19,8 +19,8 @@ export const schema: SectionSchema = {
   settings: [
     { id: "eyebrow", type: "text", label: "Eyebrow", default: "Bestsellers" },
     { id: "heading", type: "text", label: "Heading", default: "Loved by our customers." },
-    { id: "background_color", type: "color", label: "Background", default: "#3b3b3d" },
-    { id: "text_color", type: "color", label: "Text", default: "#faf6f1" },
+    { id: "background_color", type: "color", label: "Background", default: "#faf6f1" },
+    { id: "text_color", type: "color", label: "Text", default: "#3b3b3d" },
     {
       id: "layout",
       type: "select",
