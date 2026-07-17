@@ -26,14 +26,31 @@ export const Route = createFileRoute("/collection/$slug")({
   component: CollectionPage,
   head: ({ params }) => {
     const title = titleize(params.slug);
+    const url = `https://radiant-revamp-palette.lovable.app/collection/${params.slug}`;
+    const description = `Shop Greyon ${title.toLowerCase()}. Filter by concern, ingredient, and price. Quick-add without leaving the page.`;
     return {
       meta: [
         { title: `${title} — Greyon` },
-        {
-          name: "description",
-          content: `Shop Greyon ${title.toLowerCase()}. Filter by concern, ingredient, and price. Quick-add without leaving the page.`,
-        },
+        { name: "description", content: description },
         { property: "og:title", content: `${title} — Greyon` },
+        { property: "og:description", content: description },
+        { property: "og:type", content: "website" },
+        { property: "og:url", content: url },
+        { name: "twitter:title", content: `${title} — Greyon` },
+        { name: "twitter:description", content: description },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            name: `${title} — Greyon`,
+            description,
+            url,
+          }),
+        },
       ],
     };
   },
