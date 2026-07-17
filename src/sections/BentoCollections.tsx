@@ -82,7 +82,7 @@ export function Section({ settings, blocks = [] }: SectionProps<Settings, BlockS
         )}
       </div>
 
-      <div className="grid auto-rows-[60px] grid-cols-6 gap-3 sm:gap-4 lg:grid-cols-12">
+      <div className="grid auto-rows-[60px] grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-12">
         {blocks.map((b, i) => (
           <a
             key={i}
