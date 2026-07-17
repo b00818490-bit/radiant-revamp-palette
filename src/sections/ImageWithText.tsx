@@ -43,7 +43,7 @@ export function Section({ settings }: SectionProps<Settings>) {
   const reverse = settings.image_position === "right";
   return (
     <section
-      className="relative overflow-hidden py-16 lg:py-24"
+      className="relative flex min-h-[480px] items-center overflow-hidden py-20 sm:min-h-[540px] lg:min-h-[640px] lg:py-32"
       style={{ backgroundColor: settings.background_color, color: settings.text_color }}
     >
       {settings.image && (
