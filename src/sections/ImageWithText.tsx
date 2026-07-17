@@ -49,9 +49,7 @@ export function Section({ settings }: SectionProps<Settings>) {
       {settings.image && (
         <>
           <div
-            className={`pointer-events-none absolute inset-y-0 w-full opacity-15 sm:w-2/3 lg:w-1/2 ${
-              reverse ? "right-0" : "left-0"
-            }`}
+            className="pointer-events-none absolute inset-0 w-full opacity-30"
           >
             <img
               src={settings.image}
@@ -61,20 +59,16 @@ export function Section({ settings }: SectionProps<Settings>) {
             />
           </div>
           <div
-            className={`pointer-events-none absolute inset-y-0 w-full sm:w-2/3 lg:w-1/2 ${
-              reverse ? "right-0" : "left-0"
-            }`}
+            className="pointer-events-none absolute inset-0 w-full"
             style={{
-              background: reverse
-                ? `linear-gradient(to left, ${settings.background_color} 0%, ${settings.background_color}00 70%)`
-                : `linear-gradient(to right, ${settings.background_color} 0%, ${settings.background_color}00 70%)`,
+              background: `linear-gradient(to right, ${settings.background_color} 0%, ${settings.background_color}00 40%, ${settings.background_color}00 60%, ${settings.background_color} 100%)`,
             }}
           />
         </>
       )}
       <div className="relative z-10 mx-auto max-w-[1440px] px-5 sm:px-8">
         <div
-          className={`max-w-xl ${reverse ? "ml-auto text-right" : "ml-auto lg:ml-[50%] text-left"}`}
+          className={`max-w-xl mx-auto text-center ${reverse ? "lg:ml-auto lg:text-right" : ""}`}
         >
           {settings.eyebrow && (
             <div className="mb-3 text-[11px] uppercase tracking-[0.28em]" style={{ color: "var(--color-primary)" }}>
