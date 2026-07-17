@@ -81,8 +81,8 @@ export function Footer() {
           <div className="space-y-1">
             <p className="uppercase tracking-[0.25em] text-ivory">Marketed by</p>
             <p className="font-medium text-ivory">Greygon Cosmetics LLP</p>
-            <p>2ND FLOOR, 17-A/38-39, VARDAN BUILDING, AJMAL KHAN</p>
-            <p>ROAD, KAROL BAGH, Delhi, 110005</p>
+            <p>2ND FLOOR, 17-A/38-39, VARDAN BUILDING</p>
+            <p>AJMAL KHAN ROAD, KAROL BAGH, Delhi, 110005</p>
           </div>
           <div className="mt-6 space-y-1">
             <p className="uppercase tracking-[0.25em] text-ivory">Manufactured by</p>
