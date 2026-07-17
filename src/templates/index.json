@@ -131,19 +131,5 @@
         "text_color": "#3b3b3d"
       }
     },
-    "newsletter": {
-      "type": "newsletter",
-      "settings": {
-        "eyebrow": "Join the list",
-        "heading": "10% off your first order.",
-        "body": "Early access to launches, shade drops, and editorial routines from our in-house dermatologists. No spam — unsubscribe anytime.",
-        "placeholder": "you@email.com",
-        "button_label": "Subscribe",
-        "disclaimer": "By subscribing you agree to receive marketing emails. See our Privacy Policy.",
-        "background_color": "#3b3b3d",
-        "text_color": "#faf6f1",
-        "accent_color": "#9e2a5c"
-      }
-    }
   }
 }
