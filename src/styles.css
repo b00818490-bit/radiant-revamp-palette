@@ -104,3 +104,11 @@
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
+
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+@utility scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
