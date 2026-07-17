@@ -28,6 +28,8 @@ import prod2 from "@/assets/prod2.jpg";
 import prod3 from "@/assets/prod3.jpg";
 import prod4 from "@/assets/prod4.jpg";
 import ingredient from "@/assets/ingredient.jpg";
+import { Footer } from "@/components/Footer";
+import { SiteHeader } from "@/components/SiteHeader";
 
 export const Route = createFileRoute("/")({
   component: Home,
