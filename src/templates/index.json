@@ -52,25 +52,6 @@
       },
       "blocks": []
     },
-    "press": {
-      "type": "press-marquee",
-      "settings": {
-        "eyebrow": "As seen in",
-        "speed_seconds": 45,
-        "background_color": "#faf6f1",
-        "text_color": "#3b3b3d",
-        "divider": true
-      },
-      "blocks": [
-        { "type": "logo", "settings": { "label": "VOGUE" } },
-        { "type": "logo", "settings": { "label": "ELLE" } },
-        { "type": "logo", "settings": { "label": "ALLURE" } },
-        { "type": "logo", "settings": { "label": "BAZAAR" } },
-        { "type": "logo", "settings": { "label": "REFINERY29" } },
-        { "type": "logo", "settings": { "label": "COSMO" } },
-        { "type": "logo", "settings": { "label": "GLAMOUR" } }
-      ]
-    },
     "bento_collections": {
       "type": "bento-collections",
       "settings": {
