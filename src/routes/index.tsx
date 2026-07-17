@@ -31,14 +31,10 @@ export const Route = createFileRoute("/")({
   component: Home,
   head: () => ({
     meta: [
-      { title: "Greyon — Clean color. Serious skincare." },
-      {
-        name: "description",
-        content:
-          "Dermatologist-tested makeup and skincare with pigment that performs. Shop best-sellers, find your shade, and build a routine you'll love.",
-      },
-      { property: "og:title", content: "Greyon — Clean color. Serious skincare." },
-      { property: "og:image", content: "https://www.greyon.co/social-cover.jpg" },
+      { property: "og:url", content: "https://radiant-revamp-palette.lovable.app/" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://radiant-revamp-palette.lovable.app/" },
     ],
   }),
 });
