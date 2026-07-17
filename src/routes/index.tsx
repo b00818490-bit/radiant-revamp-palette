@@ -718,64 +718,6 @@ function Newsletter() {
   );
 }
 
-function Footer() {
-  const cols = [
-    { title: "Shop", links: ["Face", "Lips", "Eyes", "Skincare", "Gift cards"] },
-    { title: "Help", links: ["Contact", "Shipping", "Returns", "Shade finder", "FAQ"] },
-    { title: "Company", links: ["About", "Journal", "Sustainability", "Press", "Careers"] },
-  ];
-  return (
-    <footer className="bg-[color:var(--color-charcoal)] text-white pt-20 pb-10">
-      <div className="mx-auto max-w-[1440px] px-5 sm:px-8">
-        <div className="grid lg:grid-cols-12 gap-10 pb-16 border-b border-white/10">
-          <div className="lg:col-span-5">
-            <div className="font-[family-name:var(--font-display)] text-5xl">
-              greyon<span className="text-[color:var(--color-pink)]">.</span>
-            </div>
-            <p className="mt-6 text-white/60 max-w-sm leading-relaxed">
-              Clean colour. Serious skincare. Built in small batches, tested by real
-              dermatologists, worn by real humans.
-            </p>
-            <div className="mt-6 flex gap-2">
-              {["#DC2E70", "#DF7E35", "#F5C518", "#7CB342", "#16A1D4"].map((c) => (
-                <span key={c} className="h-6 w-6 rounded-full" style={{ backgroundColor: c }} />
-              ))}
-            </div>
-          </div>
-          {cols.map((col) => (
-            <div key={col.title} className="lg:col-span-2">
-              <div className="text-[11px] uppercase tracking-[0.24em] text-white/50 mb-5">
-                {col.title}
-              </div>
-              <ul className="space-y-3 text-sm text-white/80">
-                {col.links.map((l) => (
-                  <li key={l}>
-                    <a href="#" className="hover:text-[color:var(--color-pink)] transition-colors">
-                      {l}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-          <div className="lg:col-span-1 text-[11px] uppercase tracking-[0.24em] text-white/50">
-            <div className="mb-5">Follow</div>
-            <ul className="space-y-3">
-              <li><a href="#" className="hover:text-white">IG</a></li>
-              <li><a href="#" className="hover:text-white">TT</a></li>
-              <li><a href="#" className="hover:text-white">YT</a></li>
-            </ul>
-          </div>
-        </div>
-        <div className="pt-8 flex flex-col md:flex-row justify-between gap-4 text-xs text-white/50">
-          <div>© 2026 Greyon Beauty Co. All rights reserved.</div>
-          <div className="flex gap-6">
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
-            <a href="#">Accessibility</a>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-}
+import { Footer } from "@/components/Footer";
+export { Footer };
+
