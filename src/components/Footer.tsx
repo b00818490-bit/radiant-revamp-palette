@@ -25,7 +25,6 @@ export function Footer() {
     { Icon: Youtube, href: "https://youtube.com/@greyon_cosmetics", label: "YouTube" },
     { Icon: Linkedin, href: "https://www.linkedin.com/company/greyon/", label: "LinkedIn" },
     { Icon: XLogo, href: "https://x.com/GreyonCosmetics", label: "X" },
-    { Icon: WhatsAppLogo, href: "https://wa.me/919319234233", label: "WhatsApp" },
   ];
 
   return (
