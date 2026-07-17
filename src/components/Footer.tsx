@@ -30,7 +30,7 @@ export function Footer() {
 
   return (
     <footer className="bg-charcoal text-ivory">
-      <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-12 px-4 py-16 text-left md:flex-row md:items-start md:px-8">
+      <div className="mx-auto flex max-w-7xl flex-col items-start justify-start gap-12 px-4 py-16 text-left md:flex-row md:items-start md:gap-16 md:px-8">
         {/* Brand */}
         <div>
           <div className="inline-flex flex-col items-center">
