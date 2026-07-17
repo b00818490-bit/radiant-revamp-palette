@@ -1,0 +1,199 @@
+{
+  "order": [
+    "announcement",
+    "hero",
+    "press",
+    "bento_collections",
+    "featured_products",
+    "shade_finder",
+    "trust",
+    "ingredient_cards",
+    "testimonials",
+    "image_with_text",
+    "newsletter"
+  ],
+  "sections": {
+    "announcement": {
+      "type": "announcement-bar",
+      "settings": {
+        "background_color": "#3b3b3d",
+        "text_color": "#faf6f1",
+        "accent_color": "#9e2a5c",
+        "speed_seconds": 35
+      },
+      "blocks": [
+        { "type": "message", "settings": { "text": "Free shipping over $50" } },
+        { "type": "message", "settings": { "text": "Dermatologist tested" } },
+        { "type": "message", "settings": { "text": "Cruelty-free · Vegan formulas" } },
+        { "type": "message", "settings": { "text": "30-day happiness guarantee" } },
+        { "type": "message", "settings": { "text": "New: Velvet Matte in six shades" } }
+      ]
+    },
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "Autumn Edit · 2026",
+        "heading_line_1": "Colour that",
+        "heading_line_2": "",
+        "heading_line_2_italic": "actually",
+        "heading_line_3": "loves your skin.",
+        "body": "Clinically-backed makeup and skincare made with pigment that performs and formulas your dermatologist would sign off on. Zero mystery. Zero compromise.",
+        "primary_cta_label": "Shop Best Sellers",
+        "primary_cta_url": "#bestsellers",
+        "secondary_cta_label": "Find Your Shade",
+        "secondary_cta_url": "#shade",
+        "image": "__ASSET__hero",
+        "image_alt": "Greyon hero — model with radiant skin and berry lipstick",
+        "overlay_product_name": "Velvet Matte · N°04 Radiant",
+        "overlay_product_meta": "$28 · 6 shades",
+        "overlay_product_image": "__ASSET__prod1",
+        "overlay_cta_label": "Shop",
+        "overlay_cta_url": "/product/velvet-matte-lipstick",
+        "background_color": "#3b3b3d",
+        "text_color": "#faf6f1",
+        "accent_color": "#9e2a5c",
+        "show_video_button": true
+      },
+      "blocks": [
+        { "type": "stat", "settings": { "value": "4.9★", "label": "12,400 reviews" } },
+        { "type": "stat", "settings": { "value": "28d", "label": "Visible glow" } },
+        { "type": "stat", "settings": { "value": "100%", "label": "Vegan" } }
+      ]
+    },
+    "press": {
+      "type": "press-marquee",
+      "settings": {
+        "eyebrow": "As seen in",
+        "speed_seconds": 45,
+        "background_color": "#faf6f1",
+        "text_color": "#3b3b3d",
+        "divider": true
+      },
+      "blocks": [
+        { "type": "logo", "settings": { "label": "VOGUE" } },
+        { "type": "logo", "settings": { "label": "ELLE" } },
+        { "type": "logo", "settings": { "label": "ALLURE" } },
+        { "type": "logo", "settings": { "label": "BAZAAR" } },
+        { "type": "logo", "settings": { "label": "REFINERY29" } },
+        { "type": "logo", "settings": { "label": "COSMO" } },
+        { "type": "logo", "settings": { "label": "GLAMOUR" } }
+      ]
+    },
+    "bento_collections": {
+      "type": "bento-collections",
+      "settings": {
+        "eyebrow": "Shop by category",
+        "heading": "Start where you want to.",
+        "view_all_label": "Shop all",
+        "view_all_url": "/collection/all"
+      },
+      "blocks": [
+        { "type": "tile", "settings": { "title": "Face", "image": "__ASSET__catFace", "accent_color": "#df7e35", "url": "/collection/face", "size": "lg" } },
+        { "type": "tile", "settings": { "title": "Lips", "image": "__ASSET__catLips", "accent_color": "#9e2a5c", "url": "/collection/lips", "size": "md" } },
+        { "type": "tile", "settings": { "title": "Eyes", "image": "__ASSET__catEyes", "accent_color": "#16a1d4", "url": "/collection/eyes", "size": "md" } },
+        { "type": "tile", "settings": { "title": "Skincare", "image": "__ASSET__catSkin", "accent_color": "#7cb342", "url": "/collection/skincare", "size": "xl" } }
+      ]
+    },
+    "featured_products": {
+      "type": "featured-products",
+      "settings": {
+        "eyebrow": "Bestsellers · Restocked",
+        "heading": "The ones everyone keeps reordering.",
+        "background_color": "#3b3b3d",
+        "text_color": "#faf6f1",
+        "layout": "bento"
+      },
+      "blocks": [
+        { "type": "product", "settings": { "product_handle": "velvet-matte-lipstick", "featured_size": "tall" } },
+        { "type": "product", "settings": { "product_handle": "cheek-cushion-blush", "featured_size": "normal" } },
+        { "type": "product", "settings": { "product_handle": "rescue-glow-serum", "featured_size": "normal" } },
+        { "type": "product", "settings": { "product_handle": "feather-volume-mascara", "featured_size": "normal" } }
+      ]
+    },
+    "shade_finder": {
+      "type": "shade-finder",
+      "settings": {
+        "eyebrow": "Shade finder",
+        "heading": "Your undertone, matched in 60 seconds.",
+        "body": "Answer three quick questions. Our tool cross-references undertone, skin type and climate, then hands back the exact three shades that will look like they were made for you.",
+        "cta_label": "Start the quiz",
+        "cta_url": "#",
+        "caption": "Velvet Matte Lipstick collection"
+      },
+      "blocks": [
+        { "type": "swatch", "settings": { "name": "N°01 Bare", "color": "#c99b8a" } },
+        { "type": "swatch", "settings": { "name": "N°02 Peony", "color": "#e5748d" } },
+        { "type": "swatch", "settings": { "name": "N°03 Coral", "color": "#df7e35" } },
+        { "type": "swatch", "settings": { "name": "N°04 Radiant", "color": "#9e2a5c" } },
+        { "type": "swatch", "settings": { "name": "N°05 Wine", "color": "#7a1f3d" } },
+        { "type": "swatch", "settings": { "name": "N°06 Cocoa", "color": "#4a2a22" } }
+      ]
+    },
+    "trust": {
+      "type": "trust-badges",
+      "settings": { "background_color": "#f1ece5", "text_color": "#3b3b3d", "divider": true },
+      "blocks": [
+        { "type": "badge", "settings": { "icon": "sparkles", "title": "Dermatologist tested", "body": "Every formula, every batch." } },
+        { "type": "badge", "settings": { "icon": "leaf", "title": "Vegan · Cruelty-free", "body": "Leaping Bunny certified." } },
+        { "type": "badge", "settings": { "icon": "truck", "title": "Carbon-neutral shipping", "body": "Free over $50, always." } },
+        { "type": "badge", "settings": { "icon": "heart", "title": "30-day happy return", "body": "Try it. Keep it. Or don't." } }
+      ]
+    },
+    "ingredient_cards": {
+      "type": "ingredient-cards",
+      "settings": {
+        "eyebrow": "Ingredient spotlight",
+        "heading": "Hero actives, at percentages that work."
+      },
+      "blocks": [
+        { "type": "ingredient", "settings": { "name": "Hyaluronic Acid", "note": "Plumps and holds up to 1,000x its weight in water.", "color": "#16a1d4" } },
+        { "type": "ingredient", "settings": { "name": "Niacinamide 5%", "note": "Evens tone, refines pores, calms redness.", "color": "#7cb342" } },
+        { "type": "ingredient", "settings": { "name": "Squalane", "note": "Weightless barrier repair that never clogs.", "color": "#df7e35" } },
+        { "type": "ingredient", "settings": { "name": "Peptide Complex", "note": "Firms and smooths over eight clinical weeks.", "color": "#f5c518" } }
+      ]
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {
+        "eyebrow": "In their words",
+        "heading": "12,400 five-star reviews and counting.",
+        "background_color": "#faf6f1",
+        "text_color": "#3b3b3d"
+      },
+      "blocks": [
+        { "type": "review", "settings": { "quote": "The Velvet Matte is the first lipstick that hasn't dried me out. Six shades in.", "author": "Lila M.", "source": "Verified buyer", "rating": 5 } },
+        { "type": "review", "settings": { "quote": "Rescue Glow made my skin look expensive. My derm asked what I switched to.", "author": "Rose B.", "source": "Verified buyer", "rating": 5 } },
+        { "type": "review", "settings": { "quote": "Cheek Cushion is idiot-proof. I never look overdone, always look awake.", "author": "Noor K.", "source": "Verified buyer", "rating": 5 } }
+      ]
+    },
+    "image_with_text": {
+      "type": "image-with-text",
+      "settings": {
+        "eyebrow": "Our story",
+        "heading": "Made in Amsterdam. Tested where it matters.",
+        "body": "Every Greyon formula is developed with a panel of dermatologists and stress-tested on hundreds of skin tones before it earns a spot on your shelf. No mystery ingredients, no filler pigment.",
+        "cta_label": "Read our story",
+        "cta_url": "#",
+        "image": "__ASSET__ingredient",
+        "image_alt": "Greyon laboratory ingredient close-up",
+        "image_position": "left",
+        "background_color": "#faf6f1",
+        "text_color": "#3b3b3d"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "Join the list",
+        "heading": "10% off your first order.",
+        "body": "Early access to launches, shade drops, and editorial routines from our in-house dermatologists. No spam — unsubscribe anytime.",
+        "placeholder": "you@email.com",
+        "button_label": "Subscribe",
+        "disclaimer": "By subscribing you agree to receive marketing emails. See our Privacy Policy.",
+        "background_color": "#3b3b3d",
+        "text_color": "#faf6f1",
+        "accent_color": "#9e2a5c"
+      }
+    }
+  }
+}
