@@ -25,7 +25,6 @@ export function Footer() {
     { Icon: Youtube, href: "https://youtube.com/@greyon_cosmetics", label: "YouTube" },
     { Icon: Linkedin, href: "https://www.linkedin.com/company/greyon/", label: "LinkedIn" },
     { Icon: XLogo, href: "https://x.com/GreyonCosmetics", label: "X" },
-    { Icon: WhatsAppLogo, href: "https://wa.me/919319234233", label: "WhatsApp" },
   ];
 
   return (
@@ -70,7 +69,7 @@ export function Footer() {
                 className="inline-flex items-center gap-2 hover:text-ivory"
               >
                 <WhatsAppLogo className="h-4 w-4" />
-                <span>WhatsApp · +91 93192 34233</span>
+                <span>+91 93192 34233</span>
               </a>
             </p>
           </div>
