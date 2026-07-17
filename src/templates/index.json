@@ -60,10 +60,9 @@
         "view_all_url": "/collection/all"
       },
       "blocks": [
-        { "type": "tile", "settings": { "title": "Face", "image": "__ASSET__catFace", "accent_color": "#df7e35", "url": "/collection/face", "size": "lg" } },
-        { "type": "tile", "settings": { "title": "Lips", "image": "__ASSET__catLips", "accent_color": "#9e2a5c", "url": "/collection/lips", "size": "md" } },
-        { "type": "tile", "settings": { "title": "Eyes", "image": "__ASSET__catEyes", "accent_color": "#16a1d4", "url": "/collection/eyes", "size": "md" } },
-        { "type": "tile", "settings": { "title": "Skincare", "image": "__ASSET__catSkin", "accent_color": "#7cb342", "url": "/collection/skincare", "size": "xl" } }
+        { "type": "tile", "settings": { "title": "Lips", "image": "https://cdn.shopify.com/s/files/1/0727/7998/9300/files/English-_Premium_Moisturizing_Lipsticks.png?v=1752772916", "accent_color": "#9e2a5c", "url": "/collection/lips", "size": "xl" } },
+        { "type": "tile", "settings": { "title": "Eyes", "image": "https://cdn.shopify.com/s/files/1/0727/7998/9300/files/Eyeliner04.jpg?v=1756058127", "accent_color": "#16a1d4", "url": "/collection/eyes", "size": "xl" } },
+        { "type": "tile", "settings": { "title": "Skincare", "image": "https://cdn.shopify.com/s/files/1/0727/7998/9300/files/Facial_Oil1_-_Copy.png?v=1756277643", "accent_color": "#7cb342", "url": "/collection/skincare", "size": "xl" } }
       ]
     },
     "featured_products": {
