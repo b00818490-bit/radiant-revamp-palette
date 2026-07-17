@@ -53,8 +53,9 @@ export function Section({ settings }: SectionProps<Settings>) {
 
   const gridClass =
     settings.layout === "bento"
-      ? "grid grid-cols-2 gap-4 lg:grid-cols-2 lg:gap-6"
-      : "grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6";
+      ? "grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 lg:gap-5"
+      : "grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 lg:gap-5";
+
 
   return (
     <section
