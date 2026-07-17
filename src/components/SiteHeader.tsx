@@ -234,7 +234,7 @@ const SEARCH_PRODUCTS = [
 ];
 
 export function SiteHeader({
-  announcement = "Free shipping on prepaid orders · Dermatologist tested · Made in India",
+  announcement = "Free shipping on prepaid orders · Lab tested · Made in India",
   pro = false,
 }: {
   announcement?: string | false;
