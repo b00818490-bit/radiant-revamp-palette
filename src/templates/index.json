@@ -18,7 +18,7 @@
       },
       "blocks": [
         { "type": "message", "settings": { "text": "Free shipping over ₹599" } },
-        { "type": "message", "settings": { "text": "Dermatologist tested" } },
+        { "type": "message", "settings": { "text": "Lab tested" } },
         { "type": "message", "settings": { "text": "Cruelty-free · Vegan formulas" } },
         { "type": "message", "settings": { "text": "30-day happiness guarantee" } },
         { "type": "message", "settings": { "text": "New: Velvet Matte in six shades" } }
