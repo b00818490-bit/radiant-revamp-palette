@@ -23,6 +23,7 @@ import catLips from "@/assets/cat-lips.jpg";
 import catEyes from "@/assets/cat-eyes.jpg";
 import catSkin from "@/assets/cat-skin.jpg";
 import logoAsset from "@/assets/greyon-logo.png.asset.json";
+import { useCartStore } from "@/stores/cartStore";
 
 type MegaKey = "shop" | "face" | "lips" | "eyes" | "skincare";
 
@@ -233,19 +234,19 @@ const SEARCH_PRODUCTS = [
 ];
 
 export function SiteHeader({
-  announcement = "Free shipping over $50 · Dermatologist tested · 30-day happiness guarantee",
+  announcement = "Free shipping on prepaid orders · Dermatologist tested · Made in India",
   pro = false,
-  cartCount = 2,
 }: {
   announcement?: string | false;
   pro?: boolean;
-  cartCount?: number;
 }) {
   const [openMega, setOpenMega] = useState<MegaKey | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
   const [q, setQ] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
+  const cartCount = useCartStore((s) => s.items.reduce((n, i) => n + i.quantity, 0));
+  const openCart = useCartStore((s) => s.setOpen);
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -399,14 +400,19 @@ export function SiteHeader({
             >
               <Heart className="h-4 w-4" />
             </a>
-            <Link to="/checkout" className="relative text-[#3B3B3D] hover:text-[#9E2A5C]" aria-label="Cart">
+            <button
+              type="button"
+              onClick={() => openCart(true)}
+              className="relative text-[#3B3B3D] hover:text-[#9E2A5C]"
+              aria-label="Open cart"
+            >
               <ShoppingBag className="h-5 w-5 sm:h-4 sm:w-4" />
               {cartCount > 0 && (
                 <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-[#9E2A5C] text-[10px] font-medium text-white">
                   {cartCount}
                 </span>
               )}
-            </Link>
+            </button>
           </div>
         </div>
 
