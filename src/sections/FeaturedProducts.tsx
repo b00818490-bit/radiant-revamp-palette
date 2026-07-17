@@ -53,8 +53,9 @@ export function Section({ settings }: SectionProps<Settings>) {
 
   const gridClass =
     settings.layout === "bento"
-      ? "grid grid-cols-2 gap-4 lg:grid-cols-2 lg:gap-6"
-      : "grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6";
+      ? "grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 lg:gap-5"
+      : "grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 lg:gap-5";
+
 
   return (
     <section
@@ -107,9 +108,10 @@ function ProductCard({ product }: { product: ShopifyProduct }) {
   return (
     <Link to="/product/$slug" params={{ slug: node.handle }} className="group">
       <div
-        className="relative mb-4 overflow-hidden aspect-[4/5]"
+        className="relative mb-4 overflow-hidden aspect-[3/4]"
         style={{ backgroundColor: "rgba(130,130,132,0.2)" }}
       >
+
         {img && (
           <img
             src={img.url}
