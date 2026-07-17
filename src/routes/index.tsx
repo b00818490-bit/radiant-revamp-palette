@@ -1,16 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
 import {
   ShoppingBag,
-  Search,
-  User,
-  Heart,
   Star,
   Truck,
   Sparkles,
   Leaf,
   ArrowRight,
-  Menu,
   ChevronRight,
   Play,
 } from "lucide-react";
