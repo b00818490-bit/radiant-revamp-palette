@@ -72,7 +72,7 @@ export function Section({ settings, blocks = [] }: SectionProps<Settings, BlockS
       style={{ backgroundColor: settings.background_color, color: settings.text_color }}
     >
       <div className="mx-auto grid min-h-[86vh] max-w-[1440px] gap-0 lg:grid-cols-12">
-        <div className="relative flex flex-col justify-between px-6 py-14 sm:px-10 lg:col-span-6 lg:px-16 lg:py-20">
+        <div className="relative flex flex-col justify-between px-6 py-14 sm:px-10 lg:col-span-5 lg:px-14 lg:py-20">
           <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.28em] opacity-60">
             <span className="h-px w-8" style={{ backgroundColor: settings.accent_color }} />
             {settings.eyebrow}
