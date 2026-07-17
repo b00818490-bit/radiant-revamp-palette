@@ -15,8 +15,8 @@ type BlockSettings = { name: string; color: string };
 export const schema: SectionSchema = {
   name: "Shade finder",
   settings: [
-    { id: "eyebrow", type: "text", label: "Eyebrow", default: "Shade finder" },
-    { id: "heading", type: "text", label: "Heading", default: "Your undertone, matched in 60 seconds." },
+    { id: "eyebrow", type: "text", label: "Eyebrow", default: "Lip shade finder" },
+    { id: "heading", type: "text", label: "Heading", default: "Find your perfect lip shade in 60 seconds." },
     { id: "body", type: "textarea", label: "Body", default: "" },
     { id: "cta_label", type: "text", label: "CTA label", default: "Start the quiz" },
     { id: "cta_url", type: "url", label: "CTA link", default: "#" },

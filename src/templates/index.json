@@ -85,10 +85,10 @@
     "shade_finder": {
       "type": "shade-finder",
       "settings": {
-        "eyebrow": "Shade finder",
-        "heading": "Your undertone, matched in 60 seconds.",
-        "body": "Answer three quick questions. Our tool cross-references undertone, skin type and climate, then hands back the exact three shades that will look like they were made for you.",
-        "cta_label": "Start the quiz",
+        "eyebrow": "Lip shade finder",
+        "heading": "Find your perfect lip shade in 60 seconds.",
+        "body": "Answer three quick questions about your skin tone, undertone and everyday vibe. We'll match you to the Velvet Matte shades that were made for your lips.",
+        "cta_label": "Find my shade",
         "cta_url": "#",
         "caption": "Velvet Matte Lipstick collection"
       },
