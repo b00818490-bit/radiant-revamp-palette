@@ -4,9 +4,6 @@ import logoAsset from "@/assets/greyon-logo.png.asset.json";
 
 
 export function Footer() {
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-
   return (
     <footer className="bg-charcoal text-ivory">
       {/* Newsletter */}
