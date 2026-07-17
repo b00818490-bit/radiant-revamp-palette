@@ -6,7 +6,7 @@
 export const themeSettings = {
   brand: {
     name: "Greyon",
-    tagline: "Clean color. Serious skincare.",
+    tagline: "Beauty For All",
     logo_text: "greyon",
     social_image: "https://www.greyon.co/social-cover.jpg",
   },
@@ -18,7 +18,6 @@ export const themeSettings = {
     accent: "#b8925a",
     muted: "#f1ece5",
     border: "#e6ded2",
-    // Palette accents
     charcoal: "#3b3b3d",
     ivory: "#faf6f1",
     fog: "#828284",
@@ -42,19 +41,22 @@ export const themeSettings = {
     radius: "4px",
   },
   social: [
-    { platform: "instagram", url: "https://instagram.com/greyon" },
-    { platform: "facebook", url: "https://facebook.com/greyon" },
-    { platform: "youtube", url: "https://youtube.com/@greyon" },
+    { platform: "instagram", url: "https://instagram.com/greyon_cosmetics" },
+    { platform: "facebook", url: "https://www.facebook.com/greyon.co/" },
+    { platform: "youtube", url: "https://youtube.com/@greyon_cosmetics" },
+    { platform: "linkedin", url: "https://www.linkedin.com/company/greyon/" },
+    { platform: "whatsapp", url: "https://wa.me/919319234233" },
   ],
   contact: {
-    email: "hello@greyon.co",
-    hours: "Mon–Fri, 9am–6pm CET",
-    address_line_1: "Herengracht 168",
-    address_line_2: "1016 BP Amsterdam, NL",
+    email: "info@greyon.co",
+    whatsapp: "+91 93192 34233",
+    hours: "Mon–Sat, 10am–7pm IST",
+    address_line_1: "",
+    address_line_2: "",
   },
   compliance: {
-    fda_notice: "Formulas registered under the U.S. Modernization of Cosmetics Regulation Act (MoCRA).",
-    eu_responsible_party: "Greyon EU B.V., Herengracht 168, 1016 BP Amsterdam, NL. CPNP-notified per EC 1223/2009.",
+    fda_notice: "",
+    eu_responsible_party: "",
   },
 } as const;
 
