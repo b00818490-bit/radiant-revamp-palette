@@ -30,7 +30,7 @@ export function Footer() {
 
   return (
     <footer className="bg-charcoal text-ivory">
-      <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-12 px-4 py-16 text-left md:flex-row md:items-start md:px-8">
+      <div className="mx-auto flex max-w-7xl flex-col items-start justify-start gap-12 px-4 py-16 text-left md:flex-row md:items-start md:gap-16 md:px-8">
         {/* Brand */}
         <div>
           <div className="inline-flex flex-col items-center">
@@ -87,7 +87,9 @@ export function Footer() {
           <div className="mt-6 space-y-1">
             <p className="uppercase tracking-[0.25em] text-ivory">Manufactured by</p>
             <p className="font-medium text-ivory">Greygon Cosmetics LLP</p>
-            <p>PLOT NO B-1 and B-2 KH. NO.30/13, 2ND FLOOR, STREET NO. 4 MASTER MOHALLA VILLAGE LIBASPUR, Delhi-110042</p>
+            <p>PLOT NO B-1 and B-2, KH. NO.30/13</p>
+            <p>2ND FLOOR, STREET NO. 4, MASTER MOHALLA</p>
+            <p>VILLAGE LIBASPUR, Delhi-110042</p>
           </div>
         </div>
       </div>
