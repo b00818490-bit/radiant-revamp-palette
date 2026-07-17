@@ -14,6 +14,7 @@ import {
   Sparkles,
   Menu,
 } from "lucide-react";
+import { Footer } from "@/components/Footer";
 
 import prod1 from "@/assets/prod1.jpg";
 import prod2 from "@/assets/prod2.jpg";
@@ -443,16 +444,7 @@ function CollectionPage() {
         </div>
       </section>
 
-      <footer className="bg-charcoal text-ivory">
-        <div className="mx-auto max-w-7xl px-4 py-14 md:px-8">
-          <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
-            <p className="font-display text-3xl">greyon</p>
-            <p className="text-xs uppercase tracking-[0.25em] text-ivory/60">
-              © {new Date().getFullYear()} Greyon Studio
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
 
       {/* Mobile filter drawer */}
       {filtersOpen && (

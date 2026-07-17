@@ -757,20 +757,6 @@ function Faq({ q, a }: { q: string; a: string }) {
   );
 }
 
-function Footer() {
-  return (
-    <footer className="bg-[color:var(--color-charcoal)] text-white py-14">
-      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
-        <Link to="/" className="font-[family-name:var(--font-display)] text-3xl">
-          greyon<span className="text-[color:var(--color-pink)]">.</span>
-        </Link>
-        <div className="flex gap-2">
-          {["#DC2E70", "#DF7E35", "#F5C518", "#7CB342", "#16A1D4"].map((c) => (
-            <span key={c} className="h-5 w-5 rounded-full" style={{ backgroundColor: c }} />
-          ))}
-        </div>
-        <div className="text-xs text-white/50">© 2026 Greyon Beauty Co.</div>
-      </div>
-    </footer>
-  );
-}
+import { Footer } from "@/components/Footer";
+export { Footer };
+
