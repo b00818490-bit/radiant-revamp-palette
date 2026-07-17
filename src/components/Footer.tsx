@@ -52,7 +52,7 @@ export function Footer() {
             </div>
           </div>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-ivory/60">
-            Beauty For All. Dermatologist-tested formulas designed and made responsibly.
+            Beauty For All. Lab-tested formulas designed and made responsibly.
           </p>
 
           {/* Contact */}
