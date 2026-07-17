@@ -90,15 +90,21 @@
         "body": "Answer three quick questions about your skin tone, undertone and everyday vibe. We'll match you to the Velvet Matte shades that were made for your lips.",
         "cta_label": "Find my shade",
         "cta_url": "#",
-        "caption": "Velvet Matte Lipstick collection"
+        "caption": "Premium Matte Liquid Lipcolor collection"
       },
       "blocks": [
-        { "type": "swatch", "settings": { "name": "N°01 Bare", "color": "#c99b8a" } },
-        { "type": "swatch", "settings": { "name": "N°02 Peony", "color": "#e5748d" } },
-        { "type": "swatch", "settings": { "name": "N°03 Coral", "color": "#df7e35" } },
-        { "type": "swatch", "settings": { "name": "N°04 Radiant", "color": "#9e2a5c" } },
-        { "type": "swatch", "settings": { "name": "N°05 Wine", "color": "#7a1f3d" } },
-        { "type": "swatch", "settings": { "name": "N°06 Cocoa", "color": "#4a2a22" } }
+        { "type": "swatch", "settings": { "name": "LLS1 Pearly Pink", "color": "#e8a7ae" } },
+        { "type": "swatch", "settings": { "name": "LLS3 Roman Red", "color": "#b81f2a" } },
+        { "type": "swatch", "settings": { "name": "LLS7 Faded Brown", "color": "#8a5a4a" } },
+        { "type": "swatch", "settings": { "name": "LLS9 Blush Pink Red", "color": "#c94960" } },
+        { "type": "swatch", "settings": { "name": "LLS11 Pueblo Brown", "color": "#a05540" } },
+        { "type": "swatch", "settings": { "name": "LLS13 Light Brown", "color": "#a97556" } },
+        { "type": "swatch", "settings": { "name": "LLS15 Orangy Red", "color": "#d94a2e" } },
+        { "type": "swatch", "settings": { "name": "LLS17 Rich Violet", "color": "#6a1f4a" } },
+        { "type": "swatch", "settings": { "name": "LLS19 Dark Brown", "color": "#5a3229" } },
+        { "type": "swatch", "settings": { "name": "LLS21 Pearsian Pink", "color": "#d47a8c" } },
+        { "type": "swatch", "settings": { "name": "LLS23 Blush Red", "color": "#b83c4a" } },
+        { "type": "swatch", "settings": { "name": "LLS25 Brownish Red", "color": "#8b3a34" } }
       ]
     },
     "instagram_feed": {
