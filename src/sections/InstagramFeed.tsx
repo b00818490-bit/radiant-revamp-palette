@@ -1,5 +1,7 @@
 import { Instagram } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 import type { SectionProps, SectionSchema } from "@/theme/types";
+import { getInstagramFeed } from "@/lib/instagram.functions";
 
 type Settings = {
   eyebrow: string;
@@ -15,14 +17,14 @@ export const schema: SectionSchema = {
   settings: [
     { id: "eyebrow", type: "text", label: "Eyebrow", default: "Follow us" },
     { id: "heading", type: "text", label: "Heading", default: "Greyon on Instagram" },
-    { id: "cta_label", type: "text", label: "CTA label", default: "@greyoncosmetics" },
-    { id: "cta_url", type: "url", label: "CTA link", default: "https://www.instagram.com/greyoncosmetics" },
+    { id: "cta_label", type: "text", label: "CTA label", default: "@greyon_cosmetics" },
+    { id: "cta_url", type: "url", label: "CTA link", default: "https://www.instagram.com/greyon_cosmetics" },
   ],
   max_blocks: 12,
   blocks: [
     {
       type: "post",
-      name: "Instagram post",
+      name: "Instagram post (fallback)",
       settings: [
         { id: "image", type: "image_picker", label: "Image" },
         { id: "url", type: "url", label: "Post link", default: "#" },
@@ -33,6 +35,19 @@ export const schema: SectionSchema = {
 };
 
 export function Section({ settings, blocks = [] }: SectionProps<Settings, BlockSettings>) {
+  const { data } = useQuery({
+    queryKey: ["instagram-feed", "greyon_cosmetics"],
+    queryFn: () => getInstagramFeed(),
+    staleTime: 1000 * 60 * 30,
+    refetchOnWindowFocus: false,
+  });
+
+  const livePosts = data?.posts ?? [];
+  const items =
+    livePosts.length > 0
+      ? livePosts.map((p) => ({ image: p.image, url: p.link, alt: p.alt }))
+      : blocks.map((b) => b.settings);
+
   return (
     <section className="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 lg:py-24">
       <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
@@ -60,20 +75,21 @@ export function Section({ settings, blocks = [] }: SectionProps<Settings, BlockS
 
       <div className="relative">
         <div className="scrollbar-hide -mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 sm:-mx-8 sm:px-8 lg:gap-4">
-          {blocks.map((b, i) => (
+          {items.map((it, i) => (
             <a
               key={i}
-              href={b.settings.url}
+              href={it.url}
               target="_blank"
               rel="noopener noreferrer"
               className="group relative w-[72vw] flex-shrink-0 snap-start overflow-hidden sm:w-[42vw] lg:w-[calc(25%-12px)]"
               style={{ aspectRatio: "4/5" }}
             >
-              {b.settings.image && (
+              {it.image && (
                 <img
-                  src={b.settings.image}
-                  alt={b.settings.alt || `Instagram post ${i + 1}`}
+                  src={it.image}
+                  alt={it.alt || `Instagram post ${i + 1}`}
                   loading="lazy"
+                  referrerPolicy="no-referrer"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               )}
@@ -87,3 +103,4 @@ export function Section({ settings, blocks = [] }: SectionProps<Settings, BlockS
     </section>
   );
 }
+
