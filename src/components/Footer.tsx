@@ -97,54 +97,6 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Trust & compliance */}
-      <div className="border-t border-ivory/10">
-        <div className="mx-auto max-w-7xl px-4 py-10 md:px-8">
-          <div className="grid gap-6 md:grid-cols-3">
-            <TrustBlock
-              icon={<ShieldCheck className="h-4 w-4" />}
-              title="FDA & MoCRA compliant"
-              body="Formulas registered under the U.S. Modernization of Cosmetics Regulation Act (MoCRA). Adverse events: safety@greyon.co."
-            />
-            <TrustBlock
-              icon={<Leaf className="h-4 w-4" />}
-              title="EU responsible person"
-              body="Greyon EU B.V., Herengracht 168, 1016 BP Amsterdam, NL. CPNP-notified per EC 1223/2009."
-            />
-            <TrustBlock
-              icon={<Sparkles className="h-4 w-4" />}
-              title="Batch & expiry"
-              body="Every unit is printed with a batch code and Period-After-Opening (PAO). Look for the open-jar symbol on-pack."
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom */}
-      <div className="border-t border-ivory/10">
-        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-4 px-4 py-8 text-[11px] uppercase tracking-[0.22em] text-ivory/50 md:flex-row md:items-center md:px-8">
-          <p>© {new Date().getFullYear()} Greyon Studio · All rights reserved</p>
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            <span>Made in Amsterdam</span>
-            <span>Ships to 40+ countries</span>
-            <a href="#" className="hover:text-ivory">Sitemap</a>
-          </div>
-        </div>
-      </div>
     </footer>
-  );
-}
-
-function TrustBlock({ icon, title, body }: { icon: React.ReactNode; title: string; body: string }) {
-  return (
-    <div className="flex gap-4">
-      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-ivory/20 text-gold">
-        {icon}
-      </div>
-      <div>
-        <p className="text-xs uppercase tracking-[0.2em] text-ivory">{title}</p>
-        <p className="mt-1.5 text-xs leading-relaxed text-ivory/60">{body}</p>
-      </div>
-    </div>
   );
 }
