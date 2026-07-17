@@ -274,7 +274,7 @@ function CollectionPage() {
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
 
-
+      <main>
       {/* Breadcrumb + Hero intro */}
       <section className="border-b border-border/60 bg-[#f1ece5]">
         <div className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
@@ -377,6 +377,7 @@ function CollectionPage() {
                   >
                     {chip}
                     <button
+                      aria-label={`Remove ${chip} filter`}
                       onClick={() => {
                         if (concerns.includes(chip)) setConcerns(concerns.filter((c) => c !== chip));
                         if (types.includes(chip)) setTypes(types.filter((c) => c !== chip));
@@ -432,6 +433,7 @@ function CollectionPage() {
           </div>
         </div>
       </section>
+      </main>
 
       <Footer />
 
