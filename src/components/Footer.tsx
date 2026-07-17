@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { useState } from "react";
-import { Instagram, Facebook, Youtube, Linkedin, MessageCircle, Mail } from "lucide-react";
+import { Instagram, Facebook, Youtube, Linkedin, MessageCircle } from "lucide-react";
 import logoAsset from "@/assets/greyon-logo.png.asset.json";
 
 
