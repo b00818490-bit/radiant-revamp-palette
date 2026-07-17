@@ -30,51 +30,67 @@ export function Footer() {
 
   return (
     <footer className="bg-charcoal text-ivory">
-      {/* Brand */}
-      <div className="mx-auto max-w-7xl px-4 py-16 text-left md:px-8">
-        <div className="inline-flex flex-col items-center">
-          <Link to="/" aria-label="Greyon home" className="inline-block">
-            <img src={logoAsset.url} alt="Greyon — produits de beauté" className="h-10 w-auto brightness-0 invert" />
-          </Link>
-          <div className="mt-6 flex items-center gap-3">
-            {socials.map(({ Icon, href, label }) => (
+      <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-12 px-4 py-16 text-left md:flex-row md:items-start md:px-8">
+        {/* Brand */}
+        <div>
+          <div className="inline-flex flex-col items-center">
+            <Link to="/" aria-label="Greyon home" className="inline-block">
+              <img src={logoAsset.url} alt="Greyon — produits de beauté" className="h-10 w-auto brightness-0 invert" />
+            </Link>
+            <div className="mt-6 flex items-center gap-3">
+              {socials.map(({ Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={label}
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-ivory/20 text-ivory/70 transition-colors hover:border-gold hover:text-gold"
+                >
+                  <Icon className="h-4 w-4" />
+                </a>
+              ))}
+            </div>
+          </div>
+          <p className="mt-4 max-w-xs text-sm leading-relaxed text-ivory/60">
+            Beauty For All. Dermatologist-tested formulas designed and made responsibly.
+          </p>
+
+          {/* Contact */}
+          <div className="mt-8 space-y-2 text-xs text-ivory/60">
+            <p className="uppercase tracking-[0.25em] text-ivory">Contact</p>
+            <p>
+              <a href="mailto:info@greyon.co" className="hover:text-ivory">info@greyon.co</a>
+            </p>
+            <p>
               <a
-                key={label}
-                href={href}
+                href="https://wa.me/919319234233"
                 target="_blank"
                 rel="noreferrer"
-                aria-label={label}
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-ivory/20 text-ivory/70 transition-colors hover:border-gold hover:text-gold"
+                className="inline-flex items-center gap-2 hover:text-ivory"
               >
-                <Icon className="h-4 w-4" />
+                <WhatsAppLogo className="h-4 w-4" />
+                <span>WhatsApp · +91 93192 34233</span>
               </a>
-            ))}
+            </p>
           </div>
         </div>
-        <p className="mt-4 max-w-xs text-sm leading-relaxed text-ivory/60">
-          Beauty For All. Dermatologist-tested formulas designed and made responsibly.
-        </p>
 
-        {/* Contact */}
-        <div className="mt-8 space-y-2 text-xs text-ivory/60">
-          <p className="uppercase tracking-[0.25em] text-ivory">Contact</p>
-          <p>
-            <a href="mailto:info@greyon.co" className="hover:text-ivory">info@greyon.co</a>
-          </p>
-          <p>
-            <a
-              href="https://wa.me/919319234233"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 hover:text-ivory"
-            >
-              <WhatsAppLogo className="h-4 w-4" />
-              <span>WhatsApp · +91 93192 34233</span>
-            </a>
-          </p>
+        {/* Company details */}
+        <div className="text-right text-xs leading-relaxed text-ivory/60 md:max-w-md">
+          <div className="space-y-1">
+            <p className="uppercase tracking-[0.25em] text-ivory">Marketed by</p>
+            <p className="font-medium text-ivory">Greygon Cosmetics LLP</p>
+            <p>2ND FLOOR, 17-A/38-39, VARDAN BUILDING, AJMAL KHAN</p>
+            <p>ROAD, KAROL BAGH, Delhi, 110005</p>
+          </div>
+          <div className="mt-6 space-y-1">
+            <p className="uppercase tracking-[0.25em] text-ivory">Manufactured by</p>
+            <p className="font-medium text-ivory">Greygon Cosmetics LLP</p>
+            <p>PLOT NO B-1 and B-2 KH. NO.30/13, 2ND FLOOR, STREET NO. 4 MASTER MOHALLA VILLAGE LIBASPUR, Delhi-110042</p>
+          </div>
         </div>
       </div>
-
     </footer>
   );
 }
