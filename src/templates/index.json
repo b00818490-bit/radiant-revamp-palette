@@ -17,7 +17,7 @@
         "speed_seconds": 35
       },
       "blocks": [
-        { "type": "message", "settings": { "text": "Free shipping over $50" } },
+        { "type": "message", "settings": { "text": "Free shipping over ₹599" } },
         { "type": "message", "settings": { "text": "Dermatologist tested" } },
         { "type": "message", "settings": { "text": "Cruelty-free · Vegan formulas" } },
         { "type": "message", "settings": { "text": "30-day happiness guarantee" } },
