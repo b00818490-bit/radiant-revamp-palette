@@ -99,10 +99,6 @@ export function Section({ settings, blocks = [] }: SectionProps<Settings, BlockS
               />
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-            <div
-              className="absolute left-4 top-4 h-7 w-7 rounded-full"
-              style={{ backgroundColor: b.settings.accent_color }}
-            />
             <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between text-white">
               <div>
                 <div className="mb-1 text-[10px] uppercase tracking-[0.24em] text-white/70">
