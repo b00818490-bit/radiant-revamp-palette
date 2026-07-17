@@ -18,14 +18,14 @@ import prod1 from "@/assets/prod1.jpg";
 import prod2 from "@/assets/prod2.jpg";
 import prod3 from "@/assets/prod3.jpg";
 import prod4 from "@/assets/prod4.jpg";
-import catFace from "@/assets/cat-face.jpg";
+
 import catLips from "@/assets/cat-lips.jpg";
 import catEyes from "@/assets/cat-eyes.jpg";
 import catSkin from "@/assets/cat-skin.jpg";
 import logoAsset from "@/assets/greyon-logo.png.asset.json";
 import { useCartStore } from "@/stores/cartStore";
 
-type MegaKey = "shop" | "face" | "lips" | "eyes" | "skincare";
+type MegaKey = "shop" | "lips" | "eyes" | "skincare";
 
 type MegaConfig = {
   key: MegaKey;
@@ -48,7 +48,6 @@ const MEGA: MegaConfig[] = [
       {
         heading: "By category",
         links: [
-          { label: "Face", slug: "face" },
           { label: "Lips", slug: "lips" },
           { label: "Eyes", slug: "eyes" },
           { label: "Skincare", slug: "skincare" },
@@ -71,42 +70,6 @@ const MEGA: MegaConfig[] = [
       tag: "This month",
       title: "The Velvet Matte drop",
       href: "/product/velvet-matte",
-    },
-  },
-  {
-    key: "face",
-    label: "Face",
-    intro: {
-      title: "Complexion, corrected.",
-      body: "Skin-first foundations, blurring primers, and cushion blush.",
-      href: "/collection/face",
-    },
-    columns: [
-      {
-        heading: "Base",
-        links: [
-          { label: "Foundation", slug: "foundation" },
-          { label: "Skin tint", slug: "skin-tint" },
-          { label: "Concealer", slug: "concealer" },
-          { label: "Primer", slug: "primer" },
-          { label: "Setting powder", slug: "powder" },
-        ],
-      },
-      {
-        heading: "Colour",
-        links: [
-          { label: "Blush", slug: "blush" },
-          { label: "Bronzer", slug: "bronzer" },
-          { label: "Highlighter", slug: "highlighter" },
-          { label: "Contour", slug: "contour" },
-        ],
-      },
-    ],
-    feature: {
-      img: catFace,
-      tag: "New",
-      title: "Cushion Blush in 8 shades",
-      href: "/collection/face",
     },
   },
   {
