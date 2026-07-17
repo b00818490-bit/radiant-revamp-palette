@@ -451,7 +451,7 @@ function MegaPanel({
       ))}
       <Link
         to="/product/$slug"
-        params={{ slug: "velvet-matte" }}
+        params={{ slug: config.feature.href.split("/").pop() || "" }}
         onClick={onClose}
         className="group relative overflow-hidden rounded-sm"
       >
