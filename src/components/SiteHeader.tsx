@@ -22,6 +22,7 @@ import catFace from "@/assets/cat-face.jpg";
 import catLips from "@/assets/cat-lips.jpg";
 import catEyes from "@/assets/cat-eyes.jpg";
 import catSkin from "@/assets/cat-skin.jpg";
+import logoAsset from "@/assets/greyon-logo.png.asset.json";
 
 type MegaKey = "shop" | "face" | "lips" | "eyes" | "skincare";
 
@@ -336,16 +337,19 @@ export function SiteHeader({
           {/* Center: logo */}
           <Link
             to="/"
-            className="justify-self-center font-display text-2xl font-medium tracking-[-0.03em] text-[#3B3B3D]"
+            aria-label="Greyon — produits de beauté"
+            className="justify-self-center flex items-center gap-2"
           >
-            <span className="flex items-baseline gap-1.5">
-              greyon<span className="text-[#9E2A5C]">.</span>
-              {pro && (
-                <span className="ml-1 rounded-sm bg-[#3B3B3D] px-1.5 py-0.5 text-[9px] font-medium uppercase tracking-widest text-white">
-                  Pro
-                </span>
-              )}
-            </span>
+            <img
+              src={logoAsset.url}
+              alt="Greyon"
+              className="h-9 w-auto md:h-10"
+            />
+            {pro && (
+              <span className="rounded-sm bg-[#3B3B3D] px-1.5 py-0.5 text-[9px] font-medium uppercase tracking-widest text-white">
+                Pro
+              </span>
+            )}
           </Link>
 
           {/* Right: search + utility */}
