@@ -138,12 +138,23 @@ export function Section({ settings, blocks = [] }: SectionProps<Settings, BlockS
 
         <div className="relative min-h-[520px] lg:col-span-6 lg:min-h-full">
           {settings.image && (
-            <img
-              src={settings.image}
-              alt={settings.image_alt}
-              className="absolute inset-0 h-full w-full object-cover"
-              loading="eager"
-            />
+            /\.(mp4|webm|mov)(\?|$)/i.test(settings.image) ? (
+              <video
+                src={settings.image}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            ) : (
+              <img
+                src={settings.image}
+                alt={settings.image_alt}
+                className="absolute inset-0 h-full w-full object-cover"
+                loading="eager"
+              />
+            )
           )}
           {settings.overlay_product_name && (
             <div
