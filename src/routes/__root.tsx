@@ -95,6 +95,34 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "Greyon",
+          url: "https://radiant-revamp-palette.lovable.app",
+          logo: "https://radiant-revamp-palette.lovable.app/favicon.ico",
+          sameAs: [],
+          description: "Dermatologist-tested makeup and skincare with pigment that performs.",
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "Greyon",
+          url: "https://radiant-revamp-palette.lovable.app",
+          potentialAction: {
+            "@type": "SearchAction",
+            target: "https://radiant-revamp-palette.lovable.app/collection/{search_term_string}",
+            "query-input": "required name=search_term_string",
+          },
+        }),
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,

@@ -1,0 +1,28 @@
+# Greyon
+
+> Clean color, serious skincare. Dermatologist-tested makeup and skincare with pigment that performs.
+
+Greyon is a clean-beauty brand pairing high-pigment color cosmetics with skincare-grade formulas. Products are vegan, cruelty-free, and dermatologist tested across 42 skin tones.
+
+## Pages
+
+- [Home](/): Brand overview, bestsellers, shade finder, and clean-ingredient story.
+- [Wholesale / For Professionals](/wholesale): B2B program for estheticians and stockists — 35% pro discount, early access, and application flow.
+
+## Shop
+
+- [Face collection](/collection/face): Foundations, cushions, and complexion products.
+- [Lips collection](/collection/lips): Velvet mattes, glosses, and lip care.
+- [Eyes collection](/collection/eyes): Mascaras, liners, and shadow.
+- [Skincare collection](/collection/skincare): Serums, creams, and barrier repair.
+- [Bestsellers collection](/collection/bestsellers): The most-reordered Greyon products.
+
+## Products
+
+- [Velvet Matte Lipstick](/product/velvet-matte): 12-hour transfer-proof matte with squalane and peptides in six dermatologist-tested shades.
+- [Cheek Cushion Blush](/product/cheek-cushion): Buildable cream-to-powder blush in flattering universal tones.
+- [Rescue Glow Serum](/product/rescue-glow): Niacinamide + hyaluronic acid serum for radiance and even tone.
+
+## Optional
+
+- [Checkout](/checkout): Secure checkout flow.

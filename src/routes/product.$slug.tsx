@@ -31,20 +31,56 @@ import ugc3 from "@/assets/ugc3.jpg";
 import ugc4 from "@/assets/ugc4.jpg";
 import { SiteHeader } from "@/components/SiteHeader";
 
+function titleize(slug: string) {
+  return slug
+    .split("-")
+    .map((s) => s[0]?.toUpperCase() + s.slice(1))
+    .join(" ");
+}
+
 export const Route = createFileRoute("/product/$slug")({
   component: PDP,
-  head: ({ params }) => ({
-    meta: [
-      { title: `Velvet Matte Lipstick — Greyon` },
-      {
-        name: "description",
-        content:
-          "Velvet Matte Lipstick in six dermatologist-tested shades. 12-hour wear, 0 dryness. Find your match with our shade finder or AR try-on.",
-      },
-      { property: "og:title", content: "Velvet Matte Lipstick — Greyon" },
-      { property: "og:image", content: "https://www.greyon.co/social-cover.jpg" },
-    ],
-  }),
+  head: ({ params }) => {
+    const name = titleize(params.slug);
+    const url = `https://radiant-revamp-palette.lovable.app/product/${params.slug}`;
+    const image = "https://radiant-revamp-palette.lovable.app/social-cover.jpg";
+    const description = `${name} by Greyon — dermatologist-tested, clean-ingredient formula with long-wear pigment. Shop shades, read reviews, and find your match.`;
+    return {
+      meta: [
+        { title: `${name} — Greyon` },
+        { name: "description", content: description },
+        { property: "og:title", content: `${name} — Greyon` },
+        { property: "og:description", content: description },
+        { property: "og:type", content: "product" },
+        { property: "og:url", content: url },
+        { property: "og:image", content: image },
+        { name: "twitter:title", content: `${name} — Greyon` },
+        { name: "twitter:description", content: description },
+        { name: "twitter:image", content: image },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            name,
+            description,
+            image,
+            brand: { "@type": "Brand", name: "Greyon" },
+            offers: {
+              "@type": "Offer",
+              url,
+              priceCurrency: "USD",
+              price: "28.00",
+              availability: "https://schema.org/InStock",
+            },
+          }),
+        },
+      ],
+    };
+  },
 });
 
 const shades = [
@@ -147,14 +183,16 @@ function PDP() {
   return (
     <div className="min-h-screen bg-white text-[color:var(--color-charcoal)]">
       <SiteHeader />
-      <Breadcrumb />
-      <ProductBlock />
-      <ShadeTools />
-      <RoutineUpsell />
-      <FBT />
-      <RatingsSummary />
-      <ReviewsList />
-      <DetailsBelow />
+      <main>
+        <Breadcrumb />
+        <ProductBlock />
+        <ShadeTools />
+        <RoutineUpsell />
+        <FBT />
+        <RatingsSummary />
+        <ReviewsList />
+        <DetailsBelow />
+      </main>
       <Footer />
     </div>
   );
@@ -306,9 +344,9 @@ function ProductBlock() {
         {/* Add to bag */}
         <div className="mt-6 flex gap-3">
           <div className="flex items-center border border-[color:var(--color-charcoal)]">
-            <button onClick={() => setQty(Math.max(1, qty - 1))} className="h-14 w-12 flex items-center justify-center hover:bg-[color:var(--color-muted)]"><Minus className="h-4 w-4" /></button>
+            <button aria-label="Decrease quantity" onClick={() => setQty(Math.max(1, qty - 1))} className="h-14 w-12 flex items-center justify-center hover:bg-[color:var(--color-muted)]"><Minus className="h-4 w-4" /></button>
             <span className="w-10 text-center text-sm">{qty}</span>
-            <button onClick={() => setQty(qty + 1)} className="h-14 w-12 flex items-center justify-center hover:bg-[color:var(--color-muted)]"><Plus className="h-4 w-4" /></button>
+            <button aria-label="Increase quantity" onClick={() => setQty(qty + 1)} className="h-14 w-12 flex items-center justify-center hover:bg-[color:var(--color-muted)]"><Plus className="h-4 w-4" /></button>
           </div>
           <button className="flex-1 bg-[color:var(--color-pink)] text-white text-[13px] uppercase tracking-[0.18em] hover:bg-[color:var(--color-pink)]/90 transition-colors flex items-center justify-center gap-2">
             Add to bag · ${(purchase === "sub" ? 22.4 : 28) * qty}

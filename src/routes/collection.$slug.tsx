@@ -26,14 +26,31 @@ export const Route = createFileRoute("/collection/$slug")({
   component: CollectionPage,
   head: ({ params }) => {
     const title = titleize(params.slug);
+    const url = `https://radiant-revamp-palette.lovable.app/collection/${params.slug}`;
+    const description = `Shop Greyon ${title.toLowerCase()}. Filter by concern, ingredient, and price. Quick-add without leaving the page.`;
     return {
       meta: [
         { title: `${title} — Greyon` },
-        {
-          name: "description",
-          content: `Shop Greyon ${title.toLowerCase()}. Filter by concern, ingredient, and price. Quick-add without leaving the page.`,
-        },
+        { name: "description", content: description },
         { property: "og:title", content: `${title} — Greyon` },
+        { property: "og:description", content: description },
+        { property: "og:type", content: "website" },
+        { property: "og:url", content: url },
+        { name: "twitter:title", content: `${title} — Greyon` },
+        { name: "twitter:description", content: description },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            name: `${title} — Greyon`,
+            description,
+            url,
+          }),
+        },
       ],
     };
   },
@@ -257,7 +274,7 @@ function CollectionPage() {
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
 
-
+      <main>
       {/* Breadcrumb + Hero intro */}
       <section className="border-b border-border/60 bg-[#f1ece5]">
         <div className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
@@ -360,6 +377,7 @@ function CollectionPage() {
                   >
                     {chip}
                     <button
+                      aria-label={`Remove ${chip} filter`}
                       onClick={() => {
                         if (concerns.includes(chip)) setConcerns(concerns.filter((c) => c !== chip));
                         if (types.includes(chip)) setTypes(types.filter((c) => c !== chip));
@@ -415,6 +433,7 @@ function CollectionPage() {
           </div>
         </div>
       </section>
+      </main>
 
       <Footer />
 
@@ -425,7 +444,7 @@ function CollectionPage() {
           <div className="absolute inset-y-0 left-0 w-[85%] max-w-sm overflow-y-auto bg-background p-6">
             <div className="mb-6 flex items-center justify-between">
               <p className="font-display text-2xl text-charcoal">Filters</p>
-              <button onClick={() => setFiltersOpen(false)}>
+              <button aria-label="Close filters" onClick={() => setFiltersOpen(false)}>
                 <X className="h-5 w-5 text-charcoal" />
               </button>
             </div>
@@ -641,6 +660,7 @@ function QuickView({ product, onClose }: { product: Product; onClose: () => void
       <div className="absolute inset-0 bg-charcoal/50" onClick={onClose} />
       <div className="relative z-10 grid w-full max-w-3xl grid-cols-1 overflow-hidden rounded-md bg-background md:grid-cols-2">
         <button
+          aria-label="Close quick view"
           onClick={onClose}
           className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-ivory text-charcoal"
         >

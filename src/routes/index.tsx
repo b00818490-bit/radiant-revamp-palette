@@ -31,14 +31,10 @@ export const Route = createFileRoute("/")({
   component: Home,
   head: () => ({
     meta: [
-      { title: "Greyon — Clean color. Serious skincare." },
-      {
-        name: "description",
-        content:
-          "Dermatologist-tested makeup and skincare with pigment that performs. Shop best-sellers, find your shade, and build a routine you'll love.",
-      },
-      { property: "og:title", content: "Greyon — Clean color. Serious skincare." },
-      { property: "og:image", content: "https://www.greyon.co/social-cover.jpg" },
+      { property: "og:url", content: "https://radiant-revamp-palette.lovable.app/" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://radiant-revamp-palette.lovable.app/" },
     ],
   }),
 });
@@ -105,17 +101,19 @@ function Home() {
     <div className="min-h-screen bg-white text-[color:var(--color-charcoal)]">
       <AnnouncementBar />
       <SiteHeader announcement={false} />
-      <Hero />
-      <PressStrip />
-      <CategoryTiles />
-      <Bestsellers />
-      <ShadeFinder />
-      <Trust />
-      <UGCWall />
-      <IngredientSpotlight />
-      <RoutineBuilder />
-      <Journal />
-      <Newsletter />
+      <main>
+        <Hero />
+        <PressStrip />
+        <CategoryTiles />
+        <Bestsellers />
+        <ShadeFinder />
+        <Trust />
+        <UGCWall />
+        <IngredientSpotlight />
+        <RoutineBuilder />
+        <Journal />
+        <Newsletter />
+      </main>
       <Footer />
     </div>
   );
@@ -227,7 +225,7 @@ function Hero() {
           </div>
 
           {/* play tag */}
-          <button className="absolute top-8 right-8 h-14 w-14 rounded-full bg-white/95 text-[color:var(--color-charcoal)] flex items-center justify-center hover:scale-105 transition-transform">
+          <button aria-label="Play brand video" className="absolute top-8 right-8 h-14 w-14 rounded-full bg-white/95 text-[color:var(--color-charcoal)] flex items-center justify-center hover:scale-105 transition-transform">
             <Play className="h-5 w-5 fill-current" />
           </button>
         </div>
@@ -287,7 +285,7 @@ function CategoryTiles() {
           >
             <img
               src={c.img}
-              alt={c.name}
+              alt={`Shop ${c.name} makeup category`}
               loading="lazy"
               className="absolute inset-0 h-full w-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
             />
@@ -409,6 +407,7 @@ function ShadeFinder() {
             {shades.map((s) => (
               <button
                 key={s.name}
+                aria-label={`Select shade ${s.name}`}
                 className="group aspect-square relative overflow-hidden"
                 style={{ backgroundColor: s.c }}
               >
