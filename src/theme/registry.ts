@@ -8,6 +8,7 @@ import * as PressMarquee from "@/sections/PressMarquee";
 import * as BentoCollections from "@/sections/BentoCollections";
 import * as FeaturedProducts from "@/sections/FeaturedProducts";
 import * as ShadeFinder from "@/sections/ShadeFinder";
+import * as Lookbook from "@/sections/Lookbook";
 import * as InstagramFeed from "@/sections/InstagramFeed";
 import * as TrustBadges from "@/sections/TrustBadges";
 import * as IngredientCards from "@/sections/IngredientCards";
@@ -31,6 +32,7 @@ export const sectionRegistry: Record<string, SectionModule> = {
   "bento-collections": { Section: BentoCollections.Section, schema: BentoCollections.schema },
   "featured-products": { Section: FeaturedProducts.Section, schema: FeaturedProducts.schema },
   "shade-finder": { Section: ShadeFinder.Section, schema: ShadeFinder.schema },
+  lookbook: { Section: Lookbook.Section, schema: Lookbook.schema },
   "instagram-feed": { Section: InstagramFeed.Section, schema: InstagramFeed.schema },
   "trust-badges": { Section: TrustBadges.Section, schema: TrustBadges.schema },
   "ingredient-cards": { Section: IngredientCards.Section, schema: IngredientCards.schema },

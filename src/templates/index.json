@@ -5,6 +5,7 @@
     "bento_collections",
     "featured_products",
     "shade_finder",
+    "lookbook",
     "instagram_feed",
     "image_with_text"
   ],
@@ -18,11 +19,36 @@
         "speed_seconds": 35
       },
       "blocks": [
-        { "type": "message", "settings": { "text": "Free shipping over ₹599" } },
-        { "type": "message", "settings": { "text": "Lab tested" } },
-        { "type": "message", "settings": { "text": "Cruelty-free · Vegan formulas" } },
-        { "type": "message", "settings": { "text": "Easy returns within 3 days of delivery" } },
-        { "type": "message", "settings": { "text": "Premium Matte Liquid Lipstick — 12 shades" } }
+        {
+          "type": "message",
+          "settings": {
+            "text": "Free shipping over ₹599"
+          }
+        },
+        {
+          "type": "message",
+          "settings": {
+            "text": "Lab tested"
+          }
+        },
+        {
+          "type": "message",
+          "settings": {
+            "text": "Cruelty-free · Vegan formulas"
+          }
+        },
+        {
+          "type": "message",
+          "settings": {
+            "text": "Easy returns within 3 days of delivery"
+          }
+        },
+        {
+          "type": "message",
+          "settings": {
+            "text": "Premium Matte Liquid Lipstick — 12 shades"
+          }
+        }
       ]
     },
     "hero": {
@@ -61,9 +87,36 @@
         "view_all_url": "/collection/all"
       },
       "blocks": [
-        { "type": "tile", "settings": { "title": "Lips", "image": "https://cdn.shopify.com/s/files/1/0727/7998/9300/files/English-_Premium_Moisturizing_Lipsticks.png?v=1752772916", "accent_color": "#9e2a5c", "url": "/collection/lips", "size": "xl" } },
-        { "type": "tile", "settings": { "title": "Eyes", "image": "https://cdn.shopify.com/s/files/1/0727/7998/9300/files/Eyeliner04.jpg?v=1756058127", "accent_color": "#16a1d4", "url": "/collection/eyes", "size": "xl" } },
-        { "type": "tile", "settings": { "title": "Skincare", "image": "https://cdn.shopify.com/s/files/1/0727/7998/9300/files/Facial_Oil1_-_Copy.png?v=1756277643", "accent_color": "#7cb342", "url": "/collection/skincare", "size": "xl" } }
+        {
+          "type": "tile",
+          "settings": {
+            "title": "Lips",
+            "image": "https://cdn.shopify.com/s/files/1/0727/7998/9300/files/English-_Premium_Moisturizing_Lipsticks.png?v=1752772916",
+            "accent_color": "#9e2a5c",
+            "url": "/collection/lips",
+            "size": "xl"
+          }
+        },
+        {
+          "type": "tile",
+          "settings": {
+            "title": "Eyes",
+            "image": "https://cdn.shopify.com/s/files/1/0727/7998/9300/files/Eyeliner04.jpg?v=1756058127",
+            "accent_color": "#16a1d4",
+            "url": "/collection/eyes",
+            "size": "xl"
+          }
+        },
+        {
+          "type": "tile",
+          "settings": {
+            "title": "Skincare",
+            "image": "https://cdn.shopify.com/s/files/1/0727/7998/9300/files/Facial_Oil1_-_Copy.png?v=1756277643",
+            "accent_color": "#7cb342",
+            "url": "/collection/skincare",
+            "size": "xl"
+          }
+        }
       ]
     },
     "featured_products": {
@@ -76,10 +129,34 @@
         "layout": "bento"
       },
       "blocks": [
-        { "type": "product", "settings": { "product_handle": "premium-matte-liquid-lipcolor", "featured_size": "tall" } },
-        { "type": "product", "settings": { "product_handle": "cheek-cushion-blush", "featured_size": "normal" } },
-        { "type": "product", "settings": { "product_handle": "rescue-glow-serum", "featured_size": "normal" } },
-        { "type": "product", "settings": { "product_handle": "feather-volume-mascara", "featured_size": "normal" } }
+        {
+          "type": "product",
+          "settings": {
+            "product_handle": "premium-matte-liquid-lipcolor",
+            "featured_size": "tall"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "product_handle": "cheek-cushion-blush",
+            "featured_size": "normal"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "product_handle": "rescue-glow-serum",
+            "featured_size": "normal"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "product_handle": "feather-volume-mascara",
+            "featured_size": "normal"
+          }
+        }
       ]
     },
     "shade_finder": {
@@ -93,18 +170,90 @@
         "caption": "Premium Matte Liquid Lipstick collection"
       },
       "blocks": [
-        { "type": "swatch", "settings": { "name": "LLS1 Pearly Pink", "color": "#e8a7ae" } },
-        { "type": "swatch", "settings": { "name": "LLS3 Roman Red", "color": "#b81f2a" } },
-        { "type": "swatch", "settings": { "name": "LLS7 Faded Brown", "color": "#8a5a4a" } },
-        { "type": "swatch", "settings": { "name": "LLS9 Blush Pink Red", "color": "#c94960" } },
-        { "type": "swatch", "settings": { "name": "LLS11 Pueblo Brown", "color": "#a05540" } },
-        { "type": "swatch", "settings": { "name": "LLS13 Light Brown", "color": "#a97556" } },
-        { "type": "swatch", "settings": { "name": "LLS15 Orangy Red", "color": "#d94a2e" } },
-        { "type": "swatch", "settings": { "name": "LLS17 Rich Violet", "color": "#6a1f4a" } },
-        { "type": "swatch", "settings": { "name": "LLS19 Dark Brown", "color": "#5a3229" } },
-        { "type": "swatch", "settings": { "name": "LLS21 Pearsian Pink", "color": "#d47a8c" } },
-        { "type": "swatch", "settings": { "name": "LLS23 Blush Red", "color": "#b83c4a" } },
-        { "type": "swatch", "settings": { "name": "LLS25 Brownish Red", "color": "#8b3a34" } }
+        {
+          "type": "swatch",
+          "settings": {
+            "name": "LLS1 Pearly Pink",
+            "color": "#e8a7ae"
+          }
+        },
+        {
+          "type": "swatch",
+          "settings": {
+            "name": "LLS3 Roman Red",
+            "color": "#b81f2a"
+          }
+        },
+        {
+          "type": "swatch",
+          "settings": {
+            "name": "LLS7 Faded Brown",
+            "color": "#8a5a4a"
+          }
+        },
+        {
+          "type": "swatch",
+          "settings": {
+            "name": "LLS9 Blush Pink Red",
+            "color": "#c94960"
+          }
+        },
+        {
+          "type": "swatch",
+          "settings": {
+            "name": "LLS11 Pueblo Brown",
+            "color": "#a05540"
+          }
+        },
+        {
+          "type": "swatch",
+          "settings": {
+            "name": "LLS13 Light Brown",
+            "color": "#a97556"
+          }
+        },
+        {
+          "type": "swatch",
+          "settings": {
+            "name": "LLS15 Orangy Red",
+            "color": "#d94a2e"
+          }
+        },
+        {
+          "type": "swatch",
+          "settings": {
+            "name": "LLS17 Rich Violet",
+            "color": "#6a1f4a"
+          }
+        },
+        {
+          "type": "swatch",
+          "settings": {
+            "name": "LLS19 Dark Brown",
+            "color": "#5a3229"
+          }
+        },
+        {
+          "type": "swatch",
+          "settings": {
+            "name": "LLS21 Pearsian Pink",
+            "color": "#d47a8c"
+          }
+        },
+        {
+          "type": "swatch",
+          "settings": {
+            "name": "LLS23 Blush Red",
+            "color": "#b83c4a"
+          }
+        },
+        {
+          "type": "swatch",
+          "settings": {
+            "name": "LLS25 Brownish Red",
+            "color": "#8b3a34"
+          }
+        }
       ]
     },
     "instagram_feed": {
@@ -116,12 +265,54 @@
         "cta_url": "https://www.instagram.com/greyon_cosmetics"
       },
       "blocks": [
-        { "type": "post", "settings": { "image": "__ASSET__ugc1", "url": "https://www.instagram.com/greyon_cosmetics", "alt": "Customer wearing Greyon Premium Matte Liquid Lipstick" } },
-        { "type": "post", "settings": { "image": "__ASSET__ugc3", "url": "https://www.instagram.com/greyon_cosmetics", "alt": "Greyon facial oils" } },
-        { "type": "post", "settings": { "image": "__ASSET__ugc4", "url": "https://www.instagram.com/greyon_cosmetics", "alt": "Close-up of Greyon blush and lip colour" } },
-        { "type": "post", "settings": { "image": "__ASSET__ugc1", "url": "https://www.instagram.com/greyon_cosmetics", "alt": "Greyon makeup look on model" } },
-        { "type": "post", "settings": { "image": "__ASSET__ugc3", "url": "https://www.instagram.com/greyon_cosmetics", "alt": "Greyon products on vanity" } },
-        { "type": "post", "settings": { "image": "__ASSET__ugc4", "url": "https://www.instagram.com/greyon_cosmetics", "alt": "Swatches of Greyon lip shades" } }
+        {
+          "type": "post",
+          "settings": {
+            "image": "__ASSET__ugc1",
+            "url": "https://www.instagram.com/greyon_cosmetics",
+            "alt": "Customer wearing Greyon Premium Matte Liquid Lipstick"
+          }
+        },
+        {
+          "type": "post",
+          "settings": {
+            "image": "__ASSET__ugc3",
+            "url": "https://www.instagram.com/greyon_cosmetics",
+            "alt": "Greyon facial oils"
+          }
+        },
+        {
+          "type": "post",
+          "settings": {
+            "image": "__ASSET__ugc4",
+            "url": "https://www.instagram.com/greyon_cosmetics",
+            "alt": "Close-up of Greyon blush and lip colour"
+          }
+        },
+        {
+          "type": "post",
+          "settings": {
+            "image": "__ASSET__ugc1",
+            "url": "https://www.instagram.com/greyon_cosmetics",
+            "alt": "Greyon makeup look on model"
+          }
+        },
+        {
+          "type": "post",
+          "settings": {
+            "image": "__ASSET__ugc3",
+            "url": "https://www.instagram.com/greyon_cosmetics",
+            "alt": "Greyon products on vanity"
+          }
+        },
+        {
+          "type": "post",
+          "settings": {
+            "image": "__ASSET__ugc4",
+            "url": "https://www.instagram.com/greyon_cosmetics",
+            "alt": "Swatches of Greyon lip shades"
+          }
+        }
       ]
     },
     "image_with_text": {
@@ -138,6 +329,58 @@
         "background_color": "#faf6f1",
         "text_color": "#3b3b3d"
       }
+    },
+    "lookbook": {
+      "type": "lookbook",
+      "settings": {
+        "eyebrow": "Lookbook",
+        "heading": "Real faces, real looks",
+        "body": "Shot on real Indian faces — every look built entirely with Greyon products, so you can see exactly how each shade wears.",
+        "cta_label": "Shop all",
+        "cta_url": "/collection/all"
+      },
+      "blocks": [
+        {
+          "type": "look",
+          "settings": {
+            "image": "https://greyon.co/cdn/shop/files/Look_1_0a25c191-bcc0-4c34-b26c-d499f0c94972.png",
+            "alt": "Grace meets perfection",
+            "title": "Grace meets perfection",
+            "caption": "A radiant traditional look with boldly defined eyes, flawless skin and a soft matte lip — Eyeliner, Mascara, Anti Acne Face Oil and Matte Moisturizing Lipstick in Seductive Peach.",
+            "url": "/collection/all"
+          }
+        },
+        {
+          "type": "look",
+          "settings": {
+            "image": "https://greyon.co/cdn/shop/files/Look_02_cd382575-ecdb-435b-a481-c1d45d112066.jpg",
+            "alt": "Radiance meets tradition",
+            "title": "Radiance meets tradition",
+            "caption": "A vibrant Punjabi look with bold kohl-lined eyes, voluminous lashes and soft, luscious lips — Kajal, Mascara, Creme Moisturizing Lipstick in Carmine Pink and Strawberry Lip Balm.",
+            "url": "/collection/lips"
+          }
+        },
+        {
+          "type": "look",
+          "settings": {
+            "image": "https://greyon.co/cdn/shop/files/Look_03_c6017ca2-bef4-4952-b49a-18f9d2af8bf7.jpg",
+            "alt": "Grace, tradition & bold elegance",
+            "title": "Grace, tradition & bold elegance",
+            "caption": "A stunning Bengali traditional look with boldly defined eyes and a striking red pout — Eyeliner, Kajal, Mascara, Premium Liquid Lipstick in Orangy Red and Liquid Lip Gloss in Wine Red.",
+            "url": "/collection/lips"
+          }
+        },
+        {
+          "type": "look",
+          "settings": {
+            "image": "https://greyon.co/cdn/shop/files/Look_04_49eebb91-7d19-40a6-9090-60c069781992.jpg",
+            "alt": "Glam, glow & all things bold",
+            "title": "Glam, glow & all things bold",
+            "caption": "A party look with sharp eyeliner, voluminous lashes and glossy pink lips — Eyeliner, Mascara, Lip Gloss Stick in Pastel Pink and Matte Moisturizing Lipstick in Pink.",
+            "url": "/collection/eyes"
+          }
+        }
+      ]
     }
   }
 }
