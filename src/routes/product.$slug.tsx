@@ -406,9 +406,7 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
             </div>
           </div>
 
-          <div className="mt-4 flex items-center gap-4 text-[11px] uppercase tracking-[0.18em] text-fog">
-            <Share2 className="h-3 w-3" /> Share
-          </div>
+          <ShareButton product={product} />
         </div>
       </section>
 
