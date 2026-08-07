@@ -15,6 +15,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ShippingReturnsRouteImport } from './routes/shipping-returns'
 import { Route as ShadeQuizRouteImport } from './routes/shade-quiz'
 import { Route as SearchRouteImport } from './routes/search'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as FaqsRouteImport } from './routes/faqs'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as AccountRouteImport } from './routes/account'
@@ -51,6 +52,11 @@ const ShadeQuizRoute = ShadeQuizRouteImport.update({
 const SearchRoute = SearchRouteImport.update({
   id: '/search',
   path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqsRoute = FaqsRouteImport.update({
@@ -95,6 +101,7 @@ export interface FileRoutesByFullPath {
   '/account': typeof AccountRoute
   '/checkout': typeof CheckoutRoute
   '/faqs': typeof FaqsRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/search': typeof SearchRoute
   '/shade-quiz': typeof ShadeQuizRoute
   '/shipping-returns': typeof ShippingReturnsRoute
@@ -110,6 +117,7 @@ export interface FileRoutesByTo {
   '/account': typeof AccountRoute
   '/checkout': typeof CheckoutRoute
   '/faqs': typeof FaqsRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/search': typeof SearchRoute
   '/shade-quiz': typeof ShadeQuizRoute
   '/shipping-returns': typeof ShippingReturnsRoute
@@ -126,6 +134,7 @@ export interface FileRoutesById {
   '/account': typeof AccountRoute
   '/checkout': typeof CheckoutRoute
   '/faqs': typeof FaqsRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/search': typeof SearchRoute
   '/shade-quiz': typeof ShadeQuizRoute
   '/shipping-returns': typeof ShippingReturnsRoute
@@ -143,6 +152,7 @@ export interface FileRouteTypes {
     | '/account'
     | '/checkout'
     | '/faqs'
+    | '/reset-password'
     | '/search'
     | '/shade-quiz'
     | '/shipping-returns'
@@ -158,6 +168,7 @@ export interface FileRouteTypes {
     | '/account'
     | '/checkout'
     | '/faqs'
+    | '/reset-password'
     | '/search'
     | '/shade-quiz'
     | '/shipping-returns'
@@ -173,6 +184,7 @@ export interface FileRouteTypes {
     | '/account'
     | '/checkout'
     | '/faqs'
+    | '/reset-password'
     | '/search'
     | '/shade-quiz'
     | '/shipping-returns'
@@ -189,6 +201,7 @@ export interface RootRouteChildren {
   AccountRoute: typeof AccountRoute
   CheckoutRoute: typeof CheckoutRoute
   FaqsRoute: typeof FaqsRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   SearchRoute: typeof SearchRoute
   ShadeQuizRoute: typeof ShadeQuizRoute
   ShippingReturnsRoute: typeof ShippingReturnsRoute
@@ -241,6 +254,13 @@ declare module '@tanstack/react-router' {
       path: '/search'
       fullPath: '/search'
       preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faqs': {
@@ -301,6 +321,7 @@ const rootRouteChildren: RootRouteChildren = {
   AccountRoute: AccountRoute,
   CheckoutRoute: CheckoutRoute,
   FaqsRoute: FaqsRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   SearchRoute: SearchRoute,
   ShadeQuizRoute: ShadeQuizRoute,
   ShippingReturnsRoute: ShippingReturnsRoute,
