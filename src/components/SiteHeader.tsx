@@ -112,34 +112,25 @@ const MEGA: MegaConfig[] = [
     key: "eyes",
     label: "Eyes",
     intro: {
-      title: "Definition, on your terms.",
-      body: "Buildable shadows and lash-loving formulas your ophthalmologist would approve.",
-      href: "/collection/eyes",
+      title: "Eyes that stand out.",
+      body: "Smudge-proof eyeliner and curl-loving mascara for everyday definition.",
+      href: "/collection/eye-makeup",
     },
     columns: [
       {
-        heading: "Colour",
+        heading: "Shop eyes",
         links: [
-          { label: "Eyeshadow palette", slug: "palette" },
-          { label: "Cream shadow", slug: "cream-shadow" },
-          { label: "Eyeliner", slug: "eyeliner" },
-          { label: "Brow pencil", slug: "brow" },
-        ],
-      },
-      {
-        heading: "Lashes",
-        links: [
-          { label: "Mascara", slug: "mascara" },
-          { label: "Lash serum", slug: "lash-serum" },
-          { label: "Curler", slug: "curler" },
+          { label: "Eye Makeup", slug: "eye-makeup" },
+          { label: "Smoky Eyeliner", slug: "greyon-smoky-eyeliner" },
+          { label: "Black Curling Mascara", slug: "mascara" },
         ],
       },
     ],
     feature: {
       img: catEyes,
-      tag: "New",
-      title: "The Everyday Palette",
-      href: "/collection/eyes",
+      tag: "Bestseller",
+      title: "Smoky Black Eyeliner",
+      href: "/product/greyon-smoky-eyeliner",
     },
   },
   {
