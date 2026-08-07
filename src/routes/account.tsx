@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import type { Session } from "@supabase/supabase-js";
-import { Loader2, Mail, ShieldCheck, LogOut, Heart, ShoppingBag } from "lucide-react";
+import { Loader2, Mail, ShieldCheck, LogOut, Heart, ShoppingBag, Eye, EyeOff, KeyRound } from "lucide-react";
 import { toast } from "sonner";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Footer } from "@/components/Footer";
@@ -82,18 +82,59 @@ function AccountPage() {
 
 /* ------------------------------- Sign in ---------------------------------- */
 
+type Mode = "signin" | "signup" | "verify" | "forgot";
+
+function passwordProblem(pw: string): string | null {
+  if (pw.length < 8) return "Use at least 8 characters.";
+  if (!/[a-zA-Z]/.test(pw) || !/[0-9]/.test(pw)) return "Include at least one letter and one number.";
+  if (pw.length > 72) return "Password must be 72 characters or fewer.";
+  return null;
+}
+
 function SignIn() {
-  const [step, setStep] = useState<"email" | "code">("email");
+  const [mode, setMode] = useState<Mode>("signin");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPw, setShowPw] = useState(false);
   const [code, setCode] = useState("");
   const [busy, setBusy] = useState(false);
 
-  const sendCode = async (e: React.FormEvent) => {
+  const cleanEmail = () => email.trim().toLowerCase();
+
+  /* Existing customer — email + password, stays signed in on this device. */
+  const signInWithPassword = async (e: React.FormEvent) => {
     e.preventDefault();
     setBusy(true);
+    const { error } = await supabase.auth.signInWithPassword({
+      email: cleanEmail(),
+      password,
+    });
+    setBusy(false);
+    if (error) {
+      toast.error("Couldn't sign you in", {
+        description:
+          error.message.toLowerCase().includes("invalid")
+            ? "That email and password combination doesn't match an account."
+            : error.message,
+      });
+      return;
+    }
+    setPassword("");
+    toast.success("Welcome back");
+  };
+
+  /* New customer — send a one-time code first, password is set after verifying. */
+  const startSignUp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const problem = passwordProblem(password);
+    if (problem) {
+      toast.error("Choose a stronger password", { description: problem });
+      return;
+    }
+    setBusy(true);
     const { error } = await supabase.auth.signInWithOtp({
-      email: email.trim(),
+      email: cleanEmail(),
       options: {
         shouldCreateUser: true,
         data: name.trim() ? { full_name: name.trim() } : undefined,
@@ -105,40 +146,148 @@ function SignIn() {
       toast.error("Couldn't send the code", { description: error.message });
       return;
     }
-    setStep("code");
-    toast.success("Check your inbox", { description: `We emailed a verification code to ${email}` });
+    setMode("verify");
+    toast.success("Check your inbox", { description: `We emailed a 6-digit code to ${cleanEmail()}` });
   };
 
-  const verify = async (e: React.FormEvent) => {
+  /* Verify the code, then attach the password the customer chose. */
+  const verifyAndSetPassword = async (e: React.FormEvent) => {
     e.preventDefault();
     setBusy(true);
     const { error } = await supabase.auth.verifyOtp({
-      email: email.trim(),
+      email: cleanEmail(),
       token: code.trim(),
       type: "email",
     });
-    setBusy(false);
     if (error) {
+      setBusy(false);
       toast.error("That code didn't work", { description: error.message });
       return;
     }
-    toast.success("You're signed in");
+    const { error: pwError } = await supabase.auth.updateUser({
+      password,
+      data: name.trim() ? { full_name: name.trim() } : undefined,
+    });
+    setBusy(false);
+    setPassword("");
+    if (pwError) {
+      toast.error("Email verified, but the password wasn't saved", {
+        description: `${pwError.message} You can set it again from your account.`,
+      });
+      return;
+    }
+    toast.success("Account created", { description: "Next time just sign in with your email and password." });
   };
+
+  const sendReset = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setBusy(true);
+    const { error } = await supabase.auth.resetPasswordForEmail(cleanEmail(), {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+    setBusy(false);
+    if (error) {
+      toast.error("Couldn't send the reset link", { description: error.message });
+      return;
+    }
+    toast.success("Reset link sent", { description: `Check ${cleanEmail()} to choose a new password.` });
+    setMode("signin");
+  };
+
+  const heading =
+    mode === "signin"
+      ? "Sign in"
+      : mode === "signup"
+        ? "Create your profile"
+        : mode === "verify"
+          ? "Verify your email"
+          : "Reset your password";
+
+  const blurb =
+    mode === "signin"
+      ? "Use the email and password you set up — you'll stay signed in on this device."
+      : mode === "signup"
+        ? "Pick a password once, verify your email with a single code, and you're set for good."
+        : mode === "verify"
+          ? `Enter the 6-digit code we sent to ${cleanEmail()}. This is the only code you'll ever need — after this you sign in with your password.`
+          : "We'll email you a secure link to choose a new password.";
+
+  const pwField = (label: string, autoComplete: string) => (
+    <Field label={label}>
+      <div className="relative">
+        <input
+          type={showPw ? "text" : "password"}
+          required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          autoComplete={autoComplete}
+          className="input-line pr-10"
+          placeholder="••••••••"
+        />
+        <button
+          type="button"
+          onClick={() => setShowPw((v) => !v)}
+          aria-label={showPw ? "Hide password" : "Show password"}
+          className="absolute right-0 top-1/2 -translate-y-1/2 p-1 text-fog hover:text-berry"
+        >
+          {showPw ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+        </button>
+      </div>
+    </Field>
+  );
 
   return (
     <div className="mx-auto max-w-md">
       <div className="text-[11px] uppercase tracking-[0.28em] text-berry">Greyon account</div>
-      <h1 className="mt-2 font-display text-5xl leading-[0.95] tracking-[-0.03em]">
-        {step === "email" ? "Create your profile" : "Enter your code"}
-      </h1>
-      <p className="mt-3 text-sm text-fog">
-        {step === "email"
-          ? "We'll email you a one-time verification code — no password to remember."
-          : `Enter the 6-digit code we sent to ${email}. You can also just tap the link in that email.`}
-      </p>
+      <h1 className="mt-2 font-display text-5xl leading-[0.95] tracking-[-0.03em]">{heading}</h1>
+      <p className="mt-3 text-sm text-fog">{blurb}</p>
 
-      {step === "email" ? (
-        <form onSubmit={sendCode} className="mt-8 space-y-4">
+      {mode === "signin" && (
+        <form onSubmit={signInWithPassword} className="mt-8 space-y-4">
+          <Field label="Email address">
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              autoComplete="email"
+              className="input-line"
+              placeholder="you@example.com"
+            />
+          </Field>
+          {pwField("Password", "current-password")}
+          <button
+            type="submit"
+            disabled={busy}
+            className="mt-2 flex w-full items-center justify-center gap-2 bg-berry py-4 text-[11px] uppercase tracking-[0.2em] text-ivory hover:bg-berry/90 disabled:opacity-60"
+          >
+            {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <ShieldCheck className="h-4 w-4" />}
+            Sign in
+          </button>
+          <div className="flex items-center justify-between pt-1">
+            <button
+              type="button"
+              onClick={() => setMode("forgot")}
+              className="text-[11px] uppercase tracking-[0.2em] text-fog hover:text-berry"
+            >
+              Forgot password
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setPassword("");
+                setMode("signup");
+              }}
+              className="text-[11px] uppercase tracking-[0.2em] text-berry hover:opacity-70"
+            >
+              Create account
+            </button>
+          </div>
+        </form>
+      )}
+
+      {mode === "signup" && (
+        <form onSubmit={startSignUp} className="mt-8 space-y-4">
           <Field label="Full name (optional)">
             <input
               value={name}
@@ -159,6 +308,8 @@ function SignIn() {
               placeholder="you@example.com"
             />
           </Field>
+          {pwField("Create a password", "new-password")}
+          <p className="text-xs text-fog">At least 8 characters, with a letter and a number.</p>
           <button
             type="submit"
             disabled={busy}
@@ -167,9 +318,21 @@ function SignIn() {
             {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <Mail className="h-4 w-4" />}
             Send verification code
           </button>
+          <button
+            type="button"
+            onClick={() => {
+              setPassword("");
+              setMode("signin");
+            }}
+            className="w-full text-[11px] uppercase tracking-[0.2em] text-fog hover:text-berry"
+          >
+            I already have an account
+          </button>
         </form>
-      ) : (
-        <form onSubmit={verify} className="mt-8 space-y-4">
+      )}
+
+      {mode === "verify" && (
+        <form onSubmit={verifyAndSetPassword} className="mt-8 space-y-4">
           <Field label="Verification code">
             <input
               inputMode="numeric"
@@ -186,16 +349,12 @@ function SignIn() {
             disabled={busy}
             className="flex w-full items-center justify-center gap-2 bg-berry py-4 text-[11px] uppercase tracking-[0.2em] text-ivory hover:bg-berry/90 disabled:opacity-60"
           >
-            {busy ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
-            ) : (
-              <ShieldCheck className="h-4 w-4" />
-            )}
-            Verify & continue
+            {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <ShieldCheck className="h-4 w-4" />}
+            Verify & create account
           </button>
           <button
             type="button"
-            onClick={() => setStep("email")}
+            onClick={() => setMode("signup")}
             className="w-full text-[11px] uppercase tracking-[0.2em] text-fog hover:text-berry"
           >
             Use a different email
@@ -203,13 +362,46 @@ function SignIn() {
         </form>
       )}
 
+      {mode === "forgot" && (
+        <form onSubmit={sendReset} className="mt-8 space-y-4">
+          <Field label="Email address">
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              autoComplete="email"
+              className="input-line"
+              placeholder="you@example.com"
+            />
+          </Field>
+          <button
+            type="submit"
+            disabled={busy}
+            className="mt-2 flex w-full items-center justify-center gap-2 bg-berry py-4 text-[11px] uppercase tracking-[0.2em] text-ivory hover:bg-berry/90 disabled:opacity-60"
+          >
+            {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <Mail className="h-4 w-4" />}
+            Email me a reset link
+          </button>
+          <button
+            type="button"
+            onClick={() => setMode("signin")}
+            className="w-full text-[11px] uppercase tracking-[0.2em] text-fog hover:text-berry"
+          >
+            Back to sign in
+          </button>
+        </form>
+      )}
+
       <p className="mt-10 text-xs leading-relaxed text-fog">
-        By continuing you agree to Greyon's terms and privacy policy. We only use your email for
-        order updates and account access.
+        By continuing you agree to Greyon's terms and privacy policy. Your password is stored
+        encrypted — we can never see it — and we only use your email for order updates and account
+        access.
       </p>
     </div>
   );
 }
+
 
 /* ------------------------------ Signed in --------------------------------- */
 
@@ -339,9 +531,79 @@ function SignedIn({ session }: { session: Session }) {
           </div>
         </form>
       )}
+
+      <ChangePassword />
     </div>
   );
 }
+
+function ChangePassword() {
+  const [password, setPassword] = useState("");
+  const [show, setShow] = useState(false);
+  const [busy, setBusy] = useState(false);
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const problem = passwordProblem(password);
+    if (problem) {
+      toast.error("Choose a stronger password", { description: problem });
+      return;
+    }
+    setBusy(true);
+    const { error } = await supabase.auth.updateUser({ password });
+    setBusy(false);
+    if (error) {
+      toast.error("Couldn't update your password", { description: error.message });
+      return;
+    }
+    setPassword("");
+    toast.success("Password updated");
+  };
+
+  return (
+    <form onSubmit={submit} className="mt-14 max-w-2xl border-t border-border pt-10">
+      <div className="text-[11px] uppercase tracking-[0.28em] text-berry">Security</div>
+      <h2 className="mt-2 font-display text-2xl tracking-[-0.02em]">Set or change your password</h2>
+      <p className="mt-2 text-sm text-fog">
+        With a password you can sign in instantly next time — no verification code needed.
+      </p>
+      <div className="mt-6 flex flex-wrap items-end gap-4">
+        <div className="min-w-[240px] flex-1">
+          <Field label="New password">
+            <div className="relative">
+              <input
+                type={show ? "text" : "password"}
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="new-password"
+                className="input-line pr-10"
+                placeholder="••••••••"
+              />
+              <button
+                type="button"
+                onClick={() => setShow((v) => !v)}
+                aria-label={show ? "Hide password" : "Show password"}
+                className="absolute right-0 top-1/2 -translate-y-1/2 p-1 text-fog hover:text-berry"
+              >
+                {show ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+              </button>
+            </div>
+          </Field>
+        </div>
+        <button
+          type="submit"
+          disabled={busy}
+          className="inline-flex items-center gap-2 bg-berry px-8 py-4 text-[11px] uppercase tracking-[0.2em] text-ivory hover:bg-berry/90 disabled:opacity-60"
+        >
+          {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <KeyRound className="h-4 w-4" />}
+          Save password
+        </button>
+      </div>
+    </form>
+  );
+}
+
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
