@@ -112,3 +112,16 @@
     display: none;
   }
 }
+
+@utility input-line {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  padding: 0.85rem 1rem;
+  font-size: 0.875rem;
+  color: var(--color-charcoal);
+  outline: none;
+  &:focus {
+    border-color: var(--color-berry);
+  }
+}
