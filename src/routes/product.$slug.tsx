@@ -184,15 +184,6 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
             <p className="mt-4 text-fog leading-relaxed">{product.description}</p>
           )}
 
-          <div className="mt-5 flex items-center gap-3 text-sm">
-            <div className="flex text-gold">
-              {[1, 2, 3, 4, 5].map((s) => (
-                <Star key={s} className="h-4 w-4" />
-              ))}
-            </div>
-            <span className="text-fog">No reviews yet</span>
-          </div>
-
           <div className="mt-6 text-2xl font-medium text-charcoal">
             {formatMoney(price.amount, price.currencyCode)}
           </div>
@@ -297,7 +288,7 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
             </div>
             <div className="flex flex-col items-center text-center gap-2">
               <Sparkles className="h-4 w-4 text-berry" />
-              Derm tested
+              Lab tested
             </div>
             <div className="flex flex-col items-center text-center gap-2">
               <Leaf className="h-4 w-4 text-berry" />
@@ -307,6 +298,23 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
 
           <div className="mt-4 flex items-center gap-4 text-[11px] uppercase tracking-[0.18em] text-fog">
             <Share2 className="h-3 w-3" /> Share
+          </div>
+        </div>
+      </section>
+
+      {/* Reviews */}
+      <section className="max-w-[1400px] mx-auto px-6 lg:px-10 pb-24">
+        <div className="border-t border-border pt-10">
+          <h2 className="font-display text-3xl tracking-[-0.02em] text-charcoal">
+            Reviews
+          </h2>
+          <div className="mt-4 flex items-center gap-3 text-sm text-fog">
+            <div className="flex text-gold">
+              {[1, 2, 3, 4, 5].map((s) => (
+                <Star key={s} className="h-4 w-4" />
+              ))}
+            </div>
+            <span>No reviews yet — be the first to review {product.title}.</span>
           </div>
         </div>
       </section>

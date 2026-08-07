@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Loader2, ShoppingBag, Star, ChevronDown } from "lucide-react";
+import { Loader2, ShoppingBag, ChevronDown } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Footer } from "@/components/Footer";
 import { fetchProducts, fetchBestSellers, fetchNewest, formatMoney, type ShopifyProduct } from "@/lib/shopify";
@@ -272,10 +272,6 @@ function ProductCard({ product }: { product: ShopifyProduct }) {
               {node.productType}
             </div>
           )}
-          <div className="mt-1.5 flex items-center gap-1 text-[11px] text-fog">
-            <Star className="h-3 w-3 fill-current text-gold" />
-            No reviews yet
-          </div>
         </div>
         <div className="text-sm font-medium text-charcoal">
           {formatMoney(price.amount, price.currencyCode)}
