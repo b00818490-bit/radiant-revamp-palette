@@ -399,7 +399,7 @@ function MegaPanel({
         </p>
         <Link
           to="/collection/$slug"
-          params={{ slug: config.key }}
+          params={{ slug: config.key === "shop" ? "all" : config.key }}
           onClick={onClose}
           className="mt-6 inline-flex items-center gap-1 text-[11px] uppercase tracking-widest text-[#9E2A5C] hover:text-[#3B3B3D]"
         >
