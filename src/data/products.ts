@@ -30,8 +30,8 @@ export interface Product {
   images: string[];
   description: string;
   variants: ProductVariant[];
-  rating: number;
-  reviews_count: number;
+  rating?: number;
+  reviews_count?: number;
   badge?: "new" | "bestseller" | "restock" | "limited";
 }
 
