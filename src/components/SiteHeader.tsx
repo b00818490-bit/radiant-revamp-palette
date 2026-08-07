@@ -50,17 +50,16 @@ const MEGA: MegaConfig[] = [
         links: [
           { label: "Best sellers", slug: "best-sellers" },
           { label: "New arrivals", slug: "new" },
-          { label: "Trending", slug: "trending" },
-          { label: "Under ₹200", slug: "under-200" },
-          { label: "Gift sets", slug: "gifts" },
+          { label: "Under ₹300", slug: "under-300" },
         ],
+
       },
     ],
     feature: {
       img: "https://cdn.shopify.com/s/files/1/0727/7998/9300/files/Model_3.jpg?v=1775040862",
       tag: "This month",
       title: "Premium Matte Liquid Lipstick",
-      href: "/product/premium-matte-liquid-lipstick",
+      href: "/product/premium-matte-liquid-lipcolor",
     },
   },
   {

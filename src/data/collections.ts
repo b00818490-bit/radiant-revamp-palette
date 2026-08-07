@@ -30,7 +30,7 @@ export const collections: Collection[] = [
     description: "Weightless color, all-day wear.",
     featured_image: catLips,
     accent_color: "#9e2a5c",
-    product_handles: ["premium-matte-liquid-lipstick"],
+    product_handles: ["premium-matte-liquid-lipcolor"],
   },
   {
     handle: "eyes",

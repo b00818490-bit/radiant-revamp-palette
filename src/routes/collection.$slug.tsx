@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Loader2, ShoppingBag, Star, ChevronDown } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Footer } from "@/components/Footer";
-import { fetchProducts, fetchBestSellers, formatMoney, type ShopifyProduct } from "@/lib/shopify";
+import { fetchProducts, fetchBestSellers, fetchNewest, formatMoney, type ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 
@@ -57,6 +57,9 @@ const COLLECTION_HANDLES: Record<string, string[]> = {
   "lip-balm": ["lip-balm"],
   eyes: ["mascara", "greyon-smoky-eyeliner", "vacuum-precision-eyeliner-intense-black"],
   "eye-makeup": ["mascara", "greyon-smoky-eyeliner", "vacuum-precision-eyeliner-intense-black"],
+  mascara: ["mascara"],
+  "greyon-smoky-eyeliner": ["greyon-smoky-eyeliner"],
+  "vacuum-precision-eyeliner-intense-black": ["vacuum-precision-eyeliner-intense-black"],
   skincare: ["facial-oil", "anti-acne-facial-oil", "anti-ageing-facial-oil"],
   "facial-oil": ["facial-oil", "anti-acne-facial-oil", "anti-ageing-facial-oil"],
   "facial-oils": ["facial-oil", "anti-acne-facial-oil", "anti-ageing-facial-oil"],
@@ -66,9 +69,18 @@ const COLLECTION_HANDLES: Record<string, string[]> = {
 
 
 const BEST_SELLER_SLUGS = ["best-sellers", "bestsellers", "best-selling"];
+const NEW_SLUGS = ["new", "new-arrivals"];
+const UNDER_200_SLUGS = ["under-300"];
 
 function buildQuery(slug: string): string | undefined {
-  if (slug === "all" || COLLECTION_HANDLES[slug] || BEST_SELLER_SLUGS.includes(slug)) return undefined;
+  if (
+    slug === "all" ||
+    COLLECTION_HANDLES[slug] ||
+    BEST_SELLER_SLUGS.includes(slug) ||
+    NEW_SLUGS.includes(slug) ||
+    UNDER_200_SLUGS.includes(slug)
+  )
+    return undefined;
   // Try product_type first, fall back to tag — Shopify OR handles both.
   const term = slug.replace(/-/g, " ");
   return `product_type:${term} OR tag:${term} OR title:${term}`;
@@ -77,23 +89,40 @@ function buildQuery(slug: string): string | undefined {
 function CollectionPage() {
   const { slug } = Route.useParams();
   const isBestSellers = BEST_SELLER_SLUGS.includes(slug);
-  const title = slug === "all" ? "All products" : isBestSellers ? "Best sellers" : titleize(slug);
+  const isNew = NEW_SLUGS.includes(slug);
+  const isUnder200 = UNDER_200_SLUGS.includes(slug);
+  const title =
+    slug === "all"
+      ? "All products"
+      : isBestSellers
+        ? "Best sellers"
+        : isNew
+          ? "New arrivals"
+          : isUnder200
+            ? "Under ₹300"
+            : titleize(slug);
   const query = buildQuery(slug);
   const [sort, setSort] = useState<"featured" | "price-asc" | "price-desc" | "title">("featured");
 
   const { data: allProducts = [], isLoading } = useQuery({
     queryKey: ["shopify-products", "collection", slug, query],
-    queryFn: () => (isBestSellers ? fetchBestSellers(12) : fetchProducts(50, query)),
+    queryFn: () =>
+      isBestSellers ? fetchBestSellers(12) : isNew ? fetchNewest(12) : fetchProducts(50, query),
     staleTime: 60_000,
   });
 
 
   const handles = COLLECTION_HANDLES[slug];
-  const products: ShopifyProduct[] = handles
+  const byHandle: ShopifyProduct[] = handles
     ? handles
         .map((h) => allProducts.find((p: ShopifyProduct) => p.node.handle === h))
         .filter((p): p is ShopifyProduct => Boolean(p))
     : allProducts;
+
+  const products = isUnder200
+    ? byHandle.filter((p) => parseFloat(p.node.priceRange.minVariantPrice.amount) < 300)
+    : byHandle;
+
 
 
 

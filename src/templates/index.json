@@ -76,7 +76,7 @@
         "layout": "bento"
       },
       "blocks": [
-        { "type": "product", "settings": { "product_handle": "premium-matte-liquid-lipstick", "featured_size": "tall" } },
+        { "type": "product", "settings": { "product_handle": "premium-matte-liquid-lipcolor", "featured_size": "tall" } },
         { "type": "product", "settings": { "product_handle": "cheek-cushion-blush", "featured_size": "normal" } },
         { "type": "product", "settings": { "product_handle": "rescue-glow-serum", "featured_size": "normal" } },
         { "type": "product", "settings": { "product_handle": "feather-volume-mascara", "featured_size": "normal" } }
