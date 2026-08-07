@@ -59,23 +59,26 @@ export function Section({ settings }: SectionProps<Settings>) {
 
   return (
     <section
-      className="py-20 lg:py-28"
+      className="py-16 lg:py-24"
       style={{ backgroundColor: settings.background_color, color: settings.text_color }}
     >
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8">
-        <div className="mb-12">
+        <div className="mb-10">
           {settings.eyebrow && (
-            <div
-              className="mb-3 text-[11px] uppercase tracking-[0.28em]"
+            <Link
+              to="/collection/$slug"
+              params={{ slug: "best-sellers" }}
+              className="mb-3 inline-block text-[11px] uppercase tracking-[0.28em] transition-opacity hover:opacity-70"
               style={{ color: "var(--color-primary)" }}
             >
               {settings.eyebrow}
-            </div>
+            </Link>
           )}
           <h2 className="max-w-3xl text-4xl leading-[0.95] sm:text-5xl lg:text-6xl">
             {settings.heading}
           </h2>
         </div>
+
 
         {isLoading ? (
           <div className="flex items-center justify-center py-24 opacity-60">
