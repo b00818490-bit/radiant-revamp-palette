@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WishlistRouteImport } from './routes/wishlist'
 import { Route as WholesaleRouteImport } from './routes/wholesale'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ShippingReturnsRouteImport } from './routes/shipping-returns'
 import { Route as ShadeQuizRouteImport } from './routes/shade-quiz'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as CheckoutRouteImport } from './routes/checkout'
@@ -34,6 +35,11 @@ const WholesaleRoute = WholesaleRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShippingReturnsRoute = ShippingReturnsRouteImport.update({
+  id: '/shipping-returns',
+  path: '/shipping-returns',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShadeQuizRoute = ShadeQuizRouteImport.update({
@@ -84,6 +90,7 @@ export interface FileRoutesByFullPath {
   '/checkout': typeof CheckoutRoute
   '/search': typeof SearchRoute
   '/shade-quiz': typeof ShadeQuizRoute
+  '/shipping-returns': typeof ShippingReturnsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/wholesale': typeof WholesaleRoute
   '/wishlist': typeof WishlistRoute
@@ -97,6 +104,7 @@ export interface FileRoutesByTo {
   '/checkout': typeof CheckoutRoute
   '/search': typeof SearchRoute
   '/shade-quiz': typeof ShadeQuizRoute
+  '/shipping-returns': typeof ShippingReturnsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/wholesale': typeof WholesaleRoute
   '/wishlist': typeof WishlistRoute
@@ -111,6 +119,7 @@ export interface FileRoutesById {
   '/checkout': typeof CheckoutRoute
   '/search': typeof SearchRoute
   '/shade-quiz': typeof ShadeQuizRoute
+  '/shipping-returns': typeof ShippingReturnsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/wholesale': typeof WholesaleRoute
   '/wishlist': typeof WishlistRoute
@@ -126,6 +135,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/search'
     | '/shade-quiz'
+    | '/shipping-returns'
     | '/sitemap.xml'
     | '/wholesale'
     | '/wishlist'
@@ -139,6 +149,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/search'
     | '/shade-quiz'
+    | '/shipping-returns'
     | '/sitemap.xml'
     | '/wholesale'
     | '/wishlist'
@@ -152,6 +163,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/search'
     | '/shade-quiz'
+    | '/shipping-returns'
     | '/sitemap.xml'
     | '/wholesale'
     | '/wishlist'
@@ -166,6 +178,7 @@ export interface RootRouteChildren {
   CheckoutRoute: typeof CheckoutRoute
   SearchRoute: typeof SearchRoute
   ShadeQuizRoute: typeof ShadeQuizRoute
+  ShippingReturnsRoute: typeof ShippingReturnsRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   WholesaleRoute: typeof WholesaleRoute
   WishlistRoute: typeof WishlistRoute
@@ -194,6 +207,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shipping-returns': {
+      id: '/shipping-returns'
+      path: '/shipping-returns'
+      fullPath: '/shipping-returns'
+      preLoaderRoute: typeof ShippingReturnsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/shade-quiz': {
@@ -262,6 +282,7 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutRoute: CheckoutRoute,
   SearchRoute: SearchRoute,
   ShadeQuizRoute: ShadeQuizRoute,
+  ShippingReturnsRoute: ShippingReturnsRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   WholesaleRoute: WholesaleRoute,
   WishlistRoute: WishlistRoute,
@@ -271,13 +292,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
