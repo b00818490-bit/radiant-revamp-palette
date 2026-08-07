@@ -56,8 +56,14 @@ const COLLECTION_HANDLES: Record<string, string[]> = {
   "lip-gloss-stick": ["lip-gloss-stick"],
   "lip-balm": ["lip-balm"],
   eyes: ["mascara", "greyon-smoky-eyeliner", "vacuum-precision-eyeliner-intense-black"],
+  "eye-makeup": ["mascara", "greyon-smoky-eyeliner", "vacuum-precision-eyeliner-intense-black"],
   skincare: ["facial-oil", "anti-acne-facial-oil", "anti-ageing-facial-oil"],
+  "facial-oil": ["facial-oil", "anti-acne-facial-oil", "anti-ageing-facial-oil"],
+  "facial-oils": ["facial-oil", "anti-acne-facial-oil", "anti-ageing-facial-oil"],
+  "anti-acne-facial-oil": ["anti-acne-facial-oil"],
+  "anti-ageing-facial-oil": ["anti-ageing-facial-oil"],
 };
+
 
 function buildQuery(slug: string): string | undefined {
   if (slug === "all" || COLLECTION_HANDLES[slug]) return undefined;
