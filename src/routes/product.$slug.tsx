@@ -290,7 +290,7 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
           <div className="mt-8 pt-6 border-t border-border grid grid-cols-3 gap-4 text-[10px] uppercase tracking-[0.18em] text-fog">
             <div className="flex flex-col items-center text-center gap-2">
               <Truck className="h-4 w-4 text-berry" />
-              Free ship on prepaid
+              Free ship over ₹599
             </div>
             <div className="flex flex-col items-center text-center gap-2">
               <Sparkles className="h-4 w-4 text-berry" />

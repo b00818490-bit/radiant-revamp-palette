@@ -172,7 +172,7 @@ const POPULAR = [
 
 
 export function SiteHeader({
-  announcement = "Free shipping on prepaid orders · Lab tested · Made in India",
+  announcement = "Free shipping on orders above ₹599 · Lab tested · Made in India",
   pro = false,
 }: {
   announcement?: string | false;
