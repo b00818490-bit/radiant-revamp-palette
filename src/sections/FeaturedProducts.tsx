@@ -87,7 +87,7 @@ export function Section({ settings }: SectionProps<Settings>) {
           <div className="py-24 text-center opacity-70">
             <p className="text-lg">No products found</p>
             <p className="mt-2 text-sm opacity-70">
-              Add a product in Shopify — I can also create one for you here.
+              No featured products are set right now.
             </p>
           </div>
         ) : (

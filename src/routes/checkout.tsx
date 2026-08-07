@@ -34,7 +34,7 @@ export const Route = createFileRoute("/checkout")({
       { property: "og:title", content: "Secure checkout — Greyon" },
       {
         property: "og:description",
-        content: "Review your bag and pay securely on Greyon's Shopify-powered checkout.",
+        content: "Review your bag and pay securely. Free shipping over ₹599, lab-tested formulas and easy returns within 3 days.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -251,7 +251,7 @@ function CheckoutPage() {
             </button>
             <p className="mt-3 flex items-center gap-2 text-xs text-fog">
               <ExternalLink className="h-3 w-3" />
-              Payment is completed on Greyon's secure Shopify checkout (UPI, cards, netbanking, COD
+              Payment is completed on a secure, encrypted checkout page (UPI, cards, netbanking, COD
               where available).
             </p>
           </form>

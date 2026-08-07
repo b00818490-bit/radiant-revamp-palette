@@ -20,7 +20,7 @@ export const Route = createFileRoute("/collection/$slug")({
   head: ({ params }) => {
     const title = titleize(params.slug);
     const url = `https://radiant-revamp-palette.lovable.app/collection/${params.slug}`;
-    const description = `Shop Greyon ${title.toLowerCase()}. Real Shopify products, live inventory, secure Shopify checkout.`;
+    const description = `Shop Greyon ${title.toLowerCase()}. Clean, cruelty-free makeup for every Indian skin tone. Free shipping over ₹599.`;
     return {
       meta: [
         { title: `${title} — Greyon` },
@@ -159,7 +159,7 @@ function CollectionPage() {
               {title}
             </h1>
             <p className="mt-6 max-w-lg text-[15px] leading-relaxed text-fog">
-              Live from your Shopify catalog. Prices and inventory update in real time.
+              Handpicked essentials for everyday care. Prices and availability update in real time.
             </p>
           </div>
         </section>

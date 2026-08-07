@@ -36,7 +36,7 @@ const CATEGORIES: Category[] = [
     faqs: [
       {
         q: "What payment methods can I use?",
-        a: "Checkout is powered by Shopify's secure payment gateway, so you can pay with UPI, credit and debit cards, net banking and popular wallets. Cash on delivery is available on serviceable pin codes and is shown at checkout when eligible.",
+        a: "You can pay with UPI, credit and debit cards, net banking and popular wallets. Cash on delivery is available on serviceable pin codes and is shown at checkout when eligible.",
       },
       {
         q: "Are prices inclusive of taxes?",

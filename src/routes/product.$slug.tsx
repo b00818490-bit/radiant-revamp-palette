@@ -38,7 +38,7 @@ export const Route = createFileRoute("/product/$slug")({
       .map((s) => s[0]?.toUpperCase() + s.slice(1))
       .join(" ");
     const url = `https://radiant-revamp-palette.lovable.app/product/${params.slug}`;
-    const description = `${name} by Greyon — shop live from our Shopify store with secure checkout.`;
+    const description = `${name} by Greyon — clean, cruelty-free makeup for every Indian skin tone.`;
     return {
       meta: [
         { title: `${name} — Greyon` },
@@ -73,7 +73,7 @@ function PDP() {
           <div className="mx-auto max-w-2xl px-6 py-32 text-center">
             <h1 className="font-display text-4xl text-charcoal">Product not found</h1>
             <p className="mt-4 text-fog">
-              This product isn't in your Shopify catalog. Browse everything else instead.
+              This product isn't available right now. Browse everything else instead.
             </p>
             <Link
               to="/collection/$slug"
