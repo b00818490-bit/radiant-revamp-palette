@@ -420,6 +420,13 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
           </div>
         </div>
       </section>
+
+      <ProductRail
+        eyebrow="Others also buy"
+        title="Complete your routine"
+        products={alsoBuy}
+      />
+      <ProductRail eyebrow="Recently viewed" title="Back to what you loved" products={recent} />
     </>
   );
 }
