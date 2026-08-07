@@ -187,6 +187,13 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
           <div className="mt-6 text-2xl font-medium text-charcoal">
             {formatMoney(price.amount, price.currencyCode)}
           </div>
+          <p className="mt-1 text-xs text-fog">Inclusive of all taxes</p>
+          <div className="mt-3 flex flex-wrap gap-x-6 gap-y-1 text-[11px] uppercase tracking-[0.18em] text-fog">
+            {selectedVariant?.sku && <span>SKU: {selectedVariant.sku}</span>}
+            <span>
+              {selectedVariant?.availableForSale ? "In stock" : "Out of stock"}
+            </span>
+          </div>
 
           {/* Variants */}
           {hasRealOptions && variants.length > 1 && (
@@ -324,6 +331,71 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
           </div>
         </div>
       </section>
+
+      {/* Legal information */}
+      <section className="max-w-[1400px] mx-auto px-6 lg:px-10 pb-24">
+        <div className="grid gap-10 border-t border-border pt-10 lg:grid-cols-2">
+          <div>
+            <h2 className="font-display text-3xl tracking-[-0.02em] text-charcoal">
+              Legal information
+            </h2>
+            <dl className="mt-6 space-y-3 text-sm text-fog">
+              <LegalRow label="Country of origin" value="India" />
+              <LegalRow label="Best before" value="24 months from packaging date" />
+              <LegalRow
+                label="Manufactured by"
+                value="Greygon Cosmetics LLP, 1st Floor, Plot No. B-1 & B-2, Kh. No. 30/13, Street No. 4, Master Mohalla, Libaspur Industrial Area, Delhi-110042"
+              />
+              <LegalRow
+                label="Marketed by"
+                value="Greygon Cosmetics LLP, 2nd Floor, 17-A/38-39, Vardan Building, Ajmal Khan Road, Karol Bagh, Delhi-110005"
+              />
+              <LegalRow
+                label="Customer care"
+                value="+91 93192 34233 · info@greyon.co"
+              />
+            </dl>
+          </div>
+          <div>
+            <h2 className="font-display text-3xl tracking-[-0.02em] text-charcoal">
+              Shipping &amp; returns
+            </h2>
+            <ul className="mt-6 space-y-3 text-sm text-fog leading-relaxed">
+              <li>Free shipping on all orders above ₹599, across serviceable pin codes in India.</li>
+              <li>Orders are processed in 1–2 business days; delivery takes 3–10 working days.</li>
+              <li>
+                Return or exchange requests can be raised within 3 days of delivery for unopened
+                items in original packaging.
+              </li>
+              <li>Refunds are processed within 24–48 business hours of the return reaching us.</li>
+            </ul>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link
+                to="/shipping-returns"
+                className="border border-charcoal px-6 py-3 text-[11px] uppercase tracking-[0.2em] text-charcoal hover:bg-charcoal hover:text-ivory transition-colors"
+              >
+                Full policy
+              </Link>
+              <Link
+                to="/faqs"
+                className="border border-border px-6 py-3 text-[11px] uppercase tracking-[0.2em] text-fog hover:text-berry"
+              >
+                FAQs
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }
+
+function LegalRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <dt className="text-[11px] uppercase tracking-[0.2em] text-charcoal">{label}</dt>
+      <dd className="mt-1 leading-relaxed">{value}</dd>
+    </div>
+  );
+}
+
