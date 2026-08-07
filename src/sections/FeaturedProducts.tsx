@@ -103,6 +103,21 @@ export function Section({ settings }: SectionProps<Settings>) {
   );
 }
 
+function categoryLabel(title: string, productType?: string) {
+  const t = title.toLowerCase();
+  if (t.includes("lipcolor") || t.includes("lipstick") || t.includes("lip color")) return "Lipstick";
+  if (t.includes("lip gloss") || t.includes("lipgloss")) return "Lip gloss";
+  if (t.includes("lip balm") || t.includes("lipbalm")) return "Lip balm";
+  if (t.includes("lip liner")) return "Lip liner";
+  if (t.includes("kajal")) return "Kajal";
+  if (t.includes("mascara")) return "Mascara";
+  if (t.includes("eyeliner") || t.includes("eye liner")) return "Eyeliner";
+  if (t.includes("oil")) return "Facial oil";
+  if (t.includes("serum")) return "Serum";
+  if (!productType || productType.toLowerCase() === "cosmetics") return "";
+  return productType;
+}
+
 function ProductCard({ product }: { product: ShopifyProduct }) {
   const node = product.node;
   const img = node.images?.edges?.[0]?.node;
@@ -138,8 +153,10 @@ function ProductCard({ product }: { product: ShopifyProduct }) {
           >
             {node.title}
           </div>
-          {node.productType && (
-            <div className="mt-1 text-xs opacity-50">{node.productType}</div>
+          {categoryLabel(node.title, node.productType) && (
+            <div className="mt-1 text-xs opacity-50">
+              {categoryLabel(node.title, node.productType)}
+            </div>
           )}
         </div>
         <div className="text-sm">{formatMoney(price.amount, price.currencyCode)}</div>
