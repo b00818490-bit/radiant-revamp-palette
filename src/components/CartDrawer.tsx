@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useNavigate } from "@tanstack/react-router";
 import {
   Sheet,
   SheetContent,
@@ -12,6 +13,7 @@ import { useCartStore } from "@/stores/cartStore";
 import { formatMoney } from "@/lib/shopify";
 
 export function CartDrawer() {
+  const navigate = useNavigate();
   const {
     items,
     isLoading,
@@ -134,8 +136,19 @@ export function CartDrawer() {
                 </div>
                 <p className="text-xs text-fog">Shipping & taxes calculated at checkout.</p>
                 <Button
-                  onClick={handleCheckout}
+                  onClick={() => {
+                    setOpen(false);
+                    navigate({ to: "/checkout" });
+                  }}
                   className="w-full bg-berry text-ivory hover:bg-berry/90 h-12 text-xs uppercase tracking-[0.2em] rounded-none"
+                  disabled={items.length === 0}
+                >
+                  Checkout
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={handleCheckout}
+                  className="w-full h-12 text-xs uppercase tracking-[0.2em] rounded-none border-charcoal text-charcoal"
                   disabled={items.length === 0 || isLoading || isSyncing}
                 >
                   {isLoading || isSyncing ? (
@@ -143,7 +156,7 @@ export function CartDrawer() {
                   ) : (
                     <>
                       <ExternalLink className="w-4 h-4 mr-2" />
-                      Checkout with Shopify
+                      Express checkout
                     </>
                   )}
                 </Button>
