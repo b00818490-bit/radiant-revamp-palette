@@ -14,14 +14,6 @@ import {
   Package,
 } from "lucide-react";
 
-import prod1 from "@/assets/prod1.jpg";
-import prod2 from "@/assets/prod2.jpg";
-import prod3 from "@/assets/prod3.jpg";
-import prod4 from "@/assets/prod4.jpg";
-
-import catLips from "@/assets/cat-lips.jpg";
-import catEyes from "@/assets/cat-eyes.jpg";
-import catSkin from "@/assets/cat-skin.jpg";
 import logoAsset from "@/assets/greyon-logo.png.asset.json";
 import { useCartStore } from "@/stores/cartStore";
 
@@ -65,7 +57,7 @@ const MEGA: MegaConfig[] = [
       },
     ],
     feature: {
-      img: prod1,
+      img: "https://cdn.shopify.com/s/files/1/0727/7998/9300/files/LLS1_Premium_Matte_Liquid_Lipstick_Pearly_Pink.png?v=1775040862",
       tag: "This month",
       title: "Premium Matte Liquid Lipstick",
       href: "/product/premium-matte-liquid-lipstick",
@@ -127,7 +119,7 @@ const MEGA: MegaConfig[] = [
       },
     ],
     feature: {
-      img: catEyes,
+      img: "https://cdn.shopify.com/s/files/1/0727/7998/9300/files/Eyeliner04.jpg?v=1756058127",
       tag: "Bestseller",
       title: "Smoky Black Eyeliner",
       href: "/product/greyon-smoky-eyeliner",
@@ -152,7 +144,7 @@ const MEGA: MegaConfig[] = [
       },
     ],
     feature: {
-      img: catSkin,
+      img: "https://cdn.shopify.com/s/files/1/0727/7998/9300/files/antiacne1_5c4caeb9-8e74-4157-a161-c9acaa2cb1db.jpg?v=1756057980",
       tag: "Popular",
       title: "Anti Acne Facial Oil",
       href: "/product/anti-acne-facial-oil",
@@ -169,10 +161,10 @@ const POPULAR = [
 ];
 
 const SEARCH_PRODUCTS = [
-  { name: "Smoky Black Eyeliner", cat: "Eyes · Bestseller", price: "₹259", img: prod1, slug: "greyon-smoky-eyeliner" },
-  { name: "Black Curling Mascara", cat: "Eyes", price: "₹359", img: prod2, slug: "mascara" },
-  { name: "Vacuum Precision Eyeliner (Kajal)", cat: "Eyes", price: "₹229", img: prod3, slug: "vacuum-precision-eyeliner-intense-black" },
-  { name: "Anti Acne Facial Oil", cat: "Skincare", price: "₹319", img: prod4, slug: "anti-acne-facial-oil" },
+  { name: "Smoky Black Eyeliner", cat: "Eyes · Bestseller", price: "₹259", img: "https://cdn.shopify.com/s/files/1/0727/7998/9300/files/Eyeliner04.jpg?v=1756058127", slug: "greyon-smoky-eyeliner" },
+  { name: "Black Curling Mascara", cat: "Eyes", price: "₹359", img: "https://cdn.shopify.com/s/files/1/0727/7998/9300/files/mascara2.png?v=1756058149", slug: "mascara" },
+  { name: "Vacuum Precision Eyeliner (Kajal)", cat: "Eyes", price: "₹229", img: "https://cdn.shopify.com/s/files/1/0727/7998/9300/files/Kajal04-Copy.jpg?v=1756228025", slug: "vacuum-precision-eyeliner-intense-black" },
+  { name: "Anti Acne Facial Oil", cat: "Skincare", price: "₹319", img: "https://cdn.shopify.com/s/files/1/0727/7998/9300/files/antiacne1_5c4caeb9-8e74-4157-a161-c9acaa2cb1db.jpg?v=1756057980", slug: "anti-acne-facial-oil" },
 ];
 
 export function SiteHeader({
