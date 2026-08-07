@@ -6,7 +6,6 @@ import {
   ShoppingBag,
   Star,
   ChevronRight,
-  Heart,
   Share2,
   Sparkles,
   Leaf,
@@ -24,6 +23,7 @@ import {
   type ShopifyVariant,
 } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
+import { WishlistButton } from "@/components/WishlistButton";
 
 export const Route = createFileRoute("/product/$slug")({
   component: PDP,
