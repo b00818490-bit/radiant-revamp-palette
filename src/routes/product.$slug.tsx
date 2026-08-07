@@ -272,13 +272,19 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
                 </>
               )}
             </button>
-            <button
-              aria-label="Wishlist"
-              className="h-14 w-14 border border-charcoal flex items-center justify-center hover:bg-charcoal hover:text-ivory transition-colors"
-            >
-              <Heart className="h-4 w-4" />
-            </button>
+            <WishlistButton
+              product={product}
+              variant={selectedVariant}
+              className="h-14 w-14 border border-charcoal hover:bg-charcoal hover:text-ivory transition-colors"
+            />
           </div>
+
+          <Link
+            to="/wishlist"
+            className="mt-3 inline-block text-[11px] uppercase tracking-[0.18em] text-fog hover:text-berry"
+          >
+            View wishlist
+          </Link>
 
           {/* Trust row */}
           <div className="mt-8 pt-6 border-t border-border grid grid-cols-3 gap-4 text-[10px] uppercase tracking-[0.18em] text-fog">
