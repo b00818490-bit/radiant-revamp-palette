@@ -81,13 +81,22 @@ const MEGA: MegaConfig[] = [
     },
     columns: [
       {
-        heading: "Shop lips",
+        heading: "Lipsticks",
         links: [
-          { label: "Matte Liquid Lipstick", slug: "matte-liquid-lipstick" },
-          { label: "Moisturizing Lipstick", slug: "moisturizing-lipstick" },
-          { label: "Creme Bullet Lipstick", slug: "creme-bullet-lipstick" },
-          { label: "Liquid Lip Gloss", slug: "liquid-lip-gloss" },
+          { label: "Matte Liquid Lipcolor", slug: "matte-liquid-lipcolor" },
+          { label: "Liquid Lipstick", slug: "liquid-lipstick" },
+          { label: "Regular Matte Liquid Lipstick", slug: "regular-matte-liquid-lipstick" },
+          { label: "Glossy Moisturizing Lipsticks", slug: "glossy-moisturizing-lipsticks" },
+          { label: "Matte Moisturizing Lipstick", slug: "matte-moisturizing-lipstick" },
+          { label: "Premium Moisturizing Lipstick", slug: "creme-moisturizing-lipstick" },
+        ],
+      },
+      {
+        heading: "Gloss & care",
+        links: [
+          { label: "Lip Gloss", slug: "lip-gloss" },
           { label: "Lip Gloss Stick", slug: "lip-gloss-stick" },
+          { label: "Liquid Lip Gloss", slug: "liquid-lip-gloss" },
           { label: "Lip Balm", slug: "lip-balm" },
         ],
       },
