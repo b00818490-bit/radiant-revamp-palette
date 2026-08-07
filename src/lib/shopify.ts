@@ -120,6 +120,28 @@ export async function fetchProducts(first = 24, query?: string): Promise<Shopify
   return res?.data?.products?.edges ?? [];
 }
 
+/**
+ * Full-text product search. Shopify's `query` arg matches title, description,
+ * product_type, tag, vendor and variant fields; we add a trailing `*` so
+ * partial words ("mat") still match ("matte").
+ */
+export async function searchProducts(term: string, first = 40): Promise<ShopifyProduct[]> {
+  const cleaned = term.trim();
+  if (!cleaned) return [];
+  const words = cleaned.split(/\s+/).filter(Boolean);
+  const query = words.map((w) => `${w.replace(/["\\:()]/g, "")}*`).join(" AND ");
+  const results = await fetchProducts(first, query);
+  if (results.length > 0) return results;
+  // Fallback: client-side contains match over the catalogue.
+  const all = await fetchProducts(100);
+  const lower = cleaned.toLowerCase();
+  return all.filter((p) =>
+    [p.node.title, p.node.productType, p.node.description]
+      .filter(Boolean)
+      .some((f) => String(f).toLowerCase().includes(lower)),
+  );
+}
+
 const BEST_SELLERS_QUERY = `
   query GetBestSellers($first: Int!) {
     products(first: $first, sortKey: BEST_SELLING) {

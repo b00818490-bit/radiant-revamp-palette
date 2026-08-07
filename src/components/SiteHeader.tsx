@@ -1,5 +1,17 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { searchProducts, formatMoney, type ShopifyProduct } from "@/lib/shopify";
+
+function useDebounced<T>(value: T, delay = 250): T {
+  const [debounced, setDebounced] = useState(value);
+  useEffect(() => {
+    const t = setTimeout(() => setDebounced(value), delay);
+    return () => clearTimeout(t);
+  }, [value, delay]);
+  return debounced;
+}
+
 import {
   Search,
   ShoppingBag,
@@ -157,12 +169,6 @@ const POPULAR = [
   "Facial oil",
 ];
 
-const SEARCH_PRODUCTS = [
-  { name: "Smoky Black Eyeliner", cat: "Eyes · Bestseller", price: "₹259", img: "https://cdn.shopify.com/s/files/1/0727/7998/9300/files/Eyeliner04.jpg?v=1756058127", slug: "greyon-smoky-eyeliner" },
-  { name: "Black Curling Mascara", cat: "Eyes", price: "₹359", img: "https://cdn.shopify.com/s/files/1/0727/7998/9300/files/mascara2.png?v=1756058149", slug: "mascara" },
-  { name: "Vacuum Precision Eyeliner (Kajal)", cat: "Eyes", price: "₹229", img: "https://cdn.shopify.com/s/files/1/0727/7998/9300/files/Kajal04-Copy.jpg?v=1756228025", slug: "vacuum-precision-eyeliner-intense-black" },
-  { name: "Anti Acne Facial Oil", cat: "Skincare", price: "₹319", img: "https://cdn.shopify.com/s/files/1/0727/7998/9300/files/antiacne1_5c4caeb9-8e74-4157-a161-c9acaa2cb1db.jpg?v=1756057980", slug: "anti-acne-facial-oil" },
-];
 
 export function SiteHeader({
   announcement = "Free shipping on prepaid orders · Lab tested · Made in India",
@@ -176,6 +182,8 @@ export function SiteHeader({
   const [q, setQ] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+
   const cartCount = useCartStore((s) => s.items.reduce((n, i) => n + i.quantity, 0));
   const openCart = useCartStore((s) => s.setOpen);
 
@@ -205,11 +213,21 @@ export function SiteHeader({
     return () => document.removeEventListener("mousedown", onClick);
   }, []);
 
-  const filtered = q
-    ? SEARCH_PRODUCTS.filter((p) =>
-        p.name.toLowerCase().includes(q.toLowerCase()),
-      )
-    : SEARCH_PRODUCTS;
+  const debouncedQ = useDebounced(q, 250);
+  const { data: results = [], isFetching } = useQuery({
+    queryKey: ["header-search", debouncedQ],
+    queryFn: () => searchProducts(debouncedQ, 8),
+    enabled: debouncedQ.trim().length > 0,
+    staleTime: 60_000,
+  });
+
+  function submitSearch(value: string) {
+    const term = value.trim();
+    if (!term) return;
+    setSearchOpen(false);
+    navigate({ to: "/search", search: { q: term } });
+  }
+
 
   return (
     <>
@@ -286,11 +304,10 @@ export function SiteHeader({
 
           {/* Right: search + utility */}
           <div className="flex items-center justify-end gap-3 sm:gap-4">
-            {/* Inline search on desktop */}
-            <div ref={searchRef} className="relative hidden md:block">
+            <div ref={searchRef} className="relative">
               <button
                 onClick={() => setSearchOpen(true)}
-                className="flex items-center gap-2 rounded-sm border border-[#e6ded2] bg-white/70 px-3 py-2 text-xs text-[#828284] transition hover:border-[#3B3B3D] hover:text-[#3B3B3D]"
+                className="hidden md:flex items-center gap-2 rounded-sm border border-[#e6ded2] bg-white/70 px-3 py-2 text-xs text-[#828284] transition hover:border-[#3B3B3D] hover:text-[#3B3B3D]"
                 aria-label="Search"
               >
                 <Search className="h-3.5 w-3.5" />
@@ -299,23 +316,25 @@ export function SiteHeader({
                   ⌘K
                 </span>
               </button>
+              <button
+                onClick={() => setSearchOpen(true)}
+                className="md:hidden text-[#3B3B3D]"
+                aria-label="Search"
+              >
+                <Search className="h-5 w-5" />
+              </button>
               {searchOpen && (
                 <SearchDropdown
                   q={q}
                   setQ={setQ}
-                  results={filtered}
+                  results={results}
+                  isFetching={isFetching}
+                  onSubmit={submitSearch}
                   onClose={() => setSearchOpen(false)}
                 />
               )}
             </div>
 
-            <button
-              onClick={() => setSearchOpen(true)}
-              className="md:hidden text-[#3B3B3D]"
-              aria-label="Search"
-            >
-              <Search className="h-5 w-5" />
-            </button>
 
             <a
               href="#account"
@@ -456,17 +475,27 @@ function SearchDropdown({
   q,
   setQ,
   results,
+  isFetching,
+  onSubmit,
   onClose,
 }: {
   q: string;
   setQ: (v: string) => void;
-  results: typeof SEARCH_PRODUCTS;
+  results: ShopifyProduct[];
+  isFetching: boolean;
+  onSubmit: (v: string) => void;
   onClose: () => void;
 }) {
   return (
     <div className="fixed inset-x-0 top-[calc(var(--header-h,4rem)+40px)] z-50 mx-auto max-w-2xl px-4 md:absolute md:right-0 md:left-auto md:top-full md:mt-2 md:w-[520px] md:max-w-none md:px-0">
       <div className="overflow-hidden rounded-sm border border-[#e6ded2] bg-white shadow-2xl">
-        <div className="relative border-b border-[#e6ded2]">
+        <form
+          className="relative border-b border-[#e6ded2]"
+          onSubmit={(e) => {
+            e.preventDefault();
+            onSubmit(q);
+          }}
+        >
           <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#828284]" />
           <input
             autoFocus
@@ -476,13 +505,14 @@ function SearchDropdown({
             className="w-full bg-transparent px-11 py-4 text-sm outline-none placeholder:text-[#828284]"
           />
           <button
+            type="button"
             onClick={onClose}
             className="absolute right-3 top-1/2 -translate-y-1/2 text-[#828284] hover:text-[#3B3B3D]"
             aria-label="Close search"
           >
             <X className="h-4 w-4" />
           </button>
-        </div>
+        </form>
 
         {!q && (
           <div className="border-b border-[#e6ded2] p-4">
@@ -503,36 +533,60 @@ function SearchDropdown({
           </div>
         )}
 
-        <div className="max-h-[60vh] overflow-y-auto p-2">
-          <p className="px-2 pt-2 pb-1 text-[10px] uppercase tracking-widest text-[#828284]">
-            Products
-          </p>
-          {results.length === 0 && (
-            <p className="px-2 py-6 text-center text-sm text-[#828284]">
-              No matches for "{q}"
+        {q && (
+          <div className="max-h-[60vh] overflow-y-auto p-2">
+            <p className="px-2 pt-2 pb-1 text-[10px] uppercase tracking-widest text-[#828284]">
+              Products
             </p>
-          )}
-          {results.map((p) => (
-            <Link
-              key={p.slug}
-              to="/product/$slug"
-              params={{ slug: p.slug }}
-              onClick={onClose}
-              className="flex items-center gap-3 rounded-sm p-2 transition hover:bg-[#FAF6F1]"
-            >
-              <img
-                src={p.img}
-                alt=""
-                className="h-12 w-12 shrink-0 rounded-sm object-cover"
-              />
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-medium">{p.name}</p>
-                <p className="text-xs text-[#828284]">{p.cat}</p>
-              </div>
-              <span className="shrink-0 text-sm font-medium">{p.price}</span>
-            </Link>
-          ))}
-        </div>
+            {isFetching && (
+              <p className="px-2 py-6 text-center text-sm text-[#828284]">Searching…</p>
+            )}
+            {!isFetching && results.length === 0 && (
+              <p className="px-2 py-6 text-center text-sm text-[#828284]">
+                No results found for “{q}”
+              </p>
+            )}
+            {!isFetching &&
+              results.map((p) => {
+                const node = p.node;
+                const img = node.images?.edges?.[0]?.node;
+                const price = node.priceRange.minVariantPrice;
+                return (
+                  <Link
+                    key={node.id}
+                    to="/product/$slug"
+                    params={{ slug: node.handle }}
+                    onClick={onClose}
+                    className="flex items-center gap-3 rounded-sm p-2 transition hover:bg-[#FAF6F1]"
+                  >
+                    {img && (
+                      <img
+                        src={img.url}
+                        alt=""
+                        className="h-12 w-12 shrink-0 rounded-sm object-cover"
+                      />
+                    )}
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm font-medium">{node.title}</p>
+                      <p className="text-xs text-[#828284]">{node.productType}</p>
+                    </div>
+                    <span className="shrink-0 text-sm font-medium">
+                      {formatMoney(price.amount, price.currencyCode)}
+                    </span>
+                  </Link>
+                );
+              })}
+            {!isFetching && results.length > 0 && (
+              <button
+                onClick={() => onSubmit(q)}
+                className="mt-1 w-full rounded-sm py-3 text-center text-[11px] uppercase tracking-widest text-[#9E2A5C] hover:bg-[#FAF6F1]"
+              >
+                See all results for “{q}”
+              </button>
+            )}
+          </div>
+        )}
+
 
         <div className="grid grid-cols-2 border-t border-[#e6ded2]">
           <Link
