@@ -35,8 +35,32 @@ export const Route = createFileRoute("/collection/$slug")({
   },
 });
 
+const LIP_HANDLES = [
+  "premium-matte-liquid-lipcolor",
+  "regular-matte-liquid-lipcolor",
+  "creme-moisturizing-lipstick",
+  "regular-moisturizing-lipstick",
+  "greyon-liquid-lip-gloss",
+  "lip-gloss-stick",
+  "lip-balm",
+];
+
+// Slug -> exact Shopify handles published on the storefront.
+const COLLECTION_HANDLES: Record<string, string[]> = {
+  lips: LIP_HANDLES,
+  "premium-matte-liquid-lipstick": ["premium-matte-liquid-lipcolor"],
+  "regular-matte-liquid-lipcolor": ["regular-matte-liquid-lipcolor"],
+  "premium-moisturizing-lipstick": ["creme-moisturizing-lipstick"],
+  "regular-moisturizing-lipstick": ["regular-moisturizing-lipstick"],
+  "liquid-lip-gloss": ["greyon-liquid-lip-gloss"],
+  "lip-gloss-stick": ["lip-gloss-stick"],
+  "lip-balm": ["lip-balm"],
+  eyes: ["mascara", "greyon-smoky-eyeliner", "vacuum-precision-eyeliner-intense-black"],
+  skincare: ["facial-oil", "anti-acne-facial-oil", "anti-ageing-facial-oil"],
+};
+
 function buildQuery(slug: string): string | undefined {
-  if (slug === "all") return undefined;
+  if (slug === "all" || COLLECTION_HANDLES[slug]) return undefined;
   // Try product_type first, fall back to tag — Shopify OR handles both.
   const term = slug.replace(/-/g, " ");
   return `product_type:${term} OR tag:${term} OR title:${term}`;
@@ -48,11 +72,19 @@ function CollectionPage() {
   const query = buildQuery(slug);
   const [sort, setSort] = useState<"featured" | "price-asc" | "price-desc" | "title">("featured");
 
-  const { data: products = [], isLoading } = useQuery({
+  const { data: allProducts = [], isLoading } = useQuery({
     queryKey: ["shopify-products", "collection", slug, query],
     queryFn: () => fetchProducts(50, query),
     staleTime: 60_000,
   });
+
+  const handles = COLLECTION_HANDLES[slug];
+  const products = handles
+    ? handles
+        .map((h) => allProducts.find((p) => p.node.handle === h))
+        .filter(Boolean as unknown as (p: (typeof allProducts)[number] | undefined) => p is (typeof allProducts)[number])
+    : allProducts;
+
 
   const sorted = [...products].sort((a, b) => {
     const pa = parseFloat(a.node.priceRange.minVariantPrice.amount);
