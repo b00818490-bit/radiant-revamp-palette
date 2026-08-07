@@ -708,12 +708,12 @@ function MobileDrawer({ onClose }: { onClose: () => void }) {
         </div>
 
         <div className="border-t border-[#e6ded2] p-5 text-sm">
-          <a href="#account" className="flex items-center gap-3 py-2">
+          <Link to="/account" onClick={onClose} className="flex items-center gap-3 py-2">
             <User className="h-4 w-4" /> Account
-          </a>
-          <a href="#wishlist" className="flex items-center gap-3 py-2">
+          </Link>
+          <Link to="/wishlist" onClick={onClose} className="flex items-center gap-3 py-2">
             <Heart className="h-4 w-4" /> Wishlist
-          </a>
+          </Link>
           <Link
             to="/wholesale"
             onClick={onClose}
