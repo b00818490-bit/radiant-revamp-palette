@@ -138,10 +138,6 @@ function ProductCard({ product }: { product: ShopifyProduct }) {
           {node.productType && (
             <div className="mt-1 text-xs opacity-50">{node.productType}</div>
           )}
-          <div className="mt-2 flex items-center gap-1 text-[11px] opacity-60">
-            <Star className="h-3 w-3 fill-current" style={{ color: "var(--color-yellow)" }} />
-            No reviews yet
-          </div>
         </div>
         <div className="text-sm">{formatMoney(price.amount, price.currencyCode)}</div>
       </div>
