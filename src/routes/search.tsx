@@ -1,7 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { zodValidator, fallback } from "@tanstack/zod-adapter";
-import { z } from "zod";
 import { Loader2, Search as SearchIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -9,12 +7,11 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { Footer } from "@/components/Footer";
 import { searchProducts, formatMoney, type ShopifyProduct } from "@/lib/shopify";
 
-const searchSchema = z.object({
-  q: fallback(z.string(), "").default(""),
-});
-
 export const Route = createFileRoute("/search")({
-  validateSearch: zodValidator(searchSchema),
+  validateSearch: (search: Record<string, unknown>): { q: string } => ({
+    q: typeof search.q === "string" ? search.q : "",
+  }),
+
   head: () => ({
     meta: [
       { title: "Search — Greyon Cosmetics" },
