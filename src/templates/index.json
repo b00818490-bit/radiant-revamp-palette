@@ -76,7 +76,7 @@
         "layout": "bento"
       },
       "blocks": [
-        { "type": "product", "settings": { "product_handle": "velvet-matte-lipstick", "featured_size": "tall" } },
+        { "type": "product", "settings": { "product_handle": "premium-matte-liquid-lipstick", "featured_size": "tall" } },
         { "type": "product", "settings": { "product_handle": "cheek-cushion-blush", "featured_size": "normal" } },
         { "type": "product", "settings": { "product_handle": "rescue-glow-serum", "featured_size": "normal" } },
         { "type": "product", "settings": { "product_handle": "feather-volume-mascara", "featured_size": "normal" } }
@@ -116,7 +116,7 @@
         "cta_url": "https://www.instagram.com/greyon_cosmetics"
       },
       "blocks": [
-        { "type": "post", "settings": { "image": "__ASSET__ugc1", "url": "https://www.instagram.com/greyon_cosmetics", "alt": "Customer wearing Greyon velvet matte lipstick" } },
+        { "type": "post", "settings": { "image": "__ASSET__ugc1", "url": "https://www.instagram.com/greyon_cosmetics", "alt": "Customer wearing Greyon Premium Matte Liquid Lipstick" } },
         { "type": "post", "settings": { "image": "__ASSET__ugc3", "url": "https://www.instagram.com/greyon_cosmetics", "alt": "Greyon facial oils" } },
         { "type": "post", "settings": { "image": "__ASSET__ugc4", "url": "https://www.instagram.com/greyon_cosmetics", "alt": "Close-up of Greyon blush and lip colour" } },
         { "type": "post", "settings": { "image": "__ASSET__ugc1", "url": "https://www.instagram.com/greyon_cosmetics", "alt": "Greyon makeup look on model" } },
