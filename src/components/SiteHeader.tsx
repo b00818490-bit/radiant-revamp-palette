@@ -169,12 +169,6 @@ const POPULAR = [
   "Facial oil",
 ];
 
-const SEARCH_PRODUCTS = [
-  { name: "Smoky Black Eyeliner", cat: "Eyes · Bestseller", price: "₹259", img: "https://cdn.shopify.com/s/files/1/0727/7998/9300/files/Eyeliner04.jpg?v=1756058127", slug: "greyon-smoky-eyeliner" },
-  { name: "Black Curling Mascara", cat: "Eyes", price: "₹359", img: "https://cdn.shopify.com/s/files/1/0727/7998/9300/files/mascara2.png?v=1756058149", slug: "mascara" },
-  { name: "Vacuum Precision Eyeliner (Kajal)", cat: "Eyes", price: "₹229", img: "https://cdn.shopify.com/s/files/1/0727/7998/9300/files/Kajal04-Copy.jpg?v=1756228025", slug: "vacuum-precision-eyeliner-intense-black" },
-  { name: "Anti Acne Facial Oil", cat: "Skincare", price: "₹319", img: "https://cdn.shopify.com/s/files/1/0727/7998/9300/files/antiacne1_5c4caeb9-8e74-4157-a161-c9acaa2cb1db.jpg?v=1756057980", slug: "anti-acne-facial-oil" },
-];
 
 export function SiteHeader({
   announcement = "Free shipping on prepaid orders · Lab tested · Made in India",
