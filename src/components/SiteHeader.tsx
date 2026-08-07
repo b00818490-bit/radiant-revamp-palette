@@ -286,7 +286,7 @@ export function SiteHeader({
             <img
               src={logoAsset.url}
               alt="Greyon"
-              className="h-9 w-auto md:h-10"
+              className="h-12 w-auto md:h-14 -my-1"
             />
             {pro && (
               <span className="rounded-sm bg-[#3B3B3D] px-1.5 py-0.5 text-[9px] font-medium uppercase tracking-widest text-white">
