@@ -117,10 +117,10 @@ function ShareButton({ product }: { product: ShopifyProductNode }) {
       <PopoverTrigger asChild>
         <button
           type="button"
-          className="inline-flex h-14 w-14 items-center justify-center border border-charcoal text-fog hover:bg-charcoal hover:text-ivory transition-colors"
+          className="inline-flex h-8 w-8 items-center justify-center border border-border text-fog hover:border-charcoal hover:bg-charcoal hover:text-ivory transition-colors"
           aria-label="Share this product"
         >
-          <Share2 className="h-4 w-4" />
+          <Share2 className="h-3.5 w-3.5" />
         </button>
       </PopoverTrigger>
       <PopoverContent align="end" className="w-56 p-3 bg-ivory border-border">
@@ -372,7 +372,7 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
             </>
           )}
 
-          <div className="mt-6 flex flex-wrap items-baseline gap-3">
+          <div className="mt-6 flex flex-wrap items-center gap-3">
             <span className="text-2xl font-medium text-charcoal">
               {formatMoney(price.amount, price.currencyCode)}
             </span>
@@ -386,6 +386,7 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
                 </span>
               </>
             )}
+            <ShareButton product={product} />
           </div>
           <p className="mt-1 text-xs text-fog">Inclusive of all taxes</p>
           <div className="mt-3 flex flex-wrap gap-x-6 gap-y-1 text-[11px] uppercase tracking-[0.18em] text-fog">
@@ -484,7 +485,6 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
               variant={selectedVariant}
               className="h-14 w-14 border border-charcoal hover:bg-charcoal hover:text-ivory transition-colors"
             />
-            <ShareButton product={product} />
           </div>
 
           <Link
