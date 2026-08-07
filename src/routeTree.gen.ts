@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WishlistRouteImport } from './routes/wishlist'
 import { Route as WholesaleRouteImport } from './routes/wholesale'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ShadeQuizRouteImport } from './routes/shade-quiz'
@@ -19,6 +20,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductSlugRouteImport } from './routes/product.$slug'
 import { Route as CollectionSlugRouteImport } from './routes/collection.$slug'
 
+const WishlistRoute = WishlistRouteImport.update({
+  id: '/wishlist',
+  path: '/wishlist',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WholesaleRoute = WholesaleRouteImport.update({
   id: '/wholesale',
   path: '/wholesale',
@@ -73,6 +79,7 @@ export interface FileRoutesByFullPath {
   '/shade-quiz': typeof ShadeQuizRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/wholesale': typeof WholesaleRoute
+  '/wishlist': typeof WishlistRoute
   '/collection/$slug': typeof CollectionSlugRoute
   '/product/$slug': typeof ProductSlugRoute
 }
@@ -84,6 +91,7 @@ export interface FileRoutesByTo {
   '/shade-quiz': typeof ShadeQuizRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/wholesale': typeof WholesaleRoute
+  '/wishlist': typeof WishlistRoute
   '/collection/$slug': typeof CollectionSlugRoute
   '/product/$slug': typeof ProductSlugRoute
 }
@@ -96,6 +104,7 @@ export interface FileRoutesById {
   '/shade-quiz': typeof ShadeQuizRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/wholesale': typeof WholesaleRoute
+  '/wishlist': typeof WishlistRoute
   '/collection/$slug': typeof CollectionSlugRoute
   '/product/$slug': typeof ProductSlugRoute
 }
@@ -109,6 +118,7 @@ export interface FileRouteTypes {
     | '/shade-quiz'
     | '/sitemap.xml'
     | '/wholesale'
+    | '/wishlist'
     | '/collection/$slug'
     | '/product/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -120,6 +130,7 @@ export interface FileRouteTypes {
     | '/shade-quiz'
     | '/sitemap.xml'
     | '/wholesale'
+    | '/wishlist'
     | '/collection/$slug'
     | '/product/$slug'
   id:
@@ -131,6 +142,7 @@ export interface FileRouteTypes {
     | '/shade-quiz'
     | '/sitemap.xml'
     | '/wholesale'
+    | '/wishlist'
     | '/collection/$slug'
     | '/product/$slug'
   fileRoutesById: FileRoutesById
@@ -143,12 +155,20 @@ export interface RootRouteChildren {
   ShadeQuizRoute: typeof ShadeQuizRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   WholesaleRoute: typeof WholesaleRoute
+  WishlistRoute: typeof WishlistRoute
   CollectionSlugRoute: typeof CollectionSlugRoute
   ProductSlugRoute: typeof ProductSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/wishlist': {
+      id: '/wishlist'
+      path: '/wishlist'
+      fullPath: '/wishlist'
+      preLoaderRoute: typeof WishlistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/wholesale': {
       id: '/wholesale'
       path: '/wholesale'
@@ -223,6 +243,7 @@ const rootRouteChildren: RootRouteChildren = {
   ShadeQuizRoute: ShadeQuizRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   WholesaleRoute: WholesaleRoute,
+  WishlistRoute: WishlistRoute,
   CollectionSlugRoute: CollectionSlugRoute,
   ProductSlugRoute: ProductSlugRoute,
 }
