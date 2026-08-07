@@ -185,6 +185,7 @@ export function SiteHeader({
   const navigate = useNavigate();
 
   const cartCount = useCartStore((s) => s.items.reduce((n, i) => n + i.quantity, 0));
+  const wishlistCount = useWishlistStore((s) => s.items.length);
   const openCart = useCartStore((s) => s.setOpen);
 
   useEffect(() => {
