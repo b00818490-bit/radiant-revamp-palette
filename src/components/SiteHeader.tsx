@@ -20,7 +20,6 @@ import {
   Menu,
   X,
   Home,
-  Sparkles,
   TrendingUp,
   ChevronRight,
   Package,
