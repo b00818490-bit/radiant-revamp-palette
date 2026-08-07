@@ -127,7 +127,7 @@ export function Section({ settings, blocks = [] }: SectionProps<Settings, BlockS
             to={look.url || "/collection/all"}
             className="group w-[88vw] flex-shrink-0 snap-start sm:w-[64vw] lg:w-[calc(50%-10px)] xl:w-[calc(45%-10px)]"
           >
-            <div className="relative overflow-hidden bg-[var(--color-sand,#f3ede6)]" style={{ aspectRatio: "16/9" }}>
+            <div className="relative overflow-hidden bg-[var(--color-sand,#f3ede6)]" style={{ aspectRatio: "4/5" }}>
               <img
                 src={look.image}
                 alt={look.alt || look.title}
