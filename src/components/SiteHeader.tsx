@@ -68,31 +68,29 @@ const MEGA: MegaConfig[] = [
     label: "Lips",
     intro: {
       title: "Pigment that performs.",
-      body: "12-hour matte, plumping gloss, and the balm that started it all.",
+      body: "Matte liquid lipcolor, moisturizing bullets, gloss and balm.",
       href: "/collection/lips",
     },
     columns: [
       {
         heading: "Lipsticks",
         links: [
-          { label: "Matte Liquid Lipcolor", slug: "matte-liquid-lipcolor" },
-          { label: "Liquid Lipstick", slug: "liquid-lipstick" },
-          { label: "Regular Matte Liquid Lipstick", slug: "regular-matte-liquid-lipstick" },
-          { label: "Glossy Moisturizing Lipsticks", slug: "glossy-moisturizing-lipsticks" },
-          { label: "Matte Moisturizing Lipstick", slug: "matte-moisturizing-lipstick" },
-          { label: "Premium Moisturizing Lipstick", slug: "creme-moisturizing-lipstick" },
+          { label: "Premium Matte Liquid Lipstick", slug: "premium-matte-liquid-lipstick" },
+          { label: "Regular Matte Liquid Lipcolor", slug: "regular-matte-liquid-lipcolor" },
+          { label: "Premium Moisturizing Lipstick", slug: "premium-moisturizing-lipstick" },
+          { label: "Regular Moisturizing Lipstick", slug: "regular-moisturizing-lipstick" },
         ],
       },
       {
         heading: "Gloss & care",
         links: [
-          { label: "Lip Gloss", slug: "lip-gloss" },
-          { label: "Lip Gloss Stick", slug: "lip-gloss-stick" },
           { label: "Liquid Lip Gloss", slug: "liquid-lip-gloss" },
+          { label: "Lip Gloss Stick", slug: "lip-gloss-stick" },
           { label: "Lip Balm", slug: "lip-balm" },
         ],
       },
     ],
+
     feature: {
       img: "https://cdn.shopify.com/s/files/1/0727/7998/9300/files/LLS1_Premium_Matte_Liquid_Lipstick_Pearly_Pink.png?v=1775040862",
       tag: "Bestseller",
