@@ -425,7 +425,7 @@ function MegaPanel({
           onClick={onClose}
           className="mt-6 inline-flex items-center gap-1 text-[11px] uppercase tracking-widest text-[#9E2A5C] hover:text-[#3B3B3D]"
         >
-          Shop all {config.label} <ChevronRight className="h-3 w-3" />
+          Shop all <ChevronRight className="h-3 w-3" />
         </Link>
       </div>
       {config.columns.map((col) => (
