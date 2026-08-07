@@ -102,6 +102,18 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
   );
 
   const price = selectedVariant?.price ?? product.priceRange.minVariantPrice;
+  const compareAtRaw = selectedVariant?.compareAtPrice;
+  const compareAt =
+    compareAtRaw && parseFloat(compareAtRaw.amount) > parseFloat(price.amount)
+      ? compareAtRaw
+      : null;
+  const discountPct = compareAt
+    ? Math.round(
+        ((parseFloat(compareAt.amount) - parseFloat(price.amount)) /
+          parseFloat(compareAt.amount)) *
+          100,
+      )
+    : 0;
 
   const handleAdd = async () => {
     if (!selectedVariant) return;
@@ -194,8 +206,20 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
             </>
           )}
 
-          <div className="mt-6 text-2xl font-medium text-charcoal">
-            {formatMoney(price.amount, price.currencyCode)}
+          <div className="mt-6 flex flex-wrap items-baseline gap-3">
+            <span className="text-2xl font-medium text-charcoal">
+              {formatMoney(price.amount, price.currencyCode)}
+            </span>
+            {compareAt && (
+              <>
+                <span className="text-lg text-fog line-through">
+                  {formatMoney(compareAt.amount, compareAt.currencyCode)}
+                </span>
+                <span className="bg-berry px-2 py-1 text-[11px] uppercase tracking-[0.18em] text-ivory">
+                  Save {discountPct}%
+                </span>
+              </>
+            )}
           </div>
           <p className="mt-1 text-xs text-fog">Inclusive of all taxes</p>
           <div className="mt-3 flex flex-wrap gap-x-6 gap-y-1 text-[11px] uppercase tracking-[0.18em] text-fog">
