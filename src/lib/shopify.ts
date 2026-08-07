@@ -92,6 +92,7 @@ const PRODUCT_FIELDS = `
         id
         title
         price { amount currencyCode }
+        compareAtPrice { amount currencyCode }
         availableForSale
         sku
         selectedOptions { name value }
