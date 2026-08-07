@@ -12,8 +12,19 @@ import {
   Truck,
   Plus,
   Minus,
+  Link2,
+  Check,
+  MessageCircle,
+  Facebook,
+  Twitter,
+  Mail,
 } from "lucide-react";
 import { toast } from "sonner";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Footer } from "@/components/Footer";
 import {
@@ -52,6 +63,124 @@ export const Route = createFileRoute("/product/$slug")({
     };
   },
 });
+
+function ShareButton({ product }: { product: ShopifyProductNode }) {
+  const [copied, setCopied] = useState(false);
+  const [url, setUrl] = useState("");
+  const [canNativeShare, setCanNativeShare] = useState(false);
+
+  useEffect(() => {
+    setUrl(window.location.href);
+    setCanNativeShare(typeof navigator !== "undefined" && !!navigator.share);
+  }, []);
+
+  const shareText = `Check out ${product.title} by Greyon`;
+  const encodedUrl = encodeURIComponent(url);
+  const encodedText = encodeURIComponent(shareText);
+
+  const copyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      toast.success("Link copied to clipboard");
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      toast.error("Could not copy link");
+    }
+  };
+
+  const nativeShare = async () => {
+    try {
+      await navigator.share({
+        title: product.title,
+        text: shareText,
+        url,
+      });
+    } catch {
+      // User cancelled or share failed — no need to toast.
+    }
+  };
+
+  const shareOptions = [
+    {
+      label: "WhatsApp",
+      icon: MessageCircle,
+      href: `https://wa.me/?text=${encodedText}%20${encodedUrl}`,
+      color: "text-green-600",
+    },
+    {
+      label: "Facebook",
+      icon: Facebook,
+      href: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+      color: "text-blue-600",
+    },
+    {
+      label: "Twitter / X",
+      icon: Twitter,
+      href: `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`,
+      color: "text-sky-500",
+    },
+    {
+      label: "Email",
+      icon: Mail,
+      href: `mailto:?subject=${encodedText}&body=${encodedText}%0A${encodedUrl}`,
+      color: "text-charcoal",
+    },
+  ];
+
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <button
+          type="button"
+          className="mt-4 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-fog hover:text-berry transition-colors"
+          aria-label="Share this product"
+        >
+          <Share2 className="h-3 w-3" /> Share
+        </button>
+      </PopoverTrigger>
+      <PopoverContent align="start" className="w-64 p-3 bg-ivory border-border">
+        <p className="font-display text-sm text-charcoal mb-2">Share this product</p>
+        <div className="space-y-1">
+          {shareOptions.map((option) => (
+            <a
+              key={option.label}
+              href={option.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 rounded-sm px-2 py-2 text-sm text-charcoal hover:bg-background transition-colors"
+            >
+              <option.icon className={`h-4 w-4 ${option.color}`} />
+              {option.label}
+            </a>
+          ))}
+          {canNativeShare && (
+            <button
+              type="button"
+              onClick={nativeShare}
+              className="flex w-full items-center gap-3 rounded-sm px-2 py-2 text-sm text-charcoal hover:bg-background transition-colors"
+            >
+              <Share2 className="h-4 w-4 text-berry" />
+              More options
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={copyLink}
+            className="flex w-full items-center gap-3 rounded-sm px-2 py-2 text-sm text-charcoal hover:bg-background transition-colors border-t border-border mt-1 pt-2"
+          >
+            {copied ? (
+              <Check className="h-4 w-4 text-green-600" />
+            ) : (
+              <Link2 className="h-4 w-4 text-charcoal" />
+            )}
+            {copied ? "Copied" : "Copy link"}
+          </button>
+        </div>
+      </PopoverContent>
+    </Popover>
+  );
+}
 
 function PDP() {
   const { slug } = Route.useParams();
@@ -394,9 +523,7 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
             </div>
           </div>
 
-          <div className="mt-4 flex items-center gap-4 text-[11px] uppercase tracking-[0.18em] text-fog">
-            <Share2 className="h-3 w-3" /> Share
-          </div>
+          <ShareButton product={product} />
         </div>
       </section>
 
