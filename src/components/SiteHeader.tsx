@@ -205,11 +205,21 @@ export function SiteHeader({
     return () => document.removeEventListener("mousedown", onClick);
   }, []);
 
-  const filtered = q
-    ? SEARCH_PRODUCTS.filter((p) =>
-        p.name.toLowerCase().includes(q.toLowerCase()),
-      )
-    : SEARCH_PRODUCTS;
+  const debouncedQ = useDebounced(q, 250);
+  const { data: results = [], isFetching } = useQuery({
+    queryKey: ["header-search", debouncedQ],
+    queryFn: () => searchProducts(debouncedQ, 8),
+    enabled: debouncedQ.trim().length > 0,
+    staleTime: 60_000,
+  });
+
+  function submitSearch(value: string) {
+    const term = value.trim();
+    if (!term) return;
+    setSearchOpen(false);
+    navigate({ to: "/search", search: { q: term } });
+  }
+
 
   return (
     <>
