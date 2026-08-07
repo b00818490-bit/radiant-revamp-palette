@@ -20,9 +20,9 @@ function WhatsAppLogo({ className }: { className?: string }) {
 
 export function Footer() {
   const socials = [
-    { Icon: Instagram, href: "https://instagram.com/greyon_cosmetics", label: "Instagram" },
-    { Icon: Facebook, href: "https://www.facebook.com/greyon.co/", label: "Facebook" },
-    { Icon: Youtube, href: "https://youtube.com/@greyon_cosmetics", label: "YouTube" },
+    { Icon: Instagram, href: "https://www.instagram.com/greyon_cosmetics/", label: "Instagram" },
+    { Icon: Facebook, href: "https://www.facebook.com/greyon.co", label: "Facebook" },
+    { Icon: Youtube, href: "https://www.youtube.com/@greyon_cosmetics", label: "YouTube" },
     { Icon: Linkedin, href: "https://www.linkedin.com/company/greyon/", label: "LinkedIn" },
     { Icon: XLogo, href: "https://x.com/GreyonCosmetics", label: "X" },
   ];
