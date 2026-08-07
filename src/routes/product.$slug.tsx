@@ -484,6 +484,7 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
               variant={selectedVariant}
               className="h-14 w-14 border border-charcoal hover:bg-charcoal hover:text-ivory transition-colors"
             />
+            <ShareButton product={product} />
           </div>
 
           <Link
@@ -508,8 +509,6 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
               Vegan · CF
             </div>
           </div>
-
-          <ShareButton product={product} />
         </div>
       </section>
 
