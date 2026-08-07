@@ -13,7 +13,6 @@ import {
   Plus,
   Minus,
   Link2,
-  Copy,
   Check,
   MessageCircle,
   Facebook,
