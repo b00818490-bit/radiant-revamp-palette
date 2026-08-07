@@ -308,11 +308,10 @@ export function SiteHeader({
 
           {/* Right: search + utility */}
           <div className="flex items-center justify-end gap-3 sm:gap-4">
-            {/* Inline search on desktop */}
-            <div ref={searchRef} className="relative hidden md:block">
+            <div ref={searchRef} className="relative">
               <button
                 onClick={() => setSearchOpen(true)}
-                className="flex items-center gap-2 rounded-sm border border-[#e6ded2] bg-white/70 px-3 py-2 text-xs text-[#828284] transition hover:border-[#3B3B3D] hover:text-[#3B3B3D]"
+                className="hidden md:flex items-center gap-2 rounded-sm border border-[#e6ded2] bg-white/70 px-3 py-2 text-xs text-[#828284] transition hover:border-[#3B3B3D] hover:text-[#3B3B3D]"
                 aria-label="Search"
               >
                 <Search className="h-3.5 w-3.5" />
@@ -321,23 +320,25 @@ export function SiteHeader({
                   ⌘K
                 </span>
               </button>
+              <button
+                onClick={() => setSearchOpen(true)}
+                className="md:hidden text-[#3B3B3D]"
+                aria-label="Search"
+              >
+                <Search className="h-5 w-5" />
+              </button>
               {searchOpen && (
                 <SearchDropdown
                   q={q}
                   setQ={setQ}
-                  results={filtered}
+                  results={results}
+                  isFetching={isFetching}
+                  onSubmit={submitSearch}
                   onClose={() => setSearchOpen(false)}
                 />
               )}
             </div>
 
-            <button
-              onClick={() => setSearchOpen(true)}
-              className="md:hidden text-[#3B3B3D]"
-              aria-label="Search"
-            >
-              <Search className="h-5 w-5" />
-            </button>
 
             <a
               href="#account"
