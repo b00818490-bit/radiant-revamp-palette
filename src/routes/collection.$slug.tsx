@@ -89,11 +89,12 @@ function CollectionPage() {
 
 
   const handles = COLLECTION_HANDLES[slug];
-  const products = handles
+  const products: ShopifyProduct[] = handles
     ? handles
-        .map((h) => allProducts.find((p) => p.node.handle === h))
-        .filter(Boolean as unknown as (p: (typeof allProducts)[number] | undefined) => p is (typeof allProducts)[number])
+        .map((h) => allProducts.find((p: ShopifyProduct) => p.node.handle === h))
+        .filter((p): p is ShopifyProduct => Boolean(p))
     : allProducts;
+
 
 
   const sorted = [...products].sort((a, b) => {
