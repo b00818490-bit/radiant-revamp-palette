@@ -37,8 +37,8 @@ export interface Product {
 
 export const products: Product[] = [
   {
-    handle: "velvet-matte-lipstick",
-    title: "Velvet Matte Lipstick",
+    handle: "premium-matte-liquid-lipstick",
+    title: "Premium Matte Liquid Lipstick",
     vendor: "Greyon",
     product_type: "Lips",
     tags: ["new", "lips", "matte"],

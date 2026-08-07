@@ -67,8 +67,8 @@ const MEGA: MegaConfig[] = [
     feature: {
       img: prod1,
       tag: "This month",
-      title: "The Velvet Matte drop",
-      href: "/product/velvet-matte",
+      title: "Premium Matte Liquid Lipstick",
+      href: "/product/premium-matte-liquid-lipstick",
     },
   },
   {
