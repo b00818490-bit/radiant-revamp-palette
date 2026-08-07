@@ -181,7 +181,17 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
             {product.title}
           </h1>
           {product.description && (
-            <p className="mt-4 text-fog leading-relaxed">{product.description}</p>
+            <>
+              <p className="mt-4 text-fog leading-relaxed">
+                {product.description.replace(/\s*Item\s+wt[:.]?\s*.*$/i, "").trim()}
+              </p>
+              {/Item\s+wt[:.]?\s*(.+)$/i.exec(product.description)?.[1] && (
+                <p className="mt-3 text-sm font-semibold text-charcoal">
+                  Item weight: {" "}
+                  {/Item\s+wt[:.]?\s*(.+)$/i.exec(product.description)?.[1].trim()}
+                </p>
+              )}
+            </>
           )}
 
           <div className="mt-6 text-2xl font-medium text-charcoal">
