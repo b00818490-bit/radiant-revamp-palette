@@ -1,6 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, Facebook, Youtube, Linkedin } from "lucide-react";
 import logoAsset from "@/assets/greyon-logo.png.asset.json";
+import { NewsletterSignup } from "@/components/NewsletterSignup";
+import { PaymentIcons } from "@/components/PaymentIcons";
+import { policies } from "@/data/policies";
 
 function XLogo({ className }: { className?: string }) {
   return (
