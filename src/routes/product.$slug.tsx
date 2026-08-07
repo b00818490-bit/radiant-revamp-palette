@@ -117,10 +117,10 @@ function ShareButton({ product }: { product: ShopifyProductNode }) {
       <PopoverTrigger asChild>
         <button
           type="button"
-          className="inline-flex h-14 w-14 items-center justify-center border border-charcoal text-fog hover:bg-charcoal hover:text-ivory transition-colors"
+          className="inline-flex h-8 w-8 items-center justify-center border border-border text-fog hover:border-charcoal hover:bg-charcoal hover:text-ivory transition-colors"
           aria-label="Share this product"
         >
-          <Share2 className="h-4 w-4" />
+          <Share2 className="h-3.5 w-3.5" />
         </button>
       </PopoverTrigger>
       <PopoverContent align="end" className="w-56 p-3 bg-ivory border-border">
