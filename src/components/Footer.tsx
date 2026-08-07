@@ -66,7 +66,7 @@ export function Footer() {
             </p>
             <p>
               <a
-                href="https://wa.me/919319234233"
+                href="https://wa.me/919319234233?text=Hi%20Greyon!%20I'd%20like%20to%20order."
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 hover:text-ivory"
