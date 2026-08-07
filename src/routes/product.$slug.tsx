@@ -372,7 +372,7 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
             </>
           )}
 
-          <div className="mt-6 flex flex-wrap items-baseline gap-3">
+          <div className="mt-6 flex flex-wrap items-center gap-3">
             <span className="text-2xl font-medium text-charcoal">
               {formatMoney(price.amount, price.currencyCode)}
             </span>
@@ -386,6 +386,7 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
                 </span>
               </>
             )}
+            <ShareButton product={product} />
           </div>
           <p className="mt-1 text-xs text-fog">Inclusive of all taxes</p>
           <div className="mt-3 flex flex-wrap gap-x-6 gap-y-1 text-[11px] uppercase tracking-[0.18em] text-fog">
