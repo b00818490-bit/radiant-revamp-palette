@@ -137,37 +137,25 @@ const MEGA: MegaConfig[] = [
     key: "skincare",
     label: "Skincare",
     intro: {
-      title: "Serious skincare.",
-      body: "Dermatologist-tested actives, prebiotic barriers, and clinical proof.",
-      href: "/collection/skincare",
+      title: "Oils that nourish.",
+      body: "Lightweight, skin-friendly facial oils made for everyday care.",
+      href: "/collection/facial-oil",
     },
     columns: [
       {
-        heading: "Routine",
+        heading: "Shop skincare",
         links: [
-          { label: "Cleanser", slug: "cleanser" },
-          { label: "Toner", slug: "toner" },
-          { label: "Serum", slug: "serum" },
-          { label: "Moisturizer", slug: "moisturizer" },
-          { label: "SPF", slug: "spf" },
-        ],
-      },
-      {
-        heading: "By concern",
-        links: [
-          { label: "Acne", slug: "acne" },
-          { label: "Dryness", slug: "dryness" },
-          { label: "Dark spots", slug: "dark-spots" },
-          { label: "Fine lines", slug: "fine-lines" },
-          { label: "Sensitive skin", slug: "sensitive" },
+          { label: "Facial Oil", slug: "facial-oil" },
+          { label: "Anti Acne Facial Oil", slug: "anti-acne-facial-oil" },
+          { label: "Anti Ageing Facial Oil", slug: "anti-ageing-facial-oil" },
         ],
       },
     ],
     feature: {
       img: catSkin,
-      tag: "Award",
-      title: "Rescue Glow Serum",
-      href: "/product/glow-serum",
+      tag: "Popular",
+      title: "Anti Acne Facial Oil",
+      href: "/product/anti-acne-facial-oil",
     },
   },
 ];
