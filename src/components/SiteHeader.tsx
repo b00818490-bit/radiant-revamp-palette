@@ -188,6 +188,8 @@ export function SiteHeader({
   const [q, setQ] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+
   const cartCount = useCartStore((s) => s.items.reduce((n, i) => n + i.quantity, 0));
   const openCart = useCartStore((s) => s.setOpen);
 
