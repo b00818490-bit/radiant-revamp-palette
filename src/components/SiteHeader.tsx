@@ -41,7 +41,7 @@ const MEGA: MegaConfig[] = [
     label: "Shop",
     intro: {
       title: "Shop everything",
-      body: "Clean color and serious skincare — 92 products, six routines.",
+      body: "Clean color and serious skincare for every routine.",
       href: "/collection/all",
     },
     columns: [
