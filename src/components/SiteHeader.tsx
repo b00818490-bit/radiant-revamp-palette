@@ -51,7 +51,6 @@ const MEGA: MegaConfig[] = [
           { label: "Lips", slug: "lips" },
           { label: "Eyes", slug: "eyes" },
           { label: "Skincare", slug: "skincare" },
-          { label: "Tools & brushes", slug: "tools" },
         ],
       },
       {
