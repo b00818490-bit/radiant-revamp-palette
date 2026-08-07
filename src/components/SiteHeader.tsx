@@ -59,7 +59,7 @@ const MEGA: MegaConfig[] = [
       img: "https://cdn.shopify.com/s/files/1/0727/7998/9300/files/Model_3.jpg?v=1775040862",
       tag: "This month",
       title: "Premium Matte Liquid Lipstick",
-      href: "/product/premium-matte-liquid-lipstick",
+      href: "/product/premium-matte-liquid-lipcolor",
     },
   },
   {
