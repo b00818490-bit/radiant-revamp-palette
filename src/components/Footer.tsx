@@ -78,19 +78,6 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Help links */}
-        <div className="text-xs leading-relaxed text-ivory/60">
-          <p className="uppercase tracking-[0.25em] text-ivory">Help</p>
-          <ul className="mt-4 space-y-2">
-            <li><Link to="/shipping-returns" className="hover:text-ivory">Shipping &amp; returns</Link></li>
-            <li><Link to="/faqs" className="hover:text-ivory">FAQs</Link></li>
-            <li><Link to="/about" className="hover:text-ivory">About Greyon</Link></li>
-            <li><Link to="/shade-quiz" className="hover:text-ivory">Lip shade finder</Link></li>
-            <li><Link to="/wholesale" className="hover:text-ivory">Wholesale enquiry</Link></li>
-            <li><Link to="/account" className="hover:text-ivory">My account</Link></li>
-          </ul>
-        </div>
-
         {/* Company details */}
         <div className="ml-auto text-right text-xs leading-relaxed text-ivory/60 max-w-md">
           <div className="space-y-1">
