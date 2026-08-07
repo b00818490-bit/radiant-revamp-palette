@@ -68,13 +68,12 @@ export function Section({ settings }: SectionProps<Settings>) {
             <Link
               to="/collection/$slug"
               params={{ slug: "best-sellers" }}
-              className="mb-3 inline-block text-[11px] uppercase tracking-[0.28em] transition-opacity hover:opacity-70"
-              style={{ color: "var(--color-primary)" }}
+              className="mb-3 inline-block text-[11px] uppercase tracking-[0.28em] text-accent transition-opacity hover:opacity-70"
             >
               {settings.eyebrow}
             </Link>
           )}
-          <h2 className="max-w-3xl text-4xl leading-[0.95] sm:text-5xl lg:text-6xl">
+          <h2 className="max-w-3xl text-4xl leading-[0.95] sm:text-5xl lg:text-6xl text-ivory">
             {settings.heading}
           </h2>
         </div>
@@ -154,7 +153,7 @@ function ProductCard({ product }: { product: ShopifyProduct }) {
             {node.title}
           </div>
           {categoryLabel(node.title, node.productType) && (
-            <div className="mt-1 text-xs opacity-50">
+            <div className="mt-1 text-xs text-ivory/70">
               {categoryLabel(node.title, node.productType)}
             </div>
           )}
