@@ -45,8 +45,9 @@ export function PaymentIcons({ className = "" }: { className?: string }) {
       </Card>
 
       <Card label="Apple Pay">
-        <span className={`text-[9px] ${wordmark}`}>&#63743; Pay</span>
+        <span className={`text-[8px] ${wordmark}`}>Apple Pay</span>
       </Card>
+
 
       <Card label="Google Pay">
         <span className={`text-[8px] ${wordmark}`}>
