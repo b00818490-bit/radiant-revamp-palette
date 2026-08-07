@@ -50,10 +50,9 @@ const MEGA: MegaConfig[] = [
         links: [
           { label: "Best sellers", slug: "best-sellers" },
           { label: "New arrivals", slug: "new" },
-          { label: "Trending", slug: "trending" },
           { label: "Under ₹200", slug: "under-200" },
-          { label: "Gift sets", slug: "gifts" },
         ],
+
       },
     ],
     feature: {
