@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Loader2, ShoppingBag, Star, ChevronDown } from "lucide-react";
+import { Loader2, ShoppingBag, ChevronDown } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Footer } from "@/components/Footer";
 import { fetchProducts, fetchBestSellers, fetchNewest, formatMoney, type ShopifyProduct } from "@/lib/shopify";

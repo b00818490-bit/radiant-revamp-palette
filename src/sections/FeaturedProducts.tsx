@@ -1,4 +1,4 @@
-import { Star, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import type { SectionProps, SectionSchema } from "@/theme/types";
