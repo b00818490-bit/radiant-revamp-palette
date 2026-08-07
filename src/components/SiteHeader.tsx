@@ -336,20 +336,25 @@ export function SiteHeader({
             </div>
 
 
-            <a
-              href="#account"
+            <Link
+              to="/account"
               className="hidden sm:inline-flex text-[#3B3B3D] hover:text-[#9E2A5C]"
               aria-label="Account"
             >
               <User className="h-4 w-4" />
-            </a>
-            <a
-              href="#wishlist"
-              className="hidden sm:inline-flex text-[#3B3B3D] hover:text-[#9E2A5C]"
+            </Link>
+            <Link
+              to="/wishlist"
+              className="relative hidden sm:inline-flex text-[#3B3B3D] hover:text-[#9E2A5C]"
               aria-label="Wishlist"
             >
               <Heart className="h-4 w-4" />
-            </a>
+              {wishlistCount > 0 && (
+                <span className="absolute -right-2 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#9E2A5C] px-1 text-[9px] text-white">
+                  {wishlistCount}
+                </span>
+              )}
+            </Link>
             <button
               type="button"
               onClick={() => openCart(true)}
