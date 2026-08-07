@@ -113,16 +113,16 @@ const MEGA: MegaConfig[] = [
     label: "Eyes",
     intro: {
       title: "Eyes that stand out.",
-      body: "Smudge-proof eyeliner and curl-loving mascara for everyday definition.",
+      body: "Smudge-proof kajal, precision eyeliner and curl-loving mascara.",
       href: "/collection/eye-makeup",
     },
     columns: [
       {
         heading: "Shop eyes",
         links: [
-          { label: "Eye Makeup", slug: "eye-makeup" },
-          { label: "Smoky Eyeliner", slug: "greyon-smoky-eyeliner" },
+          { label: "Smoky Black Eyeliner", slug: "greyon-smoky-eyeliner" },
           { label: "Black Curling Mascara", slug: "mascara" },
+          { label: "Vacuum Precision Eyeliner (Kajal)", slug: "vacuum-precision-eyeliner-intense-black" },
         ],
       },
     ],
