@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import {
   Loader2,
@@ -18,12 +18,17 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { Footer } from "@/components/Footer";
 import {
   fetchProductByHandle,
+  fetchProducts,
+  fetchBestSellers,
   formatMoney,
+  type ShopifyProduct,
   type ShopifyProductNode,
   type ShopifyVariant,
 } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { WishlistButton } from "@/components/WishlistButton";
+import { ProductRail } from "@/components/ProductRail";
+import { getRecentlyViewed, recordRecentlyViewed } from "@/stores/recentlyViewed";
 
 export const Route = createFileRoute("/product/$slug")({
   component: PDP,
@@ -114,6 +119,52 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
           100,
       )
     : 0;
+
+  /* Recently viewed — tracked locally, real products only */
+  const [recentHandles, setRecentHandles] = useState<string[]>([]);
+  useEffect(() => {
+    setRecentHandles(getRecentlyViewed().filter((h) => h !== product.handle));
+    recordRecentlyViewed(product.handle);
+  }, [product.handle]);
+
+  const { data: catalog = [] } = useQuery({
+    queryKey: ["shopify-products-rail"],
+    queryFn: () => fetchProducts(50),
+    staleTime: 5 * 60_000,
+  });
+  const { data: bestSellers = [] } = useQuery({
+    queryKey: ["shopify-bestsellers-rail"],
+    queryFn: () => fetchBestSellers(12),
+    staleTime: 5 * 60_000,
+  });
+
+  const alsoBuy = useMemo(() => {
+    const pool: ShopifyProduct[] = [...bestSellers, ...catalog];
+    const seen = new Set<string>([product.handle]);
+    const out: ShopifyProduct[] = [];
+    for (const p of pool) {
+      if (seen.has(p.node.handle)) continue;
+      seen.add(p.node.handle);
+      out.push(p);
+    }
+    // prefer items from the same category first
+    return out
+      .sort((a, b) => {
+        const score = (p: ShopifyProduct) =>
+          p.node.productType && p.node.productType === product.productType ? 0 : 1;
+        return score(a) - score(b);
+      })
+      .slice(0, 8);
+  }, [bestSellers, catalog, product.handle, product.productType]);
+
+  const recent = useMemo(
+    () =>
+      recentHandles
+        .map((h) => catalog.find((p) => p.node.handle === h))
+        .filter((p): p is ShopifyProduct => Boolean(p))
+        .slice(0, 8),
+    [recentHandles, catalog],
+  );
 
   const handleAdd = async () => {
     if (!selectedVariant) return;
@@ -420,6 +471,13 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
           </div>
         </div>
       </section>
+
+      <ProductRail
+        eyebrow="Others also buy"
+        title="Complete your routine"
+        products={alsoBuy}
+      />
+      <ProductRail eyebrow="Recently viewed" title="Back to what you loved" products={recent} />
     </>
   );
 }
