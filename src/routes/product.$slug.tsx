@@ -12,8 +12,20 @@ import {
   Truck,
   Plus,
   Minus,
+  Link2,
+  Copy,
+  Check,
+  MessageCircle,
+  Facebook,
+  Twitter,
+  Mail,
 } from "lucide-react";
 import { toast } from "sonner";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Footer } from "@/components/Footer";
 import {
