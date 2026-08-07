@@ -58,7 +58,7 @@ type CartItem = {
 };
 
 const INITIAL_CART: CartItem[] = [
-  { id: "vm", name: "Velvet Matte Lipstick", shade: "Berry Noir", price: 28, qty: 1, image: prod1 },
+  { id: "vm", name: "Premium Matte Liquid Lipstick", shade: "Roman Red - LLS3", price: 839, qty: 1, image: prod1 },
   { id: "gs", name: "Anti Acne Facial Oil", shade: "30 ml", price: 319, qty: 1, image: prod2 },
 ];
 

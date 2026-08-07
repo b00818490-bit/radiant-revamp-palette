@@ -20,7 +20,7 @@ export const schema: SectionSchema = {
     { id: "body", type: "textarea", label: "Body", default: "" },
     { id: "cta_label", type: "text", label: "CTA label", default: "Start the quiz" },
     { id: "cta_url", type: "url", label: "CTA link", default: "#" },
-    { id: "caption", type: "text", label: "Caption", default: "Velvet Matte Lipstick collection" },
+    { id: "caption", type: "text", label: "Caption", default: "Premium Matte Liquid Lipstick collection" },
   ],
   max_blocks: 12,
   blocks: [

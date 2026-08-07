@@ -30,33 +30,37 @@ export interface Product {
   images: string[];
   description: string;
   variants: ProductVariant[];
-  rating: number;
-  reviews_count: number;
+  rating?: number;
+  reviews_count?: number;
   badge?: "new" | "bestseller" | "restock" | "limited";
 }
 
 export const products: Product[] = [
   {
-    handle: "velvet-matte-lipstick",
-    title: "Velvet Matte Lipstick",
+    handle: "premium-matte-liquid-lipstick",
+    title: "Premium Matte Liquid Lipstick",
     vendor: "Greyon",
     product_type: "Lips",
     tags: ["new", "lips", "matte"],
-    price: 28,
+    price: 839,
     featured_image: prod1,
     images: [prod1],
     description:
-      "A featherweight matte with 8-hour comfortable wear. 92% naturally derived pigment.",
-    rating: 4.9,
-    reviews_count: 1240,
+      "Our first matte liquid lip formulation: intense one-stroke colour with a lightweight, suede finish that stays comfortable and transfer-proof all day. 5 ml.",
     badge: "new",
     variants: [
-      { id: "vm-01", title: "N°01 Bare", price: 28, available: true, swatch_color: "#c99b8a" },
-      { id: "vm-02", title: "N°02 Peony", price: 28, available: true, swatch_color: "#e5748d" },
-      { id: "vm-03", title: "N°03 Coral", price: 28, available: true, swatch_color: "#df7e35" },
-      { id: "vm-04", title: "N°04 Radiant", price: 28, available: true, swatch_color: "#dc2e70" },
-      { id: "vm-05", title: "N°05 Wine", price: 28, available: false, swatch_color: "#7a1f3d" },
-      { id: "vm-06", title: "N°06 Cocoa", price: 28, available: true, swatch_color: "#4a2a22" },
+      { id: "LLS1", title: "Pearly Pink - LLS1", price: 839, available: true, swatch_color: "#e8a7ae" },
+      { id: "LLS3", title: "Roman Red - LLS3", price: 839, available: true, swatch_color: "#b81f2a" },
+      { id: "LLS7", title: "Faded Brown - LLS7", price: 839, available: true, swatch_color: "#8a5a4a" },
+      { id: "LLS9", title: "Blush Pink Red - LLS9", price: 839, available: true, swatch_color: "#c94960" },
+      { id: "LLS11", title: "Pueblo Brown - LLS11", price: 839, available: true, swatch_color: "#a05540" },
+      { id: "LLS13", title: "Light Brown - LLS13", price: 839, available: true, swatch_color: "#a97556" },
+      { id: "LLS15", title: "Orangy Red - LLS15", price: 839, available: true, swatch_color: "#d94a2e" },
+      { id: "LLS17", title: "Rich Violet - LLS17", price: 839, available: true, swatch_color: "#6a1f4a" },
+      { id: "LLS19", title: "Dark Brown - LLS19", price: 839, available: true, swatch_color: "#5a3229" },
+      { id: "LLS21", title: "Pearsian Pink - LLS21", price: 839, available: true, swatch_color: "#d47a8c" },
+      { id: "LLS23", title: "Blush Red - LLS23", price: 839, available: true, swatch_color: "#b83c4a" },
+      { id: "LLS25", title: "Brownish Red - LLS25", price: 839, available: true, swatch_color: "#8b3a34" },
     ],
   },
   {

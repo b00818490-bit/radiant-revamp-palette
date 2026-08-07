@@ -22,7 +22,7 @@
         { "type": "message", "settings": { "text": "Lab tested" } },
         { "type": "message", "settings": { "text": "Cruelty-free · Vegan formulas" } },
         { "type": "message", "settings": { "text": "Easy returns within 3 days" } },
-        { "type": "message", "settings": { "text": "New: Velvet Matte in six shades" } }
+        { "type": "message", "settings": { "text": "Premium Matte Liquid Lipstick — 12 shades" } }
       ]
     },
     "hero": {
@@ -76,7 +76,7 @@
         "layout": "bento"
       },
       "blocks": [
-        { "type": "product", "settings": { "product_handle": "velvet-matte-lipstick", "featured_size": "tall" } },
+        { "type": "product", "settings": { "product_handle": "premium-matte-liquid-lipstick", "featured_size": "tall" } },
         { "type": "product", "settings": { "product_handle": "cheek-cushion-blush", "featured_size": "normal" } },
         { "type": "product", "settings": { "product_handle": "rescue-glow-serum", "featured_size": "normal" } },
         { "type": "product", "settings": { "product_handle": "feather-volume-mascara", "featured_size": "normal" } }
@@ -87,10 +87,10 @@
       "settings": {
         "eyebrow": "Lip shade finder",
         "heading": "Find your perfect lip shade in 60 seconds.",
-        "body": "Answer three quick questions about your skin tone, undertone and everyday vibe. We'll match you to the Velvet Matte shades that were made for your lips.",
+        "body": "Answer three quick questions about your skin tone, undertone and everyday vibe. We'll match you to the Premium Matte Liquid Lipstick shades that were made for your lips.",
         "cta_label": "Find my shade",
         "cta_url": "#",
-        "caption": "Premium Matte Liquid Lipcolor collection"
+        "caption": "Premium Matte Liquid Lipstick collection"
       },
       "blocks": [
         { "type": "swatch", "settings": { "name": "LLS1 Pearly Pink", "color": "#e8a7ae" } },
@@ -116,7 +116,7 @@
         "cta_url": "https://www.instagram.com/greyon_cosmetics"
       },
       "blocks": [
-        { "type": "post", "settings": { "image": "__ASSET__ugc1", "url": "https://www.instagram.com/greyon_cosmetics", "alt": "Customer wearing Greyon velvet matte lipstick" } },
+        { "type": "post", "settings": { "image": "__ASSET__ugc1", "url": "https://www.instagram.com/greyon_cosmetics", "alt": "Customer wearing Greyon Premium Matte Liquid Lipstick" } },
         { "type": "post", "settings": { "image": "__ASSET__ugc3", "url": "https://www.instagram.com/greyon_cosmetics", "alt": "Greyon facial oils" } },
         { "type": "post", "settings": { "image": "__ASSET__ugc4", "url": "https://www.instagram.com/greyon_cosmetics", "alt": "Close-up of Greyon blush and lip colour" } },
         { "type": "post", "settings": { "image": "__ASSET__ugc1", "url": "https://www.instagram.com/greyon_cosmetics", "alt": "Greyon makeup look on model" } },
