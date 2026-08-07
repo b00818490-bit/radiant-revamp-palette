@@ -8,7 +8,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Loader2, Minus, Plus, Trash2, ExternalLink, ShoppingBag } from "lucide-react";
+import { Loader2, Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import { formatMoney } from "@/lib/shopify";
 
@@ -22,7 +22,6 @@ export function CartDrawer() {
     setOpen,
     updateQuantity,
     removeItem,
-    getCheckoutUrl,
     syncCart,
   } = useCartStore();
 
@@ -36,14 +35,6 @@ export function CartDrawer() {
     (sum, item) => sum + parseFloat(item.price.amount) * item.quantity,
     0,
   );
-
-  const handleCheckout = () => {
-    const checkoutUrl = getCheckoutUrl();
-    if (checkoutUrl) {
-      window.open(checkoutUrl, "_blank");
-      setOpen(false);
-    }
-  };
 
   return (
     <Sheet open={isOpen} onOpenChange={setOpen}>
@@ -144,21 +135,6 @@ export function CartDrawer() {
                   disabled={items.length === 0}
                 >
                   Checkout
-                </Button>
-                <Button
-                  variant="outline"
-                  onClick={handleCheckout}
-                  className="w-full h-12 text-xs uppercase tracking-[0.2em] rounded-none border-charcoal text-charcoal"
-                  disabled={items.length === 0 || isLoading || isSyncing}
-                >
-                  {isLoading || isSyncing ? (
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                  ) : (
-                    <>
-                      <ExternalLink className="w-4 h-4 mr-2" />
-                      Express checkout
-                    </>
-                  )}
                 </Button>
               </div>
             </>
