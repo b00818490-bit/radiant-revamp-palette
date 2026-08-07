@@ -15,6 +15,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ShippingReturnsRouteImport } from './routes/shipping-returns'
 import { Route as ShadeQuizRouteImport } from './routes/shade-quiz'
 import { Route as SearchRouteImport } from './routes/search'
+import { Route as FaqsRouteImport } from './routes/faqs'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as AboutRouteImport } from './routes/about'
@@ -50,6 +51,11 @@ const ShadeQuizRoute = ShadeQuizRouteImport.update({
 const SearchRoute = SearchRouteImport.update({
   id: '/search',
   path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqsRoute = FaqsRouteImport.update({
+  id: '/faqs',
+  path: '/faqs',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckoutRoute = CheckoutRouteImport.update({
@@ -88,6 +94,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/account': typeof AccountRoute
   '/checkout': typeof CheckoutRoute
+  '/faqs': typeof FaqsRoute
   '/search': typeof SearchRoute
   '/shade-quiz': typeof ShadeQuizRoute
   '/shipping-returns': typeof ShippingReturnsRoute
@@ -102,6 +109,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/account': typeof AccountRoute
   '/checkout': typeof CheckoutRoute
+  '/faqs': typeof FaqsRoute
   '/search': typeof SearchRoute
   '/shade-quiz': typeof ShadeQuizRoute
   '/shipping-returns': typeof ShippingReturnsRoute
@@ -117,6 +125,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/account': typeof AccountRoute
   '/checkout': typeof CheckoutRoute
+  '/faqs': typeof FaqsRoute
   '/search': typeof SearchRoute
   '/shade-quiz': typeof ShadeQuizRoute
   '/shipping-returns': typeof ShippingReturnsRoute
@@ -133,6 +142,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/account'
     | '/checkout'
+    | '/faqs'
     | '/search'
     | '/shade-quiz'
     | '/shipping-returns'
@@ -147,6 +157,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/account'
     | '/checkout'
+    | '/faqs'
     | '/search'
     | '/shade-quiz'
     | '/shipping-returns'
@@ -161,6 +172,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/account'
     | '/checkout'
+    | '/faqs'
     | '/search'
     | '/shade-quiz'
     | '/shipping-returns'
@@ -176,6 +188,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   AccountRoute: typeof AccountRoute
   CheckoutRoute: typeof CheckoutRoute
+  FaqsRoute: typeof FaqsRoute
   SearchRoute: typeof SearchRoute
   ShadeQuizRoute: typeof ShadeQuizRoute
   ShippingReturnsRoute: typeof ShippingReturnsRoute
@@ -230,6 +243,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SearchRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/faqs': {
+      id: '/faqs'
+      path: '/faqs'
+      fullPath: '/faqs'
+      preLoaderRoute: typeof FaqsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/checkout': {
       id: '/checkout'
       path: '/checkout'
@@ -280,6 +300,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   AccountRoute: AccountRoute,
   CheckoutRoute: CheckoutRoute,
+  FaqsRoute: FaqsRoute,
   SearchRoute: SearchRoute,
   ShadeQuizRoute: ShadeQuizRoute,
   ShippingReturnsRoute: ShippingReturnsRoute,
