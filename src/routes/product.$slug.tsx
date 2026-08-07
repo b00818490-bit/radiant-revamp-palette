@@ -102,6 +102,18 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
   );
 
   const price = selectedVariant?.price ?? product.priceRange.minVariantPrice;
+  const compareAtRaw = selectedVariant?.compareAtPrice;
+  const compareAt =
+    compareAtRaw && parseFloat(compareAtRaw.amount) > parseFloat(price.amount)
+      ? compareAtRaw
+      : null;
+  const discountPct = compareAt
+    ? Math.round(
+        ((parseFloat(compareAt.amount) - parseFloat(price.amount)) /
+          parseFloat(compareAt.amount)) *
+          100,
+      )
+    : 0;
 
   const handleAdd = async () => {
     if (!selectedVariant) return;
