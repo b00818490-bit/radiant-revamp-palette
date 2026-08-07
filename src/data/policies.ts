@@ -259,14 +259,6 @@ export const policies: Policy[] = [
       { kind: "h3", text: "28. 100% MADE IN INDIA" },
     ],
   },
-  {
-    slug: "contact-information",
-    title: "Contact information",
-    description: "Greyon's registered address, WhatsApp number, email and GST details.",
-    blocks: [
-      { kind: "p", text: "Vardan, 17-A, 38-39, 2nd Floor, W.E.A Ajmal Khan Road, Karol Bagh, New Delhi-110005 India WhatsApp only- 9319234233 info@greyon.co GST: 07AAUFG0221D1ZR" },
-    ],
-  },
 ];
 
 export const policyBySlug = (slug: string) => policies.find((p) => p.slug === slug);
