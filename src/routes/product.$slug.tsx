@@ -18,12 +18,17 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { Footer } from "@/components/Footer";
 import {
   fetchProductByHandle,
+  fetchProducts,
+  fetchBestSellers,
   formatMoney,
+  type ShopifyProduct,
   type ShopifyProductNode,
   type ShopifyVariant,
 } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { WishlistButton } from "@/components/WishlistButton";
+import { ProductRail } from "@/components/ProductRail";
+import { getRecentlyViewed, recordRecentlyViewed } from "@/stores/recentlyViewed";
 
 export const Route = createFileRoute("/product/$slug")({
   component: PDP,
