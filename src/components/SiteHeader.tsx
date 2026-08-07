@@ -20,7 +20,6 @@ import {
   Menu,
   X,
   Home,
-  Sparkles,
   TrendingUp,
   ChevronRight,
   Package,
@@ -714,13 +713,6 @@ function MobileDrawer({ onClose }: { onClose: () => void }) {
           <Link to="/wishlist" onClick={onClose} className="flex items-center gap-3 py-2">
             <Heart className="h-4 w-4" /> Wishlist
           </Link>
-          <Link
-            to="/wholesale"
-            onClick={onClose}
-            className="flex items-center gap-3 py-2 text-[#B8925A]"
-          >
-            <Sparkles className="h-4 w-4" /> For professionals
-          </Link>
         </div>
       </aside>
     </div>
@@ -759,7 +751,7 @@ function MobileBottomNav({
             <Search className="h-5 w-5" />
             Search
           </button>
-          <Link to="/wholesale" className={linkCls} activeProps={activeCls}>
+          <Link to="/account" className={linkCls} activeProps={activeCls}>
             <User className="h-5 w-5" />
             Account
           </Link>

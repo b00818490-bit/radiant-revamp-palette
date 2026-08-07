@@ -50,10 +50,6 @@ const CATEGORIES: Category[] = [
         q: "Do I need an account to order?",
         a: "No — you can check out as a guest. Creating an account lets you save your delivery address, keep a wishlist and check out faster next time.",
       },
-      {
-        q: "Do you take bulk or wholesale orders?",
-        a: "Yes. Share your requirement through our wholesale enquiry page and our team will get back with pricing and lead times.",
-      },
     ],
   },
   {
