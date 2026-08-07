@@ -65,8 +65,10 @@ const COLLECTION_HANDLES: Record<string, string[]> = {
 };
 
 
+const BEST_SELLER_SLUGS = ["best-sellers", "bestsellers", "best-selling"];
+
 function buildQuery(slug: string): string | undefined {
-  if (slug === "all" || COLLECTION_HANDLES[slug]) return undefined;
+  if (slug === "all" || COLLECTION_HANDLES[slug] || BEST_SELLER_SLUGS.includes(slug)) return undefined;
   // Try product_type first, fall back to tag — Shopify OR handles both.
   const term = slug.replace(/-/g, " ");
   return `product_type:${term} OR tag:${term} OR title:${term}`;
@@ -74,15 +76,17 @@ function buildQuery(slug: string): string | undefined {
 
 function CollectionPage() {
   const { slug } = Route.useParams();
-  const title = slug === "all" ? "All products" : titleize(slug);
+  const isBestSellers = BEST_SELLER_SLUGS.includes(slug);
+  const title = slug === "all" ? "All products" : isBestSellers ? "Best sellers" : titleize(slug);
   const query = buildQuery(slug);
   const [sort, setSort] = useState<"featured" | "price-asc" | "price-desc" | "title">("featured");
 
   const { data: allProducts = [], isLoading } = useQuery({
     queryKey: ["shopify-products", "collection", slug, query],
-    queryFn: () => fetchProducts(50, query),
+    queryFn: () => (isBestSellers ? fetchBestSellers(12) : fetchProducts(50, query)),
     staleTime: 60_000,
   });
+
 
   const handles = COLLECTION_HANDLES[slug];
   const products = handles
