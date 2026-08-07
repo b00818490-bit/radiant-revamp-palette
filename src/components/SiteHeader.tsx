@@ -481,17 +481,27 @@ function SearchDropdown({
   q,
   setQ,
   results,
+  isFetching,
+  onSubmit,
   onClose,
 }: {
   q: string;
   setQ: (v: string) => void;
-  results: typeof SEARCH_PRODUCTS;
+  results: ShopifyProduct[];
+  isFetching: boolean;
+  onSubmit: (v: string) => void;
   onClose: () => void;
 }) {
   return (
     <div className="fixed inset-x-0 top-[calc(var(--header-h,4rem)+40px)] z-50 mx-auto max-w-2xl px-4 md:absolute md:right-0 md:left-auto md:top-full md:mt-2 md:w-[520px] md:max-w-none md:px-0">
       <div className="overflow-hidden rounded-sm border border-[#e6ded2] bg-white shadow-2xl">
-        <div className="relative border-b border-[#e6ded2]">
+        <form
+          className="relative border-b border-[#e6ded2]"
+          onSubmit={(e) => {
+            e.preventDefault();
+            onSubmit(q);
+          }}
+        >
           <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#828284]" />
           <input
             autoFocus
@@ -501,13 +511,14 @@ function SearchDropdown({
             className="w-full bg-transparent px-11 py-4 text-sm outline-none placeholder:text-[#828284]"
           />
           <button
+            type="button"
             onClick={onClose}
             className="absolute right-3 top-1/2 -translate-y-1/2 text-[#828284] hover:text-[#3B3B3D]"
             aria-label="Close search"
           >
             <X className="h-4 w-4" />
           </button>
-        </div>
+        </form>
 
         {!q && (
           <div className="border-b border-[#e6ded2] p-4">
@@ -528,36 +539,60 @@ function SearchDropdown({
           </div>
         )}
 
-        <div className="max-h-[60vh] overflow-y-auto p-2">
-          <p className="px-2 pt-2 pb-1 text-[10px] uppercase tracking-widest text-[#828284]">
-            Products
-          </p>
-          {results.length === 0 && (
-            <p className="px-2 py-6 text-center text-sm text-[#828284]">
-              No matches for "{q}"
+        {q && (
+          <div className="max-h-[60vh] overflow-y-auto p-2">
+            <p className="px-2 pt-2 pb-1 text-[10px] uppercase tracking-widest text-[#828284]">
+              Products
             </p>
-          )}
-          {results.map((p) => (
-            <Link
-              key={p.slug}
-              to="/product/$slug"
-              params={{ slug: p.slug }}
-              onClick={onClose}
-              className="flex items-center gap-3 rounded-sm p-2 transition hover:bg-[#FAF6F1]"
-            >
-              <img
-                src={p.img}
-                alt=""
-                className="h-12 w-12 shrink-0 rounded-sm object-cover"
-              />
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-medium">{p.name}</p>
-                <p className="text-xs text-[#828284]">{p.cat}</p>
-              </div>
-              <span className="shrink-0 text-sm font-medium">{p.price}</span>
-            </Link>
-          ))}
-        </div>
+            {isFetching && (
+              <p className="px-2 py-6 text-center text-sm text-[#828284]">Searching…</p>
+            )}
+            {!isFetching && results.length === 0 && (
+              <p className="px-2 py-6 text-center text-sm text-[#828284]">
+                No results found for “{q}”
+              </p>
+            )}
+            {!isFetching &&
+              results.map((p) => {
+                const node = p.node;
+                const img = node.images?.edges?.[0]?.node;
+                const price = node.priceRange.minVariantPrice;
+                return (
+                  <Link
+                    key={node.id}
+                    to="/product/$slug"
+                    params={{ slug: node.handle }}
+                    onClick={onClose}
+                    className="flex items-center gap-3 rounded-sm p-2 transition hover:bg-[#FAF6F1]"
+                  >
+                    {img && (
+                      <img
+                        src={img.url}
+                        alt=""
+                        className="h-12 w-12 shrink-0 rounded-sm object-cover"
+                      />
+                    )}
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm font-medium">{node.title}</p>
+                      <p className="text-xs text-[#828284]">{node.productType}</p>
+                    </div>
+                    <span className="shrink-0 text-sm font-medium">
+                      {formatMoney(price.amount, price.currencyCode)}
+                    </span>
+                  </Link>
+                );
+              })}
+            {!isFetching && results.length > 0 && (
+              <button
+                onClick={() => onSubmit(q)}
+                className="mt-1 w-full rounded-sm py-3 text-center text-[11px] uppercase tracking-widest text-[#9E2A5C] hover:bg-[#FAF6F1]"
+              >
+                See all results for “{q}”
+              </button>
+            )}
+          </div>
+        )}
+
 
         <div className="grid grid-cols-2 border-t border-[#e6ded2]">
           <Link
