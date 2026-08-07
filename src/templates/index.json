@@ -21,7 +21,7 @@
         { "type": "message", "settings": { "text": "Free shipping over ₹599" } },
         { "type": "message", "settings": { "text": "Lab tested" } },
         { "type": "message", "settings": { "text": "Cruelty-free · Vegan formulas" } },
-        { "type": "message", "settings": { "text": "Easy returns within 3 days" } },
+        { "type": "message", "settings": { "text": "Easy returns within 3 days of delivery" } },
         { "type": "message", "settings": { "text": "Premium Matte Liquid Lipstick — 12 shades" } }
       ]
     },
