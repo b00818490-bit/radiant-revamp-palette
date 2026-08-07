@@ -22,6 +22,7 @@ import { Route as AccountRouteImport } from './routes/account'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductSlugRouteImport } from './routes/product.$slug'
+import { Route as PoliciesSlugRouteImport } from './routes/policies.$slug'
 import { Route as CollectionSlugRouteImport } from './routes/collection.$slug'
 
 const WishlistRoute = WishlistRouteImport.update({
@@ -89,6 +90,11 @@ const ProductSlugRoute = ProductSlugRouteImport.update({
   path: '/product/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PoliciesSlugRoute = PoliciesSlugRouteImport.update({
+  id: '/policies/$slug',
+  path: '/policies/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CollectionSlugRoute = CollectionSlugRouteImport.update({
   id: '/collection/$slug',
   path: '/collection/$slug',
@@ -109,6 +115,7 @@ export interface FileRoutesByFullPath {
   '/wholesale': typeof WholesaleRoute
   '/wishlist': typeof WishlistRoute
   '/collection/$slug': typeof CollectionSlugRoute
+  '/policies/$slug': typeof PoliciesSlugRoute
   '/product/$slug': typeof ProductSlugRoute
 }
 export interface FileRoutesByTo {
@@ -125,6 +132,7 @@ export interface FileRoutesByTo {
   '/wholesale': typeof WholesaleRoute
   '/wishlist': typeof WishlistRoute
   '/collection/$slug': typeof CollectionSlugRoute
+  '/policies/$slug': typeof PoliciesSlugRoute
   '/product/$slug': typeof ProductSlugRoute
 }
 export interface FileRoutesById {
@@ -142,6 +150,7 @@ export interface FileRoutesById {
   '/wholesale': typeof WholesaleRoute
   '/wishlist': typeof WishlistRoute
   '/collection/$slug': typeof CollectionSlugRoute
+  '/policies/$slug': typeof PoliciesSlugRoute
   '/product/$slug': typeof ProductSlugRoute
 }
 export interface FileRouteTypes {
@@ -160,6 +169,7 @@ export interface FileRouteTypes {
     | '/wholesale'
     | '/wishlist'
     | '/collection/$slug'
+    | '/policies/$slug'
     | '/product/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -176,6 +186,7 @@ export interface FileRouteTypes {
     | '/wholesale'
     | '/wishlist'
     | '/collection/$slug'
+    | '/policies/$slug'
     | '/product/$slug'
   id:
     | '__root__'
@@ -192,6 +203,7 @@ export interface FileRouteTypes {
     | '/wholesale'
     | '/wishlist'
     | '/collection/$slug'
+    | '/policies/$slug'
     | '/product/$slug'
   fileRoutesById: FileRoutesById
 }
@@ -209,6 +221,7 @@ export interface RootRouteChildren {
   WholesaleRoute: typeof WholesaleRoute
   WishlistRoute: typeof WishlistRoute
   CollectionSlugRoute: typeof CollectionSlugRoute
+  PoliciesSlugRoute: typeof PoliciesSlugRoute
   ProductSlugRoute: typeof ProductSlugRoute
 }
 
@@ -305,6 +318,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/policies/$slug': {
+      id: '/policies/$slug'
+      path: '/policies/$slug'
+      fullPath: '/policies/$slug'
+      preLoaderRoute: typeof PoliciesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/collection/$slug': {
       id: '/collection/$slug'
       path: '/collection/$slug'
@@ -329,6 +349,7 @@ const rootRouteChildren: RootRouteChildren = {
   WholesaleRoute: WholesaleRoute,
   WishlistRoute: WishlistRoute,
   CollectionSlugRoute: CollectionSlugRoute,
+  PoliciesSlugRoute: PoliciesSlugRoute,
   ProductSlugRoute: ProductSlugRoute,
 }
 export const routeTree = rootRouteImport

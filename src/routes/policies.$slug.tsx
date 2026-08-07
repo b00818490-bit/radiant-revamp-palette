@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Footer } from "@/components/Footer";
-import { policies, policyBySlug } from "@/data/policies";
+import { policies, policyBySlug, type Policy } from "@/data/policies";
 
 export const Route = createFileRoute("/policies/$slug")({
   loader: ({ params }) => {
@@ -59,7 +59,7 @@ function PolicyMissing() {
 }
 
 function PolicyPage() {
-  const policy = Route.useLoaderData();
+  const policy = Route.useLoaderData() as Policy;
 
   return (
     <Shell>
