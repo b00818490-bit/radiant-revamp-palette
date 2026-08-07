@@ -66,11 +66,9 @@ export const Route = createFileRoute("/product/$slug")({
 function ShareButton({ product }: { product: ShopifyProductNode }) {
   const [copied, setCopied] = useState(false);
   const [url, setUrl] = useState("");
-  const [canNativeShare, setCanNativeShare] = useState(false);
 
   useEffect(() => {
     setUrl(window.location.href);
-    setCanNativeShare(typeof navigator !== "undefined" && !!navigator.share);
   }, []);
 
   const shareText = `Check out ${product.title} by Greyon`;
@@ -88,16 +86,9 @@ function ShareButton({ product }: { product: ShopifyProductNode }) {
     }
   };
 
-  const nativeShare = async () => {
-    try {
-      await navigator.share({
-        title: product.title,
-        text: shareText,
-        url,
-      });
-    } catch {
-      // User cancelled or share failed — no need to toast.
-    }
+  const shareOnInstagram = async () => {
+    await copyLink();
+    window.open("https://www.instagram.com/", "_blank", "noopener,noreferrer");
   };
 
   const shareOptions = [
@@ -114,16 +105,10 @@ function ShareButton({ product }: { product: ShopifyProductNode }) {
       color: "text-blue-600",
     },
     {
-      label: "Twitter / X",
-      icon: Twitter,
-      href: `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`,
-      color: "text-sky-500",
-    },
-    {
-      label: "Email",
-      icon: Mail,
-      href: `mailto:?subject=${encodedText}&body=${encodedText}%0A${encodedUrl}`,
-      color: "text-charcoal",
+      label: "Instagram",
+      icon: Instagram,
+      action: shareOnInstagram,
+      color: "text-pink-600",
     },
   ];
 
@@ -132,36 +117,38 @@ function ShareButton({ product }: { product: ShopifyProductNode }) {
       <PopoverTrigger asChild>
         <button
           type="button"
-          className="mt-4 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-fog hover:text-berry transition-colors"
+          className="inline-flex h-14 w-14 items-center justify-center border border-charcoal text-fog hover:bg-charcoal hover:text-ivory transition-colors"
           aria-label="Share this product"
         >
-          <Share2 className="h-3 w-3" /> Share
+          <Share2 className="h-4 w-4" />
         </button>
       </PopoverTrigger>
-      <PopoverContent align="start" className="w-64 p-3 bg-ivory border-border">
+      <PopoverContent align="end" className="w-56 p-3 bg-ivory border-border">
         <p className="font-display text-sm text-charcoal mb-2">Share this product</p>
         <div className="space-y-1">
-          {shareOptions.map((option) => (
-            <a
-              key={option.label}
-              href={option.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 rounded-sm px-2 py-2 text-sm text-charcoal hover:bg-background transition-colors"
-            >
-              <option.icon className={`h-4 w-4 ${option.color}`} />
-              {option.label}
-            </a>
-          ))}
-          {canNativeShare && (
-            <button
-              type="button"
-              onClick={nativeShare}
-              className="flex w-full items-center gap-3 rounded-sm px-2 py-2 text-sm text-charcoal hover:bg-background transition-colors"
-            >
-              <Share2 className="h-4 w-4 text-berry" />
-              More options
-            </button>
+          {shareOptions.map((option) =>
+            "href" in option ? (
+              <a
+                key={option.label}
+                href={option.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 rounded-sm px-2 py-2 text-sm text-charcoal hover:bg-background transition-colors"
+              >
+                <option.icon className={`h-4 w-4 ${option.color}`} />
+                {option.label}
+              </a>
+            ) : (
+              <button
+                key={option.label}
+                type="button"
+                onClick={option.action}
+                className="flex w-full items-center gap-3 rounded-sm px-2 py-2 text-sm text-charcoal hover:bg-background transition-colors"
+              >
+                <option.icon className={`h-4 w-4 ${option.color}`} />
+                {option.label}
+              </button>
+            ),
           )}
           <button
             type="button"
