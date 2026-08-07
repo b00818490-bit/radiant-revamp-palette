@@ -260,7 +260,7 @@ function ShadeQuizPage() {
   );
 }
 
-type ProductNode = Awaited<ReturnType<typeof fetchProductByHandle>>;
+type ProductNode = Awaited<ReturnType<typeof fetchProductByHandle>> | undefined;
 
 function ResultCard({
   shade,
