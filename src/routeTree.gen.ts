@@ -10,7 +10,6 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WishlistRouteImport } from './routes/wishlist'
-import { Route as WholesaleRouteImport } from './routes/wholesale'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ShippingReturnsRouteImport } from './routes/shipping-returns'
 import { Route as ShadeQuizRouteImport } from './routes/shade-quiz'
@@ -28,11 +27,6 @@ import { Route as CollectionSlugRouteImport } from './routes/collection.$slug'
 const WishlistRoute = WishlistRouteImport.update({
   id: '/wishlist',
   path: '/wishlist',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const WholesaleRoute = WholesaleRouteImport.update({
-  id: '/wholesale',
-  path: '/wholesale',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -112,7 +106,6 @@ export interface FileRoutesByFullPath {
   '/shade-quiz': typeof ShadeQuizRoute
   '/shipping-returns': typeof ShippingReturnsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/wholesale': typeof WholesaleRoute
   '/wishlist': typeof WishlistRoute
   '/collection/$slug': typeof CollectionSlugRoute
   '/policies/$slug': typeof PoliciesSlugRoute
@@ -129,7 +122,6 @@ export interface FileRoutesByTo {
   '/shade-quiz': typeof ShadeQuizRoute
   '/shipping-returns': typeof ShippingReturnsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/wholesale': typeof WholesaleRoute
   '/wishlist': typeof WishlistRoute
   '/collection/$slug': typeof CollectionSlugRoute
   '/policies/$slug': typeof PoliciesSlugRoute
@@ -147,7 +139,6 @@ export interface FileRoutesById {
   '/shade-quiz': typeof ShadeQuizRoute
   '/shipping-returns': typeof ShippingReturnsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/wholesale': typeof WholesaleRoute
   '/wishlist': typeof WishlistRoute
   '/collection/$slug': typeof CollectionSlugRoute
   '/policies/$slug': typeof PoliciesSlugRoute
@@ -166,7 +157,6 @@ export interface FileRouteTypes {
     | '/shade-quiz'
     | '/shipping-returns'
     | '/sitemap.xml'
-    | '/wholesale'
     | '/wishlist'
     | '/collection/$slug'
     | '/policies/$slug'
@@ -183,7 +173,6 @@ export interface FileRouteTypes {
     | '/shade-quiz'
     | '/shipping-returns'
     | '/sitemap.xml'
-    | '/wholesale'
     | '/wishlist'
     | '/collection/$slug'
     | '/policies/$slug'
@@ -200,7 +189,6 @@ export interface FileRouteTypes {
     | '/shade-quiz'
     | '/shipping-returns'
     | '/sitemap.xml'
-    | '/wholesale'
     | '/wishlist'
     | '/collection/$slug'
     | '/policies/$slug'
@@ -218,7 +206,6 @@ export interface RootRouteChildren {
   ShadeQuizRoute: typeof ShadeQuizRoute
   ShippingReturnsRoute: typeof ShippingReturnsRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
-  WholesaleRoute: typeof WholesaleRoute
   WishlistRoute: typeof WishlistRoute
   CollectionSlugRoute: typeof CollectionSlugRoute
   PoliciesSlugRoute: typeof PoliciesSlugRoute
@@ -232,13 +219,6 @@ declare module '@tanstack/react-router' {
       path: '/wishlist'
       fullPath: '/wishlist'
       preLoaderRoute: typeof WishlistRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/wholesale': {
-      id: '/wholesale'
-      path: '/wholesale'
-      fullPath: '/wholesale'
-      preLoaderRoute: typeof WholesaleRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -346,7 +326,6 @@ const rootRouteChildren: RootRouteChildren = {
   ShadeQuizRoute: ShadeQuizRoute,
   ShippingReturnsRoute: ShippingReturnsRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
-  WholesaleRoute: WholesaleRoute,
   WishlistRoute: WishlistRoute,
   CollectionSlugRoute: CollectionSlugRoute,
   PoliciesSlugRoute: PoliciesSlugRoute,
@@ -355,3 +334,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
