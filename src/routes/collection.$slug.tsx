@@ -70,7 +70,7 @@ const COLLECTION_HANDLES: Record<string, string[]> = {
 
 const BEST_SELLER_SLUGS = ["best-sellers", "bestsellers", "best-selling"];
 const NEW_SLUGS = ["new", "new-arrivals"];
-const UNDER_200_SLUGS = ["under-200"];
+const UNDER_200_SLUGS = ["under-300"];
 
 function buildQuery(slug: string): string | undefined {
   if (
@@ -99,7 +99,7 @@ function CollectionPage() {
         : isNew
           ? "New arrivals"
           : isUnder200
-            ? "Under ₹200"
+            ? "Under ₹300"
             : titleize(slug);
   const query = buildQuery(slug);
   const [sort, setSort] = useState<"featured" | "price-asc" | "price-desc" | "title">("featured");
@@ -120,7 +120,7 @@ function CollectionPage() {
     : allProducts;
 
   const products = isUnder200
-    ? byHandle.filter((p) => parseFloat(p.node.priceRange.minVariantPrice.amount) < 200)
+    ? byHandle.filter((p) => parseFloat(p.node.priceRange.minVariantPrice.amount) < 300)
     : byHandle;
 
 
