@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import type { Session } from "@supabase/supabase-js";
-import { Loader2, Mail, ShieldCheck, LogOut, Heart, ShoppingBag } from "lucide-react";
+import { Loader2, Mail, ShieldCheck, LogOut, Heart, ShoppingBag, Eye, EyeOff, KeyRound } from "lucide-react";
 import { toast } from "sonner";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Footer } from "@/components/Footer";
