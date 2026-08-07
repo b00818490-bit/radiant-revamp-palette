@@ -46,27 +46,15 @@ const COLLECTION_SLUGS = [
   "mascara",
   "lash-serum",
   "curler",
-  "cleanser",
-  "toner",
-  "serum",
-  "moisturizer",
-  "spf",
-  "acne",
-  "dryness",
-  "dark-spots",
-  "fine-lines",
-  "sensitive",
 ];
 
 const PRODUCT_SLUGS = [
-  "velvet-matte",
-  "cheek-cushion",
-  "rescue-glow",
-  "feather-mascara",
-  "dew-drops",
-  "clarity-cleanser",
-  "silk-foundation",
-  "night-repair",
+  "greyon-smoky-eyeliner",
+  "mascara",
+  "vacuum-precision-eyeliner-intense-black",
+  "anti-acne-facial-oil",
+  "anti-ageing-facial-oil",
+  "facial-oil",
 ];
 
 export const Route = createFileRoute("/sitemap.xml")({

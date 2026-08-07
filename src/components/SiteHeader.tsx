@@ -41,7 +41,7 @@ const MEGA: MegaConfig[] = [
     label: "Shop",
     intro: {
       title: "Shop everything",
-      body: "Clean color and serious skincare for every routine.",
+      body: "Clean color and facial oils for everyday care.",
       href: "/collection/all",
     },
     columns: [
@@ -145,7 +145,7 @@ const MEGA: MegaConfig[] = [
       {
         heading: "Shop skincare",
         links: [
-          { label: "Facial Oil", slug: "facial-oil" },
+          { label: "Glow Boosting Facial Oil", slug: "facial-oil" },
           { label: "Anti Acne Facial Oil", slug: "anti-acne-facial-oil" },
           { label: "Anti Ageing Facial Oil", slug: "anti-ageing-facial-oil" },
         ],
@@ -161,19 +161,18 @@ const MEGA: MegaConfig[] = [
 ];
 
 const POPULAR = [
-  "Velvet matte lipstick",
-  "Glow serum",
-  "Cushion blush",
-  "Barrier cream",
-  "Everyday palette",
-  "SPF 45",
+  "Matte liquid lipcolor",
+  "Smoky black eyeliner",
+  "Black curling mascara",
+  "Vacuum precision kajal",
+  "Facial oil",
 ];
 
 const SEARCH_PRODUCTS = [
-  { name: "Velvet Matte Lipstick", cat: "Lips · Bestseller", price: "$28", img: prod1, slug: "velvet-matte" },
-  { name: "Rescue Glow Serum", cat: "Skincare · Award", price: "$48", img: prod2, slug: "glow-serum" },
-  { name: "Cushion Blush", cat: "Face · New", price: "$32", img: prod3, slug: "cushion-blush" },
-  { name: "Barrier Cream Rich", cat: "Skincare", price: "$42", img: prod4, slug: "barrier-cream" },
+  { name: "Smoky Black Eyeliner", cat: "Eyes · Bestseller", price: "₹259", img: prod1, slug: "greyon-smoky-eyeliner" },
+  { name: "Black Curling Mascara", cat: "Eyes", price: "₹359", img: prod2, slug: "mascara" },
+  { name: "Vacuum Precision Eyeliner (Kajal)", cat: "Eyes", price: "₹229", img: prod3, slug: "vacuum-precision-eyeliner-intense-black" },
+  { name: "Anti Acne Facial Oil", cat: "Skincare", price: "₹319", img: prod4, slug: "anti-acne-facial-oil" },
 ];
 
 export function SiteHeader({

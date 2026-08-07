@@ -117,7 +117,7 @@
       },
       "blocks": [
         { "type": "post", "settings": { "image": "__ASSET__ugc1", "url": "https://www.instagram.com/greyon_cosmetics", "alt": "Customer wearing Greyon velvet matte lipstick" } },
-        { "type": "post", "settings": { "image": "__ASSET__ugc3", "url": "https://www.instagram.com/greyon_cosmetics", "alt": "Greyon skincare routine flat lay" } },
+        { "type": "post", "settings": { "image": "__ASSET__ugc3", "url": "https://www.instagram.com/greyon_cosmetics", "alt": "Greyon facial oils" } },
         { "type": "post", "settings": { "image": "__ASSET__ugc4", "url": "https://www.instagram.com/greyon_cosmetics", "alt": "Close-up of Greyon blush and lip colour" } },
         { "type": "post", "settings": { "image": "__ASSET__ugc1", "url": "https://www.instagram.com/greyon_cosmetics", "alt": "Greyon makeup look on model" } },
         { "type": "post", "settings": { "image": "__ASSET__ugc3", "url": "https://www.instagram.com/greyon_cosmetics", "alt": "Greyon products on vanity" } },
