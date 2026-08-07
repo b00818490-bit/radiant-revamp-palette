@@ -628,9 +628,13 @@ function MobileDrawer({ onClose }: { onClose: () => void }) {
       />
       <aside className="absolute inset-y-0 left-0 flex w-[88%] max-w-sm flex-col bg-[#FAF6F1]">
         <div className="flex items-center justify-between border-b border-[#e6ded2] px-5 py-5">
-          <span className="font-display text-2xl">
-            greyon<span className="text-[#9E2A5C]">.</span>
-          </span>
+          <Link to="/" onClick={onClose} aria-label="Greyon — home">
+            <img
+              src={logoAsset.url}
+              alt="Greyon"
+              className="h-8 w-auto"
+            />
+          </Link>
           <button onClick={onClose} aria-label="Close menu">
             <X className="h-5 w-5" />
           </button>
