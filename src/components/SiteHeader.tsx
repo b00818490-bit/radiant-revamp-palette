@@ -28,6 +28,7 @@ import {
 
 import logoAsset from "@/assets/greyon-logo.png.asset.json";
 import { useCartStore } from "@/stores/cartStore";
+import { useWishlistStore } from "@/stores/wishlistStore";
 
 type MegaKey = "shop" | "lips" | "eyes" | "skincare";
 
