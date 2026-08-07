@@ -105,6 +105,37 @@ export function Footer() {
           </div>
         </div>
       </div>
+
+      {/* Policies + newsletter */}
+      <div className="border-t border-ivory/10">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 md:grid-cols-2 md:gap-16 md:px-8">
+          <div className="text-xs leading-relaxed text-ivory/60">
+            <p className="uppercase tracking-[0.25em] text-ivory">Policies</p>
+            <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+              {policies.map((p) => (
+                <li key={p.slug}>
+                  <Link to="/policies/$slug" params={{ slug: p.slug }} className="hover:text-ivory">
+                    {p.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="text-xs">
+            <NewsletterSignup source="footer" />
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom bar */}
+      <div className="border-t border-ivory/10">
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-6 text-[11px] text-ivory/50 md:flex-row md:items-center md:justify-between md:px-8">
+          <p>© {new Date().getFullYear()} Greygon Cosmetics LLP. All rights reserved.</p>
+          <PaymentIcons className="justify-start md:justify-end" />
+        </div>
+      </div>
     </footer>
   );
 }
+
