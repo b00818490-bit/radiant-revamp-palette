@@ -531,9 +531,79 @@ function SignedIn({ session }: { session: Session }) {
           </div>
         </form>
       )}
+
+      <ChangePassword />
     </div>
   );
 }
+
+function ChangePassword() {
+  const [password, setPassword] = useState("");
+  const [show, setShow] = useState(false);
+  const [busy, setBusy] = useState(false);
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const problem = passwordProblem(password);
+    if (problem) {
+      toast.error("Choose a stronger password", { description: problem });
+      return;
+    }
+    setBusy(true);
+    const { error } = await supabase.auth.updateUser({ password });
+    setBusy(false);
+    if (error) {
+      toast.error("Couldn't update your password", { description: error.message });
+      return;
+    }
+    setPassword("");
+    toast.success("Password updated");
+  };
+
+  return (
+    <form onSubmit={submit} className="mt-14 max-w-2xl border-t border-border pt-10">
+      <div className="text-[11px] uppercase tracking-[0.28em] text-berry">Security</div>
+      <h2 className="mt-2 font-display text-2xl tracking-[-0.02em]">Set or change your password</h2>
+      <p className="mt-2 text-sm text-fog">
+        With a password you can sign in instantly next time — no verification code needed.
+      </p>
+      <div className="mt-6 flex flex-wrap items-end gap-4">
+        <div className="min-w-[240px] flex-1">
+          <Field label="New password">
+            <div className="relative">
+              <input
+                type={show ? "text" : "password"}
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="new-password"
+                className="input-line pr-10"
+                placeholder="••••••••"
+              />
+              <button
+                type="button"
+                onClick={() => setShow((v) => !v)}
+                aria-label={show ? "Hide password" : "Show password"}
+                className="absolute right-0 top-1/2 -translate-y-1/2 p-1 text-fog hover:text-berry"
+              >
+                {show ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+              </button>
+            </div>
+          </Field>
+        </div>
+        <button
+          type="submit"
+          disabled={busy}
+          className="inline-flex items-center gap-2 bg-berry px-8 py-4 text-[11px] uppercase tracking-[0.2em] text-ivory hover:bg-berry/90 disabled:opacity-60"
+        >
+          {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <KeyRound className="h-4 w-4" />}
+          Save password
+        </button>
+      </div>
+    </form>
+  );
+}
+
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
