@@ -120,6 +120,24 @@ export async function fetchProducts(first = 24, query?: string): Promise<Shopify
   return res?.data?.products?.edges ?? [];
 }
 
+const BEST_SELLERS_QUERY = `
+  query GetBestSellers($first: Int!) {
+    products(first: $first, sortKey: BEST_SELLING) {
+      edges { node { ${PRODUCT_FIELDS} } }
+    }
+  }
+`;
+
+/** Real best sellers, ordered by Shopify's own BEST_SELLING sort. */
+export async function fetchBestSellers(first = 12): Promise<ShopifyProduct[]> {
+  const res = await storefrontApiRequest<{ products: { edges: ShopifyProduct[] } }>(
+    BEST_SELLERS_QUERY,
+    { first },
+  );
+  return res?.data?.products?.edges ?? [];
+}
+
+
 export async function fetchProductByHandle(handle: string): Promise<ShopifyProductNode | null> {
   const res = await storefrontApiRequest<{ product: ShopifyProductNode | null }>(
     PRODUCT_BY_HANDLE_QUERY,
