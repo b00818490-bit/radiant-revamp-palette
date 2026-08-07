@@ -8,7 +8,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Loader2, Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
+import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import { formatMoney } from "@/lib/shopify";
 
@@ -16,8 +16,6 @@ export function CartDrawer() {
   const navigate = useNavigate();
   const {
     items,
-    isLoading,
-    isSyncing,
     isOpen,
     setOpen,
     updateQuantity,
