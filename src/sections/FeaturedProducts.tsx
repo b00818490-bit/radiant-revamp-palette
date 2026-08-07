@@ -153,7 +153,7 @@ function ProductCard({ product }: { product: ShopifyProduct }) {
             {node.title}
           </div>
           {categoryLabel(node.title, node.productType) && (
-            <div className="mt-1 text-xs opacity-50">
+            <div className="mt-1 text-xs text-ivory/70">
               {categoryLabel(node.title, node.productType)}
             </div>
           )}
