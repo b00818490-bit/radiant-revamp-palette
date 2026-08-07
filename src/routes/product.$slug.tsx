@@ -16,8 +16,7 @@ import {
   Check,
   MessageCircle,
   Facebook,
-  Twitter,
-  Mail,
+  Instagram,
 } from "lucide-react";
 import { toast } from "sonner";
 import {
