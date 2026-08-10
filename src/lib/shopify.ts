@@ -25,6 +25,20 @@ export interface ShopifyVariant {
   selectedOptions: Array<{ name: string; value: string }>;
 }
 
+export interface ShopifyMetafield {
+  namespace: string;
+  key: string;
+  value: string;
+  type: string;
+}
+
+/** Aggregate review data owned by the store's review app (read-only). */
+export interface ProductReviewSummary {
+  rating: number;
+  count: number;
+  scaleMax: number;
+}
+
 export interface ShopifyProductNode {
   id: string;
   title: string;
@@ -38,7 +52,34 @@ export interface ShopifyProductNode {
   images: { edges: Array<{ node: ShopifyImage }> };
   variants: { edges: Array<{ node: ShopifyVariant }> };
   options: Array<{ name: string; values: string[] }>;
+  metafields?: Array<ShopifyMetafield | null>;
 }
+
+/**
+ * Reads the aggregate rating written by the store's existing review app.
+ * Individual review bodies live in that app and are not exposed here.
+ */
+export function getReviewSummary(
+  product: Pick<ShopifyProductNode, "metafields">,
+): ProductReviewSummary | null {
+  const fields = product.metafields ?? [];
+  const ratingField = fields.find((f) => f?.namespace === "reviews" && f.key === "rating");
+  const countField = fields.find((f) => f?.namespace === "reviews" && f.key === "rating_count");
+  if (!ratingField) return null;
+  let rating = 0;
+  let scaleMax = 5;
+  try {
+    const parsed = JSON.parse(ratingField.value) as { value?: string; scale_max?: string };
+    rating = parseFloat(parsed.value ?? "0");
+    scaleMax = parseFloat(parsed.scale_max ?? "5");
+  } catch {
+    rating = parseFloat(ratingField.value);
+  }
+  if (!Number.isFinite(rating) || rating <= 0) return null;
+  const count = countField ? parseInt(countField.value, 10) : 0;
+  return { rating, count: Number.isFinite(count) ? count : 0, scaleMax: scaleMax || 5 };
+}
+
 
 export interface ShopifyProduct {
   node: ShopifyProductNode;
