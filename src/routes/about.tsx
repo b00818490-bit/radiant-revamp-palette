@@ -10,6 +10,9 @@ import {
 } from "lucide-react";
 import modelAsset from "@/assets/greyon-model.png.asset.json";
 import ingredientImg from "@/assets/ingredient.jpg";
+import { SiteHeader } from "@/components/SiteHeader";
+import { Footer } from "@/components/Footer";
+
 
 
 export const Route = createFileRoute("/about")({
@@ -122,7 +125,10 @@ const GLANCE = [
 
 function AboutPage() {
   return (
-    <main>
+    <div className="min-h-screen bg-white text-charcoal">
+      <SiteHeader />
+      <main>
+
       {/* Hero */}
       <section className="relative overflow-hidden bg-charcoal text-ivory">
         <img
@@ -326,6 +332,9 @@ function AboutPage() {
           Shop bestsellers <ArrowRight className="h-4 w-4" />
         </Link>
       </section>
-    </main>
+      </main>
+      <Footer />
+    </div>
+
   );
 }

@@ -44,6 +44,10 @@ import { getRecentlyViewed, recordRecentlyViewed } from "@/stores/recentlyViewed
 
 export const Route = createFileRoute("/product/$slug")({
   component: PDP,
+  validateSearch: (search: Record<string, unknown>) => ({
+    variant: typeof search.variant === "string" ? search.variant : undefined,
+  }),
+
   head: ({ params }) => {
     const name = params.slug
       .split("-")
@@ -210,9 +214,19 @@ function PDP() {
 }
 
 function ProductView({ product }: { product: ShopifyProductNode }) {
+  const { variant: variantParam } = Route.useSearch();
   const images = product.images.edges.map((e) => e.node);
   const variants = product.variants.edges.map((e) => e.node);
-  const [selectedVariant, setSelectedVariant] = useState<ShopifyVariant>(variants[0]);
+  const initialVariant =
+    (variantParam
+      ? variants.find(
+          (v) =>
+            v.id === variantParam ||
+            v.title.toUpperCase().includes(variantParam.toUpperCase()),
+        )
+      : undefined) ?? variants[0];
+  const [selectedVariant, setSelectedVariant] = useState<ShopifyVariant>(initialVariant);
+
   const [qty, setQty] = useState(1);
   const [activeImg, setActiveImg] = useState(0);
   const addItem = useCartStore((s) => s.addItem);

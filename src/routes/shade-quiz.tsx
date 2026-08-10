@@ -150,7 +150,7 @@ function ShadeQuizPage() {
   const q = QUESTIONS[step];
 
   return (
-    <main className="mx-auto max-w-[900px] px-5 py-16 sm:px-8 lg:py-24">
+    <main className="mx-auto max-w-[1280px] px-6 py-16 sm:px-10 lg:py-24">
       <Link
         to="/"
         className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-fog hover:text-charcoal"
@@ -158,20 +158,20 @@ function ShadeQuizPage() {
         <ArrowLeft className="h-3 w-3" /> Back to home
       </Link>
 
-      <h1 className="mt-6 font-display text-4xl leading-[0.95] tracking-[-0.03em] text-charcoal sm:text-5xl">
+      <h1 className="mt-6 font-display text-5xl leading-[0.95] tracking-[-0.03em] text-charcoal sm:text-6xl lg:text-7xl">
         Lip shade finder
       </h1>
-      <p className="mt-3 max-w-lg text-fog">
+      <p className="mt-4 max-w-2xl text-lg text-fog">
         Four quick taps and we&apos;ll match you to shades from the Premium Matte Liquid Lipstick
         range.
       </p>
 
       {/* Progress */}
-      <div className="mt-8 flex gap-1.5">
+      <div className="mt-10 flex gap-1.5">
         {QUESTIONS.map((item, i) => (
           <div
             key={item.key}
-            className="h-[3px] flex-1"
+            className="h-[4px] flex-1"
             style={{
               backgroundColor:
                 i < step || done ? "var(--color-charcoal)" : "var(--color-border, #e5e0d8)",
@@ -181,12 +181,14 @@ function ShadeQuizPage() {
       </div>
 
       {!done && q && (
-        <section className="mt-10">
+        <section className="mt-12">
           <div className="text-[11px] uppercase tracking-[0.28em] text-berry">{q.eyebrow}</div>
-          <h2 className="mt-3 font-display text-2xl text-charcoal sm:text-3xl">{q.title}</h2>
-          {q.help && <p className="mt-2 text-sm text-fog">{q.help}</p>}
+          <h2 className="mt-3 font-display text-3xl text-charcoal sm:text-4xl lg:text-5xl">
+            {q.title}
+          </h2>
+          {q.help && <p className="mt-3 text-base text-fog">{q.help}</p>}
 
-          <div className="mt-7 grid gap-3 sm:grid-cols-2">
+          <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {q.options.map((opt) => (
               <button
                 key={opt.value}
@@ -195,17 +197,17 @@ function ShadeQuizPage() {
                   setAnswers((prev) => ({ ...prev, [q.key]: opt.value }));
                   setStep((s) => s + 1);
                 }}
-                className="flex items-center gap-4 border border-border p-4 text-left transition-colors hover:border-charcoal hover:bg-charcoal/[0.03]"
+                className="flex items-center gap-4 border border-border p-6 text-left transition-colors hover:border-charcoal hover:bg-charcoal/[0.03] lg:flex-col lg:items-start lg:gap-5 lg:p-8"
               >
                 {opt.swatch && (
                   <span
-                    className="h-10 w-10 flex-shrink-0 rounded-full"
+                    className="h-12 w-12 flex-shrink-0 rounded-full lg:h-20 lg:w-20"
                     style={{ backgroundColor: opt.swatch }}
                   />
                 )}
                 <span>
-                  <span className="block text-sm text-charcoal">{opt.label}</span>
-                  {opt.hint && <span className="mt-0.5 block text-xs text-fog">{opt.hint}</span>}
+                  <span className="block text-base text-charcoal">{opt.label}</span>
+                  {opt.hint && <span className="mt-1 block text-sm text-fog">{opt.hint}</span>}
                 </span>
               </button>
             ))}
@@ -215,7 +217,7 @@ function ShadeQuizPage() {
             <button
               type="button"
               onClick={() => setStep((s) => s - 1)}
-              className="mt-7 text-[11px] uppercase tracking-[0.18em] text-fog hover:text-charcoal"
+              className="mt-8 text-[11px] uppercase tracking-[0.18em] text-fog hover:text-charcoal"
             >
               ← Previous question
             </button>
@@ -223,12 +225,14 @@ function ShadeQuizPage() {
         </section>
       )}
 
+
       {done && (
-        <section className="mt-10">
+        <section className="mt-12">
           <div className="text-[11px] uppercase tracking-[0.28em] text-berry">Your matches</div>
-          <h2 className="mt-3 font-display text-2xl text-charcoal sm:text-3xl">
+          <h2 className="mt-3 font-display text-3xl text-charcoal sm:text-4xl lg:text-5xl">
             These shades were made for you.
           </h2>
+
 
           {isLoading && (
             <div className="mt-8 flex items-center gap-2 text-fog">
@@ -299,22 +303,25 @@ function ResultCard({
   };
 
   return (
-    <div className="flex flex-col gap-4 border border-border p-4 sm:flex-row sm:items-center">
-      <span
-        className="h-16 w-16 flex-shrink-0 rounded-full"
+    <div className="flex flex-col gap-5 border border-border p-6 sm:flex-row sm:items-center sm:p-7">
+      <Link
+        to="/product/$slug"
+        params={{ slug: LIPSTICK_HANDLE }}
+        search={{ variant: shade.code }}
+        aria-label={`View ${shade.name} ${shade.code}`}
+        className="h-20 w-20 flex-shrink-0 rounded-full ring-1 ring-black/5 sm:h-24 sm:w-24"
         style={{ backgroundColor: shade.hex }}
-        aria-hidden
       />
       <div className="flex-1">
         {top && (
           <div className="text-[10px] uppercase tracking-[0.22em] text-berry">Best match</div>
         )}
-        <div className="font-display text-xl text-charcoal">
+        <div className="font-display text-2xl text-charcoal">
           {shade.name} · {shade.code}
         </div>
-        <div className="mt-0.5 text-xs text-fog">Premium Matte Liquid Lipstick</div>
+        <div className="mt-0.5 text-sm text-fog">Premium Matte Liquid Lipstick</div>
         {variant && (
-          <div className="mt-1 text-sm text-charcoal">
+          <div className="mt-1 text-base text-charcoal">
             {formatMoney(variant.price.amount, variant.price.currencyCode)}
           </div>
         )}
@@ -324,7 +331,7 @@ function ResultCard({
           type="button"
           onClick={handleAdd}
           disabled={!variant || !variant.availableForSale || adding || isLoading}
-          className="inline-flex items-center justify-center gap-2 bg-charcoal px-6 py-3 text-[12px] uppercase tracking-[0.18em] text-ivory transition-opacity hover:opacity-90 disabled:opacity-40"
+          className="inline-flex items-center justify-center gap-2 bg-charcoal px-7 py-3.5 text-[12px] uppercase tracking-[0.18em] text-ivory transition-opacity hover:opacity-90 disabled:opacity-40"
         >
           {adding ? (
             <Loader2 className="h-4 w-4 animate-spin" />
@@ -338,11 +345,13 @@ function ResultCard({
         <Link
           to="/product/$slug"
           params={{ slug: LIPSTICK_HANDLE }}
-          className="text-[11px] uppercase tracking-[0.18em] text-fog hover:text-charcoal"
+          search={{ variant: shade.code }}
+          className="inline-flex items-center gap-2 border border-charcoal px-7 py-3 text-[11px] uppercase tracking-[0.18em] text-charcoal transition-colors hover:bg-charcoal hover:text-ivory"
         >
-          View product
+          Shop this shade
         </Link>
       </div>
     </div>
   );
+
 }
