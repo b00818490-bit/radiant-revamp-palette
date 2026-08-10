@@ -721,9 +721,30 @@ function MobileDrawer({ onClose }: { onClose: () => void }) {
                                 {l.label}
                               </Link>
                             </li>
-                          ))}
-                        </ul>
-                      </div>
+            ))}
+            <li className="border-t border-[#e6ded2]">
+              <Link
+                to="/"
+                onClick={onClose}
+                activeOptions={{ exact: true }}
+                activeProps={{ className: "flex w-full items-center px-5 py-4 text-sm uppercase tracking-widest text-[#9E2A5C]" }}
+                inactiveProps={{ className: "flex w-full items-center px-5 py-4 text-sm uppercase tracking-widest text-[#3B3B3D] hover:text-[#9E2A5C]" }}
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/about"
+                onClick={onClose}
+                activeProps={{ className: "flex w-full items-center px-5 py-4 text-sm uppercase tracking-widest text-[#9E2A5C]" }}
+                inactiveProps={{ className: "flex w-full items-center px-5 py-4 text-sm uppercase tracking-widest text-[#3B3B3D] hover:text-[#9E2A5C]" }}
+              >
+                Our Story
+              </Link>
+            </li>
+          </ul>
+        </div>
                     ))}
                   </div>
                 )}
