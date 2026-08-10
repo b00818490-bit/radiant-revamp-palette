@@ -131,20 +131,20 @@ export const campaignContent: CampaignContent = {
   header_announcement: "Free shipping on orders above ₹599 · Lab tested · Made in India",
 
   campaign: {
-    enabled: true,
-    starts_at: "2026-08-01",
-    ends_at: "2026-08-31",
+    enabled: false,
+    starts_at: "",
+    ends_at: "",
 
     sale: {
-      percent: 25,
-      text: "Monsoon Sale",
-      code: "GLOW25",
+      percent: 0,
+      text: "",
+      code: "",
     },
 
-    promotional_messages: ["{{sale_percent}} off with code {{code}}"],
+    promotional_messages: [],
 
     banner: {
-      enabled: true,
+      enabled: false,
       text: "{{sale_percent}} off sitewide with code {{code}} · ends {{ends}}",
       cta: { label: "Shop the sale", url: "/collection/all" },
       background_color: "#9e2a5c",
