@@ -1,4 +1,5 @@
-import { Instagram } from "lucide-react";
+import { Instagram, ChevronLeft, ChevronRight } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import type { SectionProps, SectionSchema } from "@/theme/types";
 import { getInstagramFeed } from "@/lib/instagram.functions";
@@ -48,6 +49,57 @@ export function Section({ settings, blocks = [] }: SectionProps<Settings, BlockS
       ? livePosts.map((p) => ({ image: p.image, url: p.link, alt: p.alt }))
       : blocks.map((b) => b.settings);
 
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  const scrollToIndex = useCallback((i: number) => {
+    const el = trackRef.current;
+    if (!el) return;
+    const child = el.children[i] as HTMLElement | undefined;
+    if (child) el.scrollTo({ left: child.offsetLeft - el.offsetLeft, behavior: "smooth" });
+  }, []);
+
+  const nudge = useCallback(
+    (dir: 1 | -1) => {
+      const next = (active + dir + items.length) % items.length;
+      setActive(next);
+      scrollToIndex(next);
+    },
+    [active, items.length, scrollToIndex],
+  );
+
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      const children = Array.from(el.children) as HTMLElement[];
+      let best = 0;
+      let bestDist = Infinity;
+      children.forEach((c, i) => {
+        const d = Math.abs(c.offsetLeft - el.offsetLeft - el.scrollLeft);
+        if (d < bestDist) {
+          bestDist = d;
+          best = i;
+        }
+      });
+      setActive(best);
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, [items.length]);
+
+  useEffect(() => {
+    if (paused || items.length < 2) return;
+    const id = window.setInterval(() => {
+      const next = (active + 1) % items.length;
+      setActive(next);
+      scrollToIndex(next);
+    }, 4000);
+    return () => window.clearInterval(id);
+  }, [active, paused, items.length, scrollToIndex]);
+
+
   return (
     <section className="mx-auto max-w-[1440px] bg-[var(--color-charcoal)] px-5 pt-10 pb-16 sm:px-8 lg:pt-14 lg:pb-24">
       <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
@@ -72,8 +124,17 @@ export function Section({ settings, blocks = [] }: SectionProps<Settings, BlockS
         )}
       </div>
 
-      <div className="relative">
-        <div className="scrollbar-hide -mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 sm:-mx-8 sm:px-8 lg:gap-4">
+      <div
+        className="group/car relative"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onFocusCapture={() => setPaused(true)}
+        onBlurCapture={() => setPaused(false)}
+      >
+        <div
+          ref={trackRef}
+          className="scrollbar-hide -mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 sm:-mx-8 sm:px-8 lg:gap-4"
+        >
           {items.map((it, i) => (
             <a
               key={i}
@@ -98,7 +159,46 @@ export function Section({ settings, blocks = [] }: SectionProps<Settings, BlockS
             </a>
           ))}
         </div>
+
+        {items.length > 1 && (
+          <>
+            <button
+              type="button"
+              aria-label="Previous posts"
+              onClick={() => nudge(-1)}
+              className="absolute top-1/2 left-2 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-[var(--color-ivory)]/85 text-[var(--color-charcoal)] opacity-0 transition-opacity duration-300 group-hover/car:opacity-100 hover:bg-[var(--color-ivory)] lg:flex"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button
+              type="button"
+              aria-label="Next posts"
+              onClick={() => nudge(1)}
+              className="absolute top-1/2 right-2 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-[var(--color-ivory)]/85 text-[var(--color-charcoal)] opacity-0 transition-opacity duration-300 group-hover/car:opacity-100 hover:bg-[var(--color-ivory)] lg:flex"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+
+            <div className="mt-6 flex items-center justify-center gap-2">
+              {items.map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  aria-label={`Go to post ${i + 1}`}
+                  onClick={() => {
+                    setActive(i);
+                    scrollToIndex(i);
+                  }}
+                  className={`h-[3px] rounded-full transition-all duration-300 ${
+                    i === active ? "w-8 bg-[var(--color-ivory)]" : "w-3 bg-[var(--color-ivory)]/35"
+                  }`}
+                />
+              ))}
+            </div>
+          </>
+        )}
       </div>
+
     </section>
   );
 }
