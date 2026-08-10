@@ -5,6 +5,8 @@ import { SectionRenderer } from "@/theme/SectionRenderer";
 import { resolveAssets } from "@/theme/assets";
 import type { PageTemplate } from "@/theme/types";
 import indexTemplate from "@/templates/index.json";
+import { applyCampaign } from "@/content/applyCampaign";
+
 
 /**
  * The home route is now a thin renderer of `templates/index.json`.
@@ -23,7 +25,8 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-  const template = resolveAssets(indexTemplate) as PageTemplate;
+  // Content comes from src/content/campaign.ts; the template supplies the design.
+  const template = resolveAssets(applyCampaign(indexTemplate as PageTemplate)) as PageTemplate;
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader announcement={false} />
@@ -34,3 +37,4 @@ function Home() {
     </div>
   );
 }
+
