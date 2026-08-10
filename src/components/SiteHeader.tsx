@@ -721,6 +721,13 @@ function MobileDrawer({ onClose }: { onClose: () => void }) {
                                 {l.label}
                               </Link>
                             </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </li>
             ))}
             <li className="border-t border-[#e6ded2]">
               <Link
@@ -743,13 +750,6 @@ function MobileDrawer({ onClose }: { onClose: () => void }) {
                 Our Story
               </Link>
             </li>
-          </ul>
-        </div>
-                    ))}
-                  </div>
-                )}
-              </li>
-            ))}
           </ul>
         </div>
 
