@@ -124,8 +124,17 @@ export function Section({ settings, blocks = [] }: SectionProps<Settings, BlockS
         )}
       </div>
 
-      <div className="relative">
-        <div className="scrollbar-hide -mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 sm:-mx-8 sm:px-8 lg:gap-4">
+      <div
+        className="group/car relative"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onFocusCapture={() => setPaused(true)}
+        onBlurCapture={() => setPaused(false)}
+      >
+        <div
+          ref={trackRef}
+          className="scrollbar-hide -mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 sm:-mx-8 sm:px-8 lg:gap-4"
+        >
           {items.map((it, i) => (
             <a
               key={i}
@@ -150,7 +159,46 @@ export function Section({ settings, blocks = [] }: SectionProps<Settings, BlockS
             </a>
           ))}
         </div>
+
+        {items.length > 1 && (
+          <>
+            <button
+              type="button"
+              aria-label="Previous posts"
+              onClick={() => nudge(-1)}
+              className="absolute top-1/2 left-2 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-[var(--color-ivory)]/85 text-[var(--color-charcoal)] opacity-0 transition-opacity duration-300 group-hover/car:opacity-100 hover:bg-[var(--color-ivory)] lg:flex"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button
+              type="button"
+              aria-label="Next posts"
+              onClick={() => nudge(1)}
+              className="absolute top-1/2 right-2 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-[var(--color-ivory)]/85 text-[var(--color-charcoal)] opacity-0 transition-opacity duration-300 group-hover/car:opacity-100 hover:bg-[var(--color-ivory)] lg:flex"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+
+            <div className="mt-6 flex items-center justify-center gap-2">
+              {items.map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  aria-label={`Go to post ${i + 1}`}
+                  onClick={() => {
+                    setActive(i);
+                    scrollToIndex(i);
+                  }}
+                  className={`h-[3px] rounded-full transition-all duration-300 ${
+                    i === active ? "w-8 bg-[var(--color-ivory)]" : "w-3 bg-[var(--color-ivory)]/35"
+                  }`}
+                />
+              ))}
+            </div>
+          </>
+        )}
       </div>
+
     </section>
   );
 }
