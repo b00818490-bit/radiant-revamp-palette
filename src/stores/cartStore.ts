@@ -1,12 +1,15 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import {
-  CART_QUERY,
   addLineToShopifyCart,
   createShopifyCart,
+  fetchCart,
   removeLineFromShopifyCart,
-  storefrontApiRequest,
+  updateCartBuyerIdentity,
   updateShopifyCartLine,
+  type BuyerIdentityInput,
+  type CartCost,
+  type CartDiscount,
   type ShopifyProduct,
 } from "@/lib/shopify";
 
@@ -24,6 +27,9 @@ interface CartStore {
   items: CartItem[];
   cartId: string | null;
   checkoutUrl: string | null;
+  /** Authoritative totals from Shopify (null until the cart exists). */
+  cost: CartCost | null;
+  discountCodes: CartDiscount[];
   isLoading: boolean;
   isSyncing: boolean;
   isOpen: boolean;
@@ -33,8 +39,11 @@ interface CartStore {
   removeItem: (variantId: string) => Promise<void>;
   clearCart: () => void;
   syncCart: () => Promise<void>;
+  refreshCost: () => Promise<void>;
+  setBuyerIdentity: (buyer: BuyerIdentityInput) => Promise<void>;
   getCheckoutUrl: () => string | null;
 }
+
 
 export const useCartStore = create<CartStore>()(
   persist(
