@@ -31,6 +31,8 @@ import {
   fetchProducts,
   fetchBestSellers,
   formatMoney,
+  getReviewSummary,
+
   type ShopifyProduct,
   type ShopifyProductNode,
   type ShopifyVariant,
@@ -220,6 +222,9 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
     () => product.options.some((o) => !(o.values.length === 1 && o.values[0] === "Default Title")),
     [product.options],
   );
+
+  const reviewSummary = useMemo(() => getReviewSummary(product), [product]);
+
 
   const price = selectedVariant?.price ?? product.priceRange.minVariantPrice;
   const compareAtRaw = selectedVariant?.compareAtPrice;
@@ -527,13 +532,26 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
           <div className="mt-4 flex items-center gap-3 text-sm text-fog">
             <div className="flex text-gold">
               {[1, 2, 3, 4, 5].map((s) => (
-                <Star key={s} className="h-4 w-4" />
+                <Star
+                  key={s}
+                  className={`h-4 w-4 ${
+                    reviewSummary && s <= Math.round(reviewSummary.rating) ? "fill-current" : ""
+                  }`}
+                />
               ))}
             </div>
-            <span>No reviews yet — be the first to review {product.title}.</span>
+            {reviewSummary ? (
+              <span>
+                {reviewSummary.rating.toFixed(1)} out of {reviewSummary.scaleMax} ·{" "}
+                {reviewSummary.count} {reviewSummary.count === 1 ? "review" : "reviews"}
+              </span>
+            ) : (
+              <span>No reviews yet — be the first to review {product.title}.</span>
+            )}
           </div>
         </div>
       </section>
+
 
       {/* Legal information */}
       <section className="max-w-[1400px] mx-auto px-6 lg:px-10 pb-24">
