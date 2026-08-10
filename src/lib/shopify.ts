@@ -171,6 +171,11 @@ const PRODUCT_FIELDS = `
     }
   }
   options { name values }
+  metafields(identifiers: [
+    { namespace: "reviews", key: "rating" },
+    { namespace: "reviews", key: "rating_count" }
+  ]) { namespace key value type }
+
 `;
 
 const PRODUCTS_QUERY = `
