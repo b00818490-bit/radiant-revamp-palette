@@ -262,31 +262,6 @@ export function SiteHeader({
               <Menu className="h-5 w-5" />
             </button>
             <nav className="hidden lg:flex items-center gap-6 text-[13px] uppercase tracking-[0.14em]">
-              {MEGA.map((m) => (
-                <button
-                  key={m.key}
-                  onMouseEnter={() => setOpenMega(m.key)}
-                  onFocus={() => setOpenMega(m.key)}
-                  onClick={() => setOpenMega(openMega === m.key ? null : m.key)}
-                  className={`relative py-2 transition-colors hover:text-[#9E2A5C] ${
-                    openMega === m.key ? "text-[#9E2A5C]" : "text-[#3B3B3D]"
-                  }`}
-                  aria-expanded={openMega === m.key}
-                >
-                  {m.label}
-                  {openMega === m.key && (
-                    <span className="absolute inset-x-0 -bottom-[1px] h-[2px] bg-[#9E2A5C]" />
-                  )}
-                </button>
-              ))}
-              <Link
-                to="/collection/$slug"
-                params={{ slug: "best-sellers" }}
-                onMouseEnter={() => setOpenMega(null)}
-                className="inline-flex items-center gap-1.5 text-[#9E2A5C] hover:text-[#3B3B3D]"
-              >
-                <TrendingUp className="h-3.5 w-3.5" /> Best sellers
-              </Link>
               <Link
                 to="/"
                 onMouseEnter={() => setOpenMega(null)}
@@ -304,7 +279,25 @@ export function SiteHeader({
               >
                 Our Story
               </Link>
+              {MEGA.map((m) => (
+                <button
+                  key={m.key}
+                  onMouseEnter={() => setOpenMega(m.key)}
+                  onFocus={() => setOpenMega(m.key)}
+                  onClick={() => setOpenMega(openMega === m.key ? null : m.key)}
+                  className={`relative py-2 transition-colors hover:text-[#9E2A5C] ${
+                    openMega === m.key ? "text-[#9E2A5C]" : "text-[#3B3B3D]"
+                  }`}
+                  aria-expanded={openMega === m.key}
+                >
+                  {m.label}
+                  {openMega === m.key && (
+                    <span className="absolute inset-x-0 -bottom-[1px] h-[2px] bg-[#9E2A5C]" />
+                  )}
+                </button>
+              ))}
             </nav>
+
           </div>
 
           {/* Center: logo */}
