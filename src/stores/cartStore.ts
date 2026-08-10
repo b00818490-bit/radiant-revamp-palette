@@ -166,8 +166,42 @@ export const useCartStore = create<CartStore>()(
         }
       },
 
-      clearCart: () => set({ items: [], cartId: null, checkoutUrl: null }),
+      clearCart: () =>
+        set({ items: [], cartId: null, checkoutUrl: null, cost: null, discountCodes: [] }),
       getCheckoutUrl: () => get().checkoutUrl,
+
+      /** Pulls Shopify's authoritative totals (subtotal, tax, discounts). */
+      refreshCost: async () => {
+        const { cartId } = get();
+        if (!cartId) return;
+        try {
+          const cart = await fetchCart(cartId);
+          if (!cart) return;
+          set({
+            cost: cart.cost,
+            discountCodes: cart.discountCodes ?? [],
+            checkoutUrl: cart.checkoutUrl ?? get().checkoutUrl,
+          });
+        } catch (error) {
+          console.error("Failed to refresh cart cost:", error);
+        }
+      },
+
+      setBuyerIdentity: async (buyer) => {
+        const { cartId } = get();
+        if (!cartId) return;
+        try {
+          const cart = await updateCartBuyerIdentity(cartId, buyer);
+          if (!cart) return;
+          set({
+            cost: cart.cost,
+            discountCodes: cart.discountCodes ?? [],
+            checkoutUrl: cart.checkoutUrl ?? get().checkoutUrl,
+          });
+        } catch (error) {
+          console.error("Failed to set buyer identity:", error);
+        }
+      },
 
       syncCart: async () => {
         const { cartId, isSyncing, clearCart } = get();
@@ -175,18 +209,27 @@ export const useCartStore = create<CartStore>()(
 
         set({ isSyncing: true });
         try {
-          const data = await storefrontApiRequest<{
-            cart: { id: string; totalQuantity: number } | null;
-          }>(CART_QUERY, { id: cartId });
-          if (!data) return;
-          const cart = data?.data?.cart;
-          if (!cart || cart.totalQuantity === 0) clearCart();
+          const cart = await fetchCart(cartId);
+          if (!cart) {
+            clearCart();
+            return;
+          }
+          if (cart.totalQuantity === 0) {
+            clearCart();
+            return;
+          }
+          set({
+            cost: cart.cost,
+            discountCodes: cart.discountCodes ?? [],
+            checkoutUrl: cart.checkoutUrl ?? get().checkoutUrl,
+          });
         } catch (error) {
           console.error("Failed to sync cart with Shopify:", error);
         } finally {
           set({ isSyncing: false });
         }
       },
+
     }),
     {
       name: "shopify-cart",
