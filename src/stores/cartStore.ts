@@ -210,10 +210,12 @@ export const useCartStore = create<CartStore>()(
         set({ isSyncing: true });
         try {
           const cart = await fetchCart(cartId);
+          if (cart === undefined) return; // API unavailable — preserve local cart
           if (!cart) {
             clearCart();
             return;
           }
+
           if (cart.totalQuantity === 0) {
             clearCart();
             return;
