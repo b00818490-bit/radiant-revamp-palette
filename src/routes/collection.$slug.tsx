@@ -35,55 +35,93 @@ export const Route = createFileRoute("/collection/$slug")({
   },
 });
 
-const LIP_HANDLES = [
-  "premium-matte-liquid-lipcolor",
-  "regular-matte-liquid-lipcolor",
-  "creme-moisturizing-lipstick",
-  "regular-moisturizing-lipstick",
-  "greyon-liquid-lip-gloss",
-  "lip-gloss-stick",
-  "lip-balm",
-];
-
-// Slug -> exact Shopify handles published on the storefront.
-const COLLECTION_HANDLES: Record<string, string[]> = {
-  lips: LIP_HANDLES,
-  "premium-matte-liquid-lipstick": ["premium-matte-liquid-lipcolor"],
-  "regular-matte-liquid-lipcolor": ["regular-matte-liquid-lipcolor"],
+/**
+ * Site slug -> real Shopify collection handle(s). Shopify owns membership,
+ * ordering and availability; the frontend only asks for the collection.
+ */
+const SHOPIFY_COLLECTIONS: Record<string, string[]> = {
+  all: ["products"],
+  "best-sellers": ["test"],
+  bestsellers: ["test"],
+  "best-selling": ["test"],
+  new: ["new-arrivals"],
+  "new-arrivals": ["new-arrivals"],
+  "under-300": ["products"],
+  lips: [
+    "liquid-lipstick",
+    "creme-moisturizing-lipstick",
+    "glossy-moisturizing-lipsticks",
+    "lip-gloss",
+    "lip-balm",
+  ],
+  "premium-matte-liquid-lipstick": ["matte-liquid-lipcolor"],
+  "regular-matte-liquid-lipcolor": ["regular-matte-liquid-lipstick"],
   "premium-moisturizing-lipstick": ["creme-moisturizing-lipstick"],
-  "regular-moisturizing-lipstick": ["regular-moisturizing-lipstick"],
-  "liquid-lip-gloss": ["greyon-liquid-lip-gloss"],
+  "regular-moisturizing-lipstick": ["glossy-moisturizing-lipsticks"],
+  "liquid-lip-gloss": ["liquid-lip-gloss"],
   "lip-gloss-stick": ["lip-gloss-stick"],
   "lip-balm": ["lip-balm"],
-  eyes: ["mascara", "greyon-smoky-eyeliner", "vacuum-precision-eyeliner-intense-black"],
-  "eye-makeup": ["mascara", "greyon-smoky-eyeliner", "vacuum-precision-eyeliner-intense-black"],
-  mascara: ["mascara"],
-  "greyon-smoky-eyeliner": ["greyon-smoky-eyeliner"],
-  "vacuum-precision-eyeliner-intense-black": ["vacuum-precision-eyeliner-intense-black"],
-  skincare: ["facial-oil", "anti-acne-facial-oil", "anti-ageing-facial-oil"],
-  "facial-oil": ["facial-oil", "anti-acne-facial-oil", "anti-ageing-facial-oil"],
-  "facial-oils": ["facial-oil", "anti-acne-facial-oil", "anti-ageing-facial-oil"],
-  "anti-acne-facial-oil": ["anti-acne-facial-oil"],
-  "anti-ageing-facial-oil": ["anti-ageing-facial-oil"],
+  "lip-gloss": ["lip-gloss"],
+  "liquid-lipstick": ["liquid-lipstick"],
+  eyes: ["eye-makeup"],
+  "eye-makeup": ["eye-makeup"],
+  skincare: ["facial-oil"],
+  "facial-oil": ["facial-oil"],
+  "facial-oils": ["facial-oil"],
+  "clean-beauty": ["clean-beauty"],
 };
 
+// Slugs that point at a single product rather than a Shopify collection.
+const SINGLE_PRODUCT_SLUGS: Record<string, string> = {
+  mascara: "mascara",
+  "greyon-smoky-eyeliner": "greyon-smoky-eyeliner",
+  "vacuum-precision-eyeliner-intense-black": "vacuum-precision-eyeliner-intense-black",
+  "anti-acne-facial-oil": "anti-acne-facial-oil",
+  "anti-ageing-facial-oil": "anti-ageing-facial-oil",
+};
 
 const BEST_SELLER_SLUGS = ["best-sellers", "bestsellers", "best-selling"];
 const NEW_SLUGS = ["new", "new-arrivals"];
 const UNDER_200_SLUGS = ["under-300"];
 
+/** Search fallback for slugs Shopify has no collection for. */
 function buildQuery(slug: string): string | undefined {
-  if (
-    slug === "all" ||
-    COLLECTION_HANDLES[slug] ||
-    BEST_SELLER_SLUGS.includes(slug) ||
-    NEW_SLUGS.includes(slug) ||
-    UNDER_200_SLUGS.includes(slug)
-  )
-    return undefined;
-  // Try product_type first, fall back to tag — Shopify OR handles both.
+  if (SHOPIFY_COLLECTIONS[slug] || SINGLE_PRODUCT_SLUGS[slug]) return undefined;
   const term = slug.replace(/-/g, " ");
   return `product_type:${term} OR tag:${term} OR title:${term}`;
+}
+
+async function loadCollection(slug: string): Promise<ShopifyProduct[]> {
+  const handles = SHOPIFY_COLLECTIONS[slug];
+  if (handles) {
+    const sortKey: CollectionSort = BEST_SELLER_SLUGS.includes(slug)
+      ? "BEST_SELLING"
+      : NEW_SLUGS.includes(slug)
+        ? "CREATED"
+        : "MANUAL";
+    const reverse = NEW_SLUGS.includes(slug);
+    const results = await Promise.all(
+      handles.map((h) => fetchCollectionByHandle(h, { sortKey, reverse })),
+    );
+    const seen = new Set<string>();
+    const merged: ShopifyProduct[] = [];
+    for (const c of results) {
+      for (const p of c?.products ?? []) {
+        if (seen.has(p.node.id)) continue;
+        seen.add(p.node.id);
+        merged.push(p);
+      }
+    }
+    return merged;
+  }
+
+  const single = SINGLE_PRODUCT_SLUGS[slug];
+  if (single) {
+    const all = await fetchProducts(100);
+    return all.filter((p) => p.node.handle === single);
+  }
+
+  return fetchProducts(50, buildQuery(slug));
 }
 
 function CollectionPage() {
@@ -101,27 +139,18 @@ function CollectionPage() {
           : isUnder200
             ? "Under ₹300"
             : titleize(slug);
-  const query = buildQuery(slug);
   const [sort, setSort] = useState<"featured" | "price-asc" | "price-desc" | "title">("featured");
 
   const { data: allProducts = [], isLoading } = useQuery({
-    queryKey: ["shopify-products", "collection", slug, query],
-    queryFn: () =>
-      isBestSellers ? fetchBestSellers(12) : isNew ? fetchNewest(12) : fetchProducts(50, query),
+    queryKey: ["shopify-collection", slug],
+    queryFn: () => loadCollection(slug),
     staleTime: 60_000,
   });
 
-
-  const handles = COLLECTION_HANDLES[slug];
-  const byHandle: ShopifyProduct[] = handles
-    ? handles
-        .map((h) => allProducts.find((p: ShopifyProduct) => p.node.handle === h))
-        .filter((p): p is ShopifyProduct => Boolean(p))
+  const products = isUnder200
+    ? allProducts.filter((p) => parseFloat(p.node.priceRange.minVariantPrice.amount) < 300)
     : allProducts;
 
-  const products = isUnder200
-    ? byHandle.filter((p) => parseFloat(p.node.priceRange.minVariantPrice.amount) < 300)
-    : byHandle;
 
 
 
