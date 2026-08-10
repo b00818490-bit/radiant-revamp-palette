@@ -72,14 +72,9 @@ const PILLARS = [
 
 const TIMELINE = [
   {
-    year: "1987",
-    title: "Where it began",
-    body: "Greyon's parent company is founded by Mr Sanjay Jain, laying the manufacturing foundation.",
-  },
-  {
     year: "2018",
-    title: "Greygon Cosmetics LLP",
-    body: "Mr Neeraj Jain and Mr Amit Pasricha join as promoters. The new enterprise is founded in New Delhi.",
+    title: "A new enterprise is founded",
+    body: "Greygon Cosmetics LLP is established in New Delhi.",
   },
   {
     year: "Today",
