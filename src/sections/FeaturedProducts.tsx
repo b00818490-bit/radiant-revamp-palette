@@ -12,6 +12,8 @@ type Settings = {
   layout: "grid-4" | "bento";
   query?: string;
   limit?: number;
+  /** Collection the eyebrow links to — supplied by src/content/campaign.ts. */
+  collection_slug?: string;
 };
 
 export const schema: SectionSchema = {
@@ -38,12 +40,14 @@ export const schema: SectionSchema = {
       default: "",
     },
     { id: "limit", type: "range", label: "Products to show", default: 4, min: 2, max: 12, step: 1 },
+    { id: "collection_slug", type: "text", label: "Featured collection", default: "best-sellers" },
   ],
 };
 
 export function Section({ settings }: SectionProps<Settings>) {
   const limit = settings.limit ?? 4;
   const query = settings.query?.trim() || undefined;
+  const collectionSlug = settings.collection_slug?.trim() || "best-sellers";
 
   const { data: products = [], isLoading } = useQuery({
     queryKey: ["shopify-products", "featured", limit, query],
@@ -67,7 +71,7 @@ export function Section({ settings }: SectionProps<Settings>) {
           {settings.eyebrow && (
             <Link
               to="/collection/$slug"
-              params={{ slug: "best-sellers" }}
+              params={{ slug: collectionSlug }}
               className="mb-3 inline-block text-[11px] uppercase tracking-[0.28em] text-accent transition-opacity hover:opacity-70"
             >
               {settings.eyebrow}
