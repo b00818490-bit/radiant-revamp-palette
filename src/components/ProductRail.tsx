@@ -40,13 +40,13 @@ export function ProductRail({
                 params={{ slug: node.handle }}
                 className="group min-w-[62%] sm:min-w-[42%] lg:min-w-0 snap-start"
               >
-                <div className="aspect-[3/4] overflow-hidden bg-muted">
+                <div className="aspect-square overflow-hidden bg-muted">
                   {image && (
                     <img
                       src={image.url}
                       alt={image.altText ?? node.title}
                       loading="lazy"
-                      className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   )}
                 </div>

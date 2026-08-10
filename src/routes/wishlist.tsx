@@ -118,14 +118,14 @@ function WishlistPage() {
                 <Link
                   to="/product/$slug"
                   params={{ slug: item.handle }}
-                  className="block relative aspect-[3/4] overflow-hidden bg-muted"
+                  className="block relative aspect-square overflow-hidden bg-muted"
                 >
                   {item.image && (
                     <img
                       src={item.image}
                       alt={item.title}
                       loading="lazy"
-                      className="h-full w-full object-contain transition duration-700 group-hover:scale-[1.04]"
+                      className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]"
                     />
                   )}
                 </Link>

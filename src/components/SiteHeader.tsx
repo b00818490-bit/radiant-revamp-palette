@@ -482,7 +482,7 @@ function MegaPanel({
         <img
           src={config.feature.img}
           alt={config.feature.title}
-          className="h-full w-full object-contain transition duration-500 group-hover:scale-105"
+          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#3B3B3D]/70 via-transparent" />
         <div className="absolute inset-x-4 bottom-4 text-white">
@@ -593,7 +593,7 @@ function SearchDropdown({
                       <img
                         src={img.url}
                         alt=""
-                        className="h-12 w-12 shrink-0 rounded-sm object-contain"
+                        className="h-12 w-12 shrink-0 rounded-sm object-cover"
                       />
                     )}
                     <div className="min-w-0 flex-1">

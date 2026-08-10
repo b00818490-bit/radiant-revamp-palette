@@ -129,7 +129,7 @@ function ProductCard({ product }: { product: ShopifyProduct }) {
   return (
     <Link to="/product/$slug" params={{ slug: node.handle }} className="group">
       <div
-        className="relative mb-4 overflow-hidden aspect-[3/4]"
+        className="relative mb-4 overflow-hidden aspect-square"
         style={{ backgroundColor: "rgba(130,130,132,0.2)" }}
       >
 
@@ -138,7 +138,7 @@ function ProductCard({ product }: { product: ShopifyProduct }) {
             src={img.url}
             alt={img.altText ?? node.title}
             loading="lazy"
-            className="h-full w-full object-contain transition-transform duration-700 group-hover:scale-105"
+            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
         )}
         <span

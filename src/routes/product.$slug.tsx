@@ -333,7 +333,7 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
                   <img
                     src={g.url}
                     alt={g.altText ?? ""}
-                    className="h-full w-full object-contain"
+                    className="h-full w-full object-cover"
                     loading="lazy"
                   />
                 </button>
@@ -341,13 +341,13 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
             </div>
           )}
           <div
-            className={`${images.length > 1 ? "col-span-12 lg:col-span-10" : "col-span-12"} bg-muted aspect-[4/5] overflow-hidden`}
+            className={`${images.length > 1 ? "col-span-12 lg:col-span-10" : "col-span-12"} bg-muted aspect-square overflow-hidden`}
           >
             {images[activeImg] && (
               <img
                 src={images[activeImg].url}
                 alt={images[activeImg].altText ?? product.title}
-                className="h-full w-full object-contain"
+                className="h-full w-full object-cover"
               />
             )}
           </div>

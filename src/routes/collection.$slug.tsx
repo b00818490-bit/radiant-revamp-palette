@@ -281,13 +281,13 @@ function ProductCard({ product }: { product: ShopifyProduct }) {
 
   return (
     <Link to="/product/$slug" params={{ slug: node.handle }} className="group">
-      <div className="relative mb-4 aspect-[4/5] overflow-hidden bg-muted">
+      <div className="relative mb-4 aspect-square overflow-hidden bg-muted">
         {img && (
           <img
             src={img.url}
             alt={img.altText ?? node.title}
             loading="lazy"
-            className="h-full w-full object-contain transition-transform duration-700 group-hover:scale-105"
+            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
         )}
         {node.variants.edges.length === 1 && firstVariant?.availableForSale && (
