@@ -318,8 +318,17 @@ export function SiteHeader({
             )}
           </Link>
 
-          {/* Right: search + utility */}
+          {/* Right: best sellers + search + utility */}
           <div className="flex items-center justify-end gap-3 sm:gap-4">
+            <Link
+              to="/collection/$slug"
+              params={{ slug: "best-sellers" }}
+              onMouseEnter={() => setOpenMega(null)}
+              className="hidden lg:inline-flex items-center gap-1.5 text-[13px] uppercase tracking-[0.14em] text-[#9E2A5C] transition-colors hover:text-[#3B3B3D]"
+            >
+              <TrendingUp className="h-3.5 w-3.5" /> Best sellers
+            </Link>
+
             <div ref={searchRef} className="relative">
               <button
                 onClick={() => setSearchOpen(true)}
