@@ -4,7 +4,14 @@ import { useQuery } from "@tanstack/react-query";
 import { Loader2, ShoppingBag, ChevronDown } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Footer } from "@/components/Footer";
-import { fetchProducts, fetchBestSellers, fetchNewest, formatMoney, type ShopifyProduct } from "@/lib/shopify";
+import {
+  fetchProducts,
+  fetchCollectionByHandle,
+  formatMoney,
+  type CollectionSort,
+  type ShopifyProduct,
+} from "@/lib/shopify";
+
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 
