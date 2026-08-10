@@ -5,6 +5,9 @@ import { SectionRenderer } from "@/theme/SectionRenderer";
 import { resolveAssets } from "@/theme/assets";
 import type { PageTemplate } from "@/theme/types";
 import indexTemplate from "@/templates/index.json";
+import { PromoBanner } from "@/components/PromoBanner";
+import { applyCampaign } from "@/content/applyCampaign";
+
 
 /**
  * The home route is now a thin renderer of `templates/index.json`.
