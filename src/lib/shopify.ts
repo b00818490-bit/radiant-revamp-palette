@@ -314,10 +314,12 @@ export interface CartSnapshot {
 }
 
 /** Authoritative cart totals (subtotal, tax, discounts) from Shopify. */
-export async function fetchCart(cartId: string): Promise<CartSnapshot | null> {
+export async function fetchCart(cartId: string): Promise<CartSnapshot | null | undefined> {
   const res = await storefrontApiRequest<{ cart: CartSnapshot | null }>(CART_QUERY, { id: cartId });
-  return res?.data?.cart ?? null;
+  if (!res) return undefined; // request failed — keep the local cart intact
+  return res.data?.cart ?? null;
 }
+
 
 const CART_BUYER_IDENTITY_MUTATION = `
   mutation cartBuyerIdentityUpdate($cartId: ID!, $buyerIdentity: CartBuyerIdentityInput!) {
