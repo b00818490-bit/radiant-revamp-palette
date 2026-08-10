@@ -31,6 +31,8 @@ import {
   fetchProducts,
   fetchBestSellers,
   formatMoney,
+  getReviewSummary,
+
   type ShopifyProduct,
   type ShopifyProductNode,
   type ShopifyVariant,
