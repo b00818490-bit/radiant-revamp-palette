@@ -227,11 +227,12 @@ function ShadeQuizPage() {
 
 
       {done && (
-        <section className="mt-10">
+        <section className="mt-12">
           <div className="text-[11px] uppercase tracking-[0.28em] text-berry">Your matches</div>
-          <h2 className="mt-3 font-display text-2xl text-charcoal sm:text-3xl">
+          <h2 className="mt-3 font-display text-3xl text-charcoal sm:text-4xl lg:text-5xl">
             These shades were made for you.
           </h2>
+
 
           {isLoading && (
             <div className="mt-8 flex items-center gap-2 text-fog">
