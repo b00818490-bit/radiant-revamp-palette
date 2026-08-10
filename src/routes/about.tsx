@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import heroImg from "@/assets/hero.jpg";
 import ingredientImg from "@/assets/ingredient.jpg";
-import lipsImg from "@/assets/cat-lips.jpg";
+
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -195,8 +195,8 @@ function AboutPage() {
           </div>
           <div className="lg:col-span-5">
             <img
-              src={lipsImg}
-              alt="Greyon lip shades across skin tones"
+              src="https://greyon.co/cdn/shop/files/Look_1_0a25c191-bcc0-4c34-b26c-d499f0c94972.png"
+              alt="Greyon campaign model wearing a full Greyon look"
               className="h-full w-full object-cover"
               loading="lazy"
             />
