@@ -1,4 +1,5 @@
-import { Instagram } from "lucide-react";
+import { Instagram, ChevronLeft, ChevronRight } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import type { SectionProps, SectionSchema } from "@/theme/types";
 import { getInstagramFeed } from "@/lib/instagram.functions";
