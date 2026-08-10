@@ -5,7 +5,6 @@ import { SectionRenderer } from "@/theme/SectionRenderer";
 import { resolveAssets } from "@/theme/assets";
 import type { PageTemplate } from "@/theme/types";
 import indexTemplate from "@/templates/index.json";
-import { PromoBanner } from "@/components/PromoBanner";
 import { applyCampaign } from "@/content/applyCampaign";
 
 
@@ -31,7 +30,6 @@ function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader announcement={false} />
-      <PromoBanner />
       <main>
         <SectionRenderer template={template} />
       </main>

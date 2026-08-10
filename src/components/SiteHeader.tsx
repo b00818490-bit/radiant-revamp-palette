@@ -26,6 +26,9 @@ import {
 } from "lucide-react";
 
 import logoAsset from "@/assets/greyon-logo.png.asset.json";
+import { PromoBanner } from "@/components/PromoBanner";
+import { campaignContent } from "@/content/campaign";
+import { fillTokens } from "@/content/applyCampaign";
 import { useCartStore } from "@/stores/cartStore";
 import { useWishlistStore } from "@/stores/wishlistStore";
 
@@ -171,7 +174,7 @@ const POPULAR = [
 
 
 export function SiteHeader({
-  announcement = "Free shipping on orders above ₹599 · Lab tested · Made in India",
+  announcement = fillTokens(campaignContent.header_announcement),
   pro = false,
 }: {
   announcement?: string | false;
@@ -240,6 +243,8 @@ export function SiteHeader({
           </div>
         </div>
       )}
+
+      <PromoBanner />
 
       <header
         className="sticky top-0 z-40 border-b border-[#e6ded2] bg-[#FAF6F1]/95 backdrop-blur"
