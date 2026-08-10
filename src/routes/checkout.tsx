@@ -303,7 +303,7 @@ function CheckoutPage() {
                           <img
                             src={img.url}
                             alt={img.altText ?? item.product.node.title}
-                            className="h-full w-full object-cover"
+                            className="h-full w-full object-contain"
                           />
                         )}
                       </div>
