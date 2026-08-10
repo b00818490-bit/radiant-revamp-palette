@@ -303,22 +303,25 @@ function ResultCard({
   };
 
   return (
-    <div className="flex flex-col gap-4 border border-border p-4 sm:flex-row sm:items-center">
-      <span
-        className="h-16 w-16 flex-shrink-0 rounded-full"
+    <div className="flex flex-col gap-5 border border-border p-6 sm:flex-row sm:items-center sm:p-7">
+      <Link
+        to="/product/$slug"
+        params={{ slug: LIPSTICK_HANDLE }}
+        search={{ variant: shade.code }}
+        aria-label={`View ${shade.name} ${shade.code}`}
+        className="h-20 w-20 flex-shrink-0 rounded-full ring-1 ring-black/5 sm:h-24 sm:w-24"
         style={{ backgroundColor: shade.hex }}
-        aria-hidden
       />
       <div className="flex-1">
         {top && (
           <div className="text-[10px] uppercase tracking-[0.22em] text-berry">Best match</div>
         )}
-        <div className="font-display text-xl text-charcoal">
+        <div className="font-display text-2xl text-charcoal">
           {shade.name} · {shade.code}
         </div>
-        <div className="mt-0.5 text-xs text-fog">Premium Matte Liquid Lipstick</div>
+        <div className="mt-0.5 text-sm text-fog">Premium Matte Liquid Lipstick</div>
         {variant && (
-          <div className="mt-1 text-sm text-charcoal">
+          <div className="mt-1 text-base text-charcoal">
             {formatMoney(variant.price.amount, variant.price.currencyCode)}
           </div>
         )}
@@ -328,7 +331,7 @@ function ResultCard({
           type="button"
           onClick={handleAdd}
           disabled={!variant || !variant.availableForSale || adding || isLoading}
-          className="inline-flex items-center justify-center gap-2 bg-charcoal px-6 py-3 text-[12px] uppercase tracking-[0.18em] text-ivory transition-opacity hover:opacity-90 disabled:opacity-40"
+          className="inline-flex items-center justify-center gap-2 bg-charcoal px-7 py-3.5 text-[12px] uppercase tracking-[0.18em] text-ivory transition-opacity hover:opacity-90 disabled:opacity-40"
         >
           {adding ? (
             <Loader2 className="h-4 w-4 animate-spin" />
@@ -342,11 +345,13 @@ function ResultCard({
         <Link
           to="/product/$slug"
           params={{ slug: LIPSTICK_HANDLE }}
-          className="text-[11px] uppercase tracking-[0.18em] text-fog hover:text-charcoal"
+          search={{ variant: shade.code }}
+          className="inline-flex items-center gap-2 border border-charcoal px-7 py-3 text-[11px] uppercase tracking-[0.18em] text-charcoal transition-colors hover:bg-charcoal hover:text-ivory"
         >
-          View product
+          Shop this shade
         </Link>
       </div>
     </div>
   );
+
 }
