@@ -69,8 +69,17 @@ const EMPTY: Form = {
 
 function CheckoutPage() {
   const navigate = useNavigate();
-  const { items, isLoading, isSyncing, updateQuantity, removeItem, getCheckoutUrl, syncCart } =
-    useCartStore();
+  const {
+    items,
+    isLoading,
+    isSyncing,
+    updateQuantity,
+    removeItem,
+    getCheckoutUrl,
+    syncCart,
+    cost,
+    setBuyerIdentity,
+  } = useCartStore();
   const [form, setForm] = useState<Form>(EMPTY);
   const [session, setSession] = useState<Session | null>(null);
 
@@ -102,8 +111,12 @@ function CheckoutPage() {
     });
   }, []);
 
-  const currency = items[0]?.price.currencyCode ?? "INR";
-  const subtotal = items.reduce((sum, i) => sum + parseFloat(i.price.amount) * i.quantity, 0);
+  // Totals come from Shopify's cart cost object; local math is only a
+  // pre-sync fallback so the UI never flashes empty.
+  const currency = cost?.subtotalAmount.currencyCode ?? items[0]?.price.currencyCode ?? "INR";
+  const subtotal = cost
+    ? parseFloat(cost.subtotalAmount.amount)
+    : items.reduce((sum, i) => sum + parseFloat(i.price.amount) * i.quantity, 0);
   const shipping = subtotal >= FREE_SHIPPING_THRESHOLD || subtotal === 0 ? 0 : 49;
   const total = subtotal + shipping;
 
@@ -130,7 +143,26 @@ function CheckoutPage() {
         pincode: form.pincode,
       });
     }
-    const target = new URL(url);
+    // Hand the buyer details to Shopify so its checkout is pre-filled and
+    // shipping/taxes are calculated against the real delivery address.
+    const [firstName, ...restName] = form.full_name.trim().split(/\s+/);
+    await setBuyerIdentity({
+      email: form.email || undefined,
+      phone: form.phone || undefined,
+      countryCode: "IN",
+      deliveryAddress: {
+        firstName: firstName || undefined,
+        lastName: restName.join(" ") || undefined,
+        address1: form.address1 || undefined,
+        address2: form.address2 || undefined,
+        city: form.city || undefined,
+        province: form.state || undefined,
+        zip: form.pincode || undefined,
+        country: "IN",
+        phone: form.phone || undefined,
+      },
+    });
+    const target = new URL(getCheckoutUrl() ?? url);
     if (form.email) target.searchParams.set("checkout[email]", form.email);
     window.open(target.toString(), "_blank");
   };
