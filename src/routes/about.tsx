@@ -8,7 +8,7 @@ import {
   FlaskConical,
   ArrowRight,
 } from "lucide-react";
-import heroImg from "@/assets/hero.jpg";
+import modelAsset from "@/assets/greyon-model.png.asset.json";
 import ingredientImg from "@/assets/ingredient.jpg";
 
 
@@ -126,10 +126,11 @@ function AboutPage() {
       {/* Hero */}
       <section className="relative overflow-hidden bg-charcoal text-ivory">
         <img
-          src={heroImg}
-          alt="Greyon makeup editorial"
-          className="absolute inset-0 h-full w-full object-cover opacity-25"
+          src={modelAsset.url}
+          alt="Greyon campaign model wearing a full Greyon look"
+          className="absolute inset-0 h-full w-full object-cover object-top opacity-30"
         />
+
         <div className="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/80 to-transparent" />
         <div className="relative mx-auto max-w-[1200px] px-5 py-24 sm:px-8 lg:py-32">
           <div className="text-[11px] uppercase tracking-[0.28em] text-gold">About Greyon</div>
@@ -195,7 +196,7 @@ function AboutPage() {
           </div>
           <div className="lg:col-span-5">
             <img
-              src="https://greyon.co/cdn/shop/files/Look_1_0a25c191-bcc0-4c34-b26c-d499f0c94972.png"
+              src={modelAsset.url}
               alt="Greyon campaign model wearing a full Greyon look"
               className="h-full w-full object-cover"
               loading="lazy"
