@@ -287,6 +287,23 @@ export function SiteHeader({
               >
                 <TrendingUp className="h-3.5 w-3.5" /> Best sellers
               </Link>
+              <Link
+                to="/"
+                onMouseEnter={() => setOpenMega(null)}
+                activeOptions={{ exact: true }}
+                activeProps={{ className: "py-2 text-[#9E2A5C] transition-colors hover:text-[#9E2A5C]" }}
+                inactiveProps={{ className: "py-2 text-[#3B3B3D] transition-colors hover:text-[#9E2A5C]" }}
+              >
+                Home
+              </Link>
+              <Link
+                to="/about"
+                onMouseEnter={() => setOpenMega(null)}
+                activeProps={{ className: "py-2 text-[#9E2A5C] transition-colors hover:text-[#9E2A5C]" }}
+                inactiveProps={{ className: "py-2 text-[#3B3B3D] transition-colors hover:text-[#9E2A5C]" }}
+              >
+                Our Story
+              </Link>
             </nav>
           </div>
 
@@ -712,6 +729,27 @@ function MobileDrawer({ onClose }: { onClose: () => void }) {
                 )}
               </li>
             ))}
+            <li className="border-t border-[#e6ded2]">
+              <Link
+                to="/"
+                onClick={onClose}
+                activeOptions={{ exact: true }}
+                activeProps={{ className: "flex w-full items-center px-5 py-4 text-sm uppercase tracking-widest text-[#9E2A5C]" }}
+                inactiveProps={{ className: "flex w-full items-center px-5 py-4 text-sm uppercase tracking-widest text-[#3B3B3D] hover:text-[#9E2A5C]" }}
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/about"
+                onClick={onClose}
+                activeProps={{ className: "flex w-full items-center px-5 py-4 text-sm uppercase tracking-widest text-[#9E2A5C]" }}
+                inactiveProps={{ className: "flex w-full items-center px-5 py-4 text-sm uppercase tracking-widest text-[#3B3B3D] hover:text-[#9E2A5C]" }}
+              >
+                Our Story
+              </Link>
+            </li>
           </ul>
         </div>
 
