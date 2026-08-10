@@ -223,6 +223,9 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
     [product.options],
   );
 
+  const reviewSummary = useMemo(() => getReviewSummary(product), [product]);
+
+
   const price = selectedVariant?.price ?? product.priceRange.minVariantPrice;
   const compareAtRaw = selectedVariant?.compareAtPrice;
   const compareAt =
