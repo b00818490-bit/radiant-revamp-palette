@@ -125,7 +125,7 @@ function WishlistPage() {
                       src={item.image}
                       alt={item.title}
                       loading="lazy"
-                      className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]"
+                      className="h-full w-full object-contain transition duration-700 group-hover:scale-[1.04]"
                     />
                   )}
                 </Link>
