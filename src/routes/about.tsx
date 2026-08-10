@@ -8,7 +8,7 @@ import {
   FlaskConical,
   ArrowRight,
 } from "lucide-react";
-import heroImg from "@/assets/hero.jpg";
+import modelAsset from "@/assets/greyon-model.png.asset.json";
 import ingredientImg from "@/assets/ingredient.jpg";
 
 
