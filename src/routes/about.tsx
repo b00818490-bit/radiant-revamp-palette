@@ -10,6 +10,9 @@ import {
 } from "lucide-react";
 import modelAsset from "@/assets/greyon-model.png.asset.json";
 import ingredientImg from "@/assets/ingredient.jpg";
+import { SiteHeader } from "@/components/SiteHeader";
+import { Footer } from "@/components/Footer";
+
 
 
 export const Route = createFileRoute("/about")({
