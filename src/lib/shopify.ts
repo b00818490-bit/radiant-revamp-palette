@@ -209,8 +209,72 @@ export async function fetchNewest(first = 12): Promise<ShopifyProduct[]> {
   return res?.data?.products?.edges ?? [];
 }
 
+/* --------------------------- Collection queries --------------------------- */
 
+const COLLECTIONS_QUERY = `
+  query GetCollections($first: Int!) {
+    collections(first: $first) {
+      edges { node { handle title description image { url altText } } }
+    }
+  }
+`;
 
+/** Every collection published to the storefront sales channel. */
+export async function fetchCollections(first = 60): Promise<ShopifyCollection[]> {
+  const res = await storefrontApiRequest<{
+    collections: { edges: Array<{ node: ShopifyCollection }> };
+  }>(COLLECTIONS_QUERY, { first });
+  return res?.data?.collections?.edges?.map((e) => e.node) ?? [];
+}
+
+const COLLECTION_BY_HANDLE_QUERY = `
+  query GetCollection($handle: String!, $first: Int!, $sortKey: ProductCollectionSortKeys, $reverse: Boolean) {
+    collection(handle: $handle) {
+      handle
+      title
+      description
+      image { url altText }
+      products(first: $first, sortKey: $sortKey, reverse: $reverse) {
+        edges { node { ${PRODUCT_FIELDS} } }
+      }
+    }
+  }
+`;
+
+export type CollectionSort = "MANUAL" | "BEST_SELLING" | "CREATED" | "PRICE" | "TITLE";
+
+export interface CollectionWithProducts extends ShopifyCollection {
+  products: ShopifyProduct[];
+}
+
+/**
+ * Live collection read straight from Shopify — membership, order and
+ * availability are all owned by the store.
+ */
+export async function fetchCollectionByHandle(
+  handle: string,
+  opts: { first?: number; sortKey?: CollectionSort; reverse?: boolean } = {},
+): Promise<CollectionWithProducts | null> {
+  const res = await storefrontApiRequest<{
+    collection:
+      | (ShopifyCollection & { products: { edges: ShopifyProduct[] } })
+      | null;
+  }>(COLLECTION_BY_HANDLE_QUERY, {
+    handle,
+    first: opts.first ?? 100,
+    sortKey: opts.sortKey ?? "MANUAL",
+    reverse: opts.reverse ?? false,
+  });
+  const c = res?.data?.collection;
+  if (!c) return null;
+  return {
+    handle: c.handle,
+    title: c.title,
+    description: c.description,
+    image: c.image ?? null,
+    products: c.products?.edges ?? [],
+  };
+}
 
 export async function fetchProductByHandle(handle: string): Promise<ShopifyProductNode | null> {
   const res = await storefrontApiRequest<{ product: ShopifyProductNode | null }>(
@@ -222,11 +286,85 @@ export async function fetchProductByHandle(handle: string): Promise<ShopifyProdu
 
 /* --------------------------------- Cart ---------------------------------- */
 
+const CART_FIELDS = `
+  id
+  totalQuantity
+  checkoutUrl
+  cost {
+    subtotalAmount { amount currencyCode }
+    totalAmount { amount currencyCode }
+    totalTaxAmount { amount currencyCode }
+    totalDutyAmount { amount currencyCode }
+  }
+  discountCodes { code applicable }
+`;
+
 export const CART_QUERY = `
   query cart($id: ID!) {
-    cart(id: $id) { id totalQuantity }
+    cart(id: $id) { ${CART_FIELDS} }
   }
 `;
+
+export interface CartSnapshot {
+  id: string;
+  totalQuantity: number;
+  checkoutUrl: string;
+  cost: CartCost;
+  discountCodes: CartDiscount[];
+}
+
+/** Authoritative cart totals (subtotal, tax, discounts) from Shopify. */
+export async function fetchCart(cartId: string): Promise<CartSnapshot | null> {
+  const res = await storefrontApiRequest<{ cart: CartSnapshot | null }>(CART_QUERY, { id: cartId });
+  return res?.data?.cart ?? null;
+}
+
+const CART_BUYER_IDENTITY_MUTATION = `
+  mutation cartBuyerIdentityUpdate($cartId: ID!, $buyerIdentity: CartBuyerIdentityInput!) {
+    cartBuyerIdentityUpdate(cartId: $cartId, buyerIdentity: $buyerIdentity) {
+      cart { ${CART_FIELDS} }
+      userErrors { field message }
+    }
+  }
+`;
+
+export interface BuyerIdentityInput {
+  email?: string;
+  phone?: string;
+  countryCode?: string;
+  deliveryAddress?: {
+    firstName?: string;
+    lastName?: string;
+    address1?: string;
+    address2?: string;
+    city?: string;
+    province?: string;
+    zip?: string;
+    country?: string;
+    phone?: string;
+  };
+}
+
+/** Attaches buyer email/phone/address to the Shopify cart before handoff. */
+export async function updateCartBuyerIdentity(
+  cartId: string,
+  buyer: BuyerIdentityInput,
+): Promise<CartSnapshot | null> {
+  const { deliveryAddress, ...rest } = buyer;
+  const buyerIdentity: Record<string, unknown> = { ...rest };
+  if (deliveryAddress) {
+    buyerIdentity["deliveryAddressPreferences"] = [{ deliveryAddress }];
+  }
+  const res = await storefrontApiRequest<{
+    cartBuyerIdentityUpdate: { cart: CartSnapshot | null; userErrors: UserError[] };
+  }>(CART_BUYER_IDENTITY_MUTATION, { cartId, buyerIdentity });
+  const payload = res?.data?.cartBuyerIdentityUpdate;
+  if (payload?.userErrors?.length) {
+    console.error("Buyer identity update failed:", payload.userErrors);
+  }
+  return payload?.cart ?? null;
+}
+
 
 const CART_CREATE_MUTATION = `
   mutation cartCreate($input: CartInput!) {
