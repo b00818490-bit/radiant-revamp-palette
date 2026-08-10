@@ -165,7 +165,7 @@ export function Section({ settings, blocks = [] }: SectionProps<Settings, BlockS
                 <img
                   src={settings.overlay_product_image}
                   alt=""
-                  className="h-20 w-20 object-cover"
+                  className="h-20 w-20 object-contain"
                   loading="lazy"
                 />
               )}

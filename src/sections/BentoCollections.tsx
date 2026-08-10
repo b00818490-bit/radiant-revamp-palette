@@ -95,7 +95,7 @@ export function Section({ settings, blocks = [] }: SectionProps<Settings, BlockS
                 src={b.settings.image}
                 alt={`Shop ${b.settings.title}`}
                 loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover opacity-90 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
+                className="absolute inset-0 h-full w-full object-contain p-4 opacity-90 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
               />
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
