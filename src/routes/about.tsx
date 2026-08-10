@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import heroImg from "@/assets/hero.jpg";
 import ingredientImg from "@/assets/ingredient.jpg";
-import lipsImg from "@/assets/cat-lips.jpg";
+
 
 export const Route = createFileRoute("/about")({
   head: () => ({
