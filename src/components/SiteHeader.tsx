@@ -287,6 +287,23 @@ export function SiteHeader({
               >
                 <TrendingUp className="h-3.5 w-3.5" /> Best sellers
               </Link>
+              <Link
+                to="/"
+                onMouseEnter={() => setOpenMega(null)}
+                activeOptions={{ exact: true }}
+                activeProps={{ className: "py-2 text-[#9E2A5C] transition-colors hover:text-[#9E2A5C]" }}
+                inactiveProps={{ className: "py-2 text-[#3B3B3D] transition-colors hover:text-[#9E2A5C]" }}
+              >
+                Home
+              </Link>
+              <Link
+                to="/about"
+                onMouseEnter={() => setOpenMega(null)}
+                activeProps={{ className: "py-2 text-[#9E2A5C] transition-colors hover:text-[#9E2A5C]" }}
+                inactiveProps={{ className: "py-2 text-[#3B3B3D] transition-colors hover:text-[#9E2A5C]" }}
+              >
+                Our Story
+              </Link>
             </nav>
           </div>
 
