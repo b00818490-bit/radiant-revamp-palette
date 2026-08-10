@@ -49,6 +49,57 @@ export function Section({ settings, blocks = [] }: SectionProps<Settings, BlockS
       ? livePosts.map((p) => ({ image: p.image, url: p.link, alt: p.alt }))
       : blocks.map((b) => b.settings);
 
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  const scrollToIndex = useCallback((i: number) => {
+    const el = trackRef.current;
+    if (!el) return;
+    const child = el.children[i] as HTMLElement | undefined;
+    if (child) el.scrollTo({ left: child.offsetLeft - el.offsetLeft, behavior: "smooth" });
+  }, []);
+
+  const nudge = useCallback(
+    (dir: 1 | -1) => {
+      const next = (active + dir + items.length) % items.length;
+      setActive(next);
+      scrollToIndex(next);
+    },
+    [active, items.length, scrollToIndex],
+  );
+
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      const children = Array.from(el.children) as HTMLElement[];
+      let best = 0;
+      let bestDist = Infinity;
+      children.forEach((c, i) => {
+        const d = Math.abs(c.offsetLeft - el.offsetLeft - el.scrollLeft);
+        if (d < bestDist) {
+          bestDist = d;
+          best = i;
+        }
+      });
+      setActive(best);
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, [items.length]);
+
+  useEffect(() => {
+    if (paused || items.length < 2) return;
+    const id = window.setInterval(() => {
+      const next = (active + 1) % items.length;
+      setActive(next);
+      scrollToIndex(next);
+    }, 4000);
+    return () => window.clearInterval(id);
+  }, [active, paused, items.length, scrollToIndex]);
+
+
   return (
     <section className="mx-auto max-w-[1440px] bg-[var(--color-charcoal)] px-5 pt-10 pb-16 sm:px-8 lg:pt-14 lg:pb-24">
       <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
