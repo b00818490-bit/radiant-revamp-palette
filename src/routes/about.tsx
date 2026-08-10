@@ -332,6 +332,9 @@ function AboutPage() {
           Shop bestsellers <ArrowRight className="h-4 w-4" />
         </Link>
       </section>
-    </main>
+      </main>
+      <Footer />
+    </div>
+
   );
 }
