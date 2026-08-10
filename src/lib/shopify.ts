@@ -20,6 +20,7 @@ export interface ShopifyVariant {
   price: { amount: string; currencyCode: string };
   compareAtPrice?: { amount: string; currencyCode: string } | null;
   availableForSale: boolean;
+  currentlyNotInStock?: boolean;
   sku?: string | null;
   selectedOptions: Array<{ name: string; value: string }>;
 }
@@ -32,6 +33,7 @@ export interface ShopifyProductNode {
   vendor?: string;
   productType?: string;
   tags?: string[];
+  availableForSale?: boolean;
   priceRange: { minVariantPrice: { amount: string; currencyCode: string } };
   images: { edges: Array<{ node: ShopifyImage }> };
   variants: { edges: Array<{ node: ShopifyVariant }> };
@@ -41,6 +43,31 @@ export interface ShopifyProductNode {
 export interface ShopifyProduct {
   node: ShopifyProductNode;
 }
+
+export interface ShopifyCollection {
+  handle: string;
+  title: string;
+  description: string;
+  image?: ShopifyImage | null;
+}
+
+export interface MoneyV2 {
+  amount: string;
+  currencyCode: string;
+}
+
+export interface CartCost {
+  subtotalAmount: MoneyV2;
+  totalAmount: MoneyV2;
+  totalTaxAmount?: MoneyV2 | null;
+  totalDutyAmount?: MoneyV2 | null;
+}
+
+export interface CartDiscount {
+  code: string;
+  applicable: boolean;
+}
+
 
 export async function storefrontApiRequest<T = unknown>(
   query: string,
