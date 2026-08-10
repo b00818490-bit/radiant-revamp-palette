@@ -111,6 +111,7 @@ const PRODUCT_FIELDS = `
   vendor
   productType
   tags
+  availableForSale
   priceRange { minVariantPrice { amount currencyCode } }
   images(first: 8) { edges { node { url altText } } }
   variants(first: 20) {
@@ -121,7 +122,9 @@ const PRODUCT_FIELDS = `
         price { amount currencyCode }
         compareAtPrice { amount currencyCode }
         availableForSale
+        currentlyNotInStock
         sku
+
         selectedOptions { name value }
       }
     }
