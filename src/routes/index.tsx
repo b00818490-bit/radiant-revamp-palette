@@ -23,10 +23,12 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-  const template = resolveAssets(indexTemplate) as PageTemplate;
+  // Content comes from src/content/campaign.ts; the template supplies the design.
+  const template = resolveAssets(applyCampaign(indexTemplate as PageTemplate)) as PageTemplate;
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader announcement={false} />
+      <PromoBanner />
       <main>
         <SectionRenderer template={template} />
       </main>
@@ -34,3 +36,4 @@ function Home() {
     </div>
   );
 }
+
