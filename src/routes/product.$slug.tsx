@@ -427,8 +427,14 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
                       return (
                         <button
                           key={value}
-                          disabled={!matchingVariant}
+                          disabled={!matchingVariant || !matchingVariant.availableForSale}
+                          title={
+                            matchingVariant && !matchingVariant.availableForSale
+                              ? "Sold out"
+                              : undefined
+                          }
                           onClick={() => matchingVariant && setSelectedVariant(matchingVariant)}
+
                           className={`px-4 py-2 text-xs border transition ${
                             isActive
                               ? "border-charcoal bg-charcoal text-ivory"

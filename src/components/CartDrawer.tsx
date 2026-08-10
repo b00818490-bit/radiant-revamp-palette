@@ -21,6 +21,7 @@ export function CartDrawer() {
     updateQuantity,
     removeItem,
     syncCart,
+    cost,
   } = useCartStore();
 
   useEffect(() => {
@@ -28,11 +29,11 @@ export function CartDrawer() {
   }, [isOpen, syncCart]);
 
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
-  const currency = items[0]?.price.currencyCode ?? "USD";
-  const totalPrice = items.reduce(
-    (sum, item) => sum + parseFloat(item.price.amount) * item.quantity,
-    0,
-  );
+  // Shopify owns the money. Fall back to line math only before the cart syncs.
+  const currency = cost?.subtotalAmount.currencyCode ?? items[0]?.price.currencyCode ?? "USD";
+  const totalPrice = cost
+    ? parseFloat(cost.subtotalAmount.amount)
+    : items.reduce((sum, item) => sum + parseFloat(item.price.amount) * item.quantity, 0);
 
   return (
     <Sheet open={isOpen} onOpenChange={setOpen}>
