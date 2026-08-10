@@ -113,6 +113,7 @@ export const useCartStore = create<CartStore>()(
           console.error("Failed to add item:", error);
         } finally {
           set({ isLoading: false });
+          void get().refreshCost();
         }
       },
 
@@ -140,6 +141,7 @@ export const useCartStore = create<CartStore>()(
           console.error("Failed to update quantity:", error);
         } finally {
           set({ isLoading: false });
+          void get().refreshCost();
         }
       },
 
@@ -163,6 +165,7 @@ export const useCartStore = create<CartStore>()(
           console.error("Failed to remove item:", error);
         } finally {
           set({ isLoading: false });
+          void get().refreshCost();
         }
       },
 
