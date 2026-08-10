@@ -44,6 +44,10 @@ import { getRecentlyViewed, recordRecentlyViewed } from "@/stores/recentlyViewed
 
 export const Route = createFileRoute("/product/$slug")({
   component: PDP,
+  validateSearch: (search: Record<string, unknown>) => ({
+    variant: typeof search.variant === "string" ? search.variant : undefined,
+  }),
+
   head: ({ params }) => {
     const name = params.slug
       .split("-")
