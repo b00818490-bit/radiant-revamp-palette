@@ -150,7 +150,7 @@ function ShadeQuizPage() {
   const q = QUESTIONS[step];
 
   return (
-    <main className="mx-auto max-w-[900px] px-5 py-16 sm:px-8 lg:py-24">
+    <main className="mx-auto max-w-[1280px] px-6 py-16 sm:px-10 lg:py-24">
       <Link
         to="/"
         className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-fog hover:text-charcoal"
@@ -158,20 +158,20 @@ function ShadeQuizPage() {
         <ArrowLeft className="h-3 w-3" /> Back to home
       </Link>
 
-      <h1 className="mt-6 font-display text-4xl leading-[0.95] tracking-[-0.03em] text-charcoal sm:text-5xl">
+      <h1 className="mt-6 font-display text-5xl leading-[0.95] tracking-[-0.03em] text-charcoal sm:text-6xl lg:text-7xl">
         Lip shade finder
       </h1>
-      <p className="mt-3 max-w-lg text-fog">
+      <p className="mt-4 max-w-2xl text-lg text-fog">
         Four quick taps and we&apos;ll match you to shades from the Premium Matte Liquid Lipstick
         range.
       </p>
 
       {/* Progress */}
-      <div className="mt-8 flex gap-1.5">
+      <div className="mt-10 flex gap-1.5">
         {QUESTIONS.map((item, i) => (
           <div
             key={item.key}
-            className="h-[3px] flex-1"
+            className="h-[4px] flex-1"
             style={{
               backgroundColor:
                 i < step || done ? "var(--color-charcoal)" : "var(--color-border, #e5e0d8)",
@@ -181,12 +181,14 @@ function ShadeQuizPage() {
       </div>
 
       {!done && q && (
-        <section className="mt-10">
+        <section className="mt-12">
           <div className="text-[11px] uppercase tracking-[0.28em] text-berry">{q.eyebrow}</div>
-          <h2 className="mt-3 font-display text-2xl text-charcoal sm:text-3xl">{q.title}</h2>
-          {q.help && <p className="mt-2 text-sm text-fog">{q.help}</p>}
+          <h2 className="mt-3 font-display text-3xl text-charcoal sm:text-4xl lg:text-5xl">
+            {q.title}
+          </h2>
+          {q.help && <p className="mt-3 text-base text-fog">{q.help}</p>}
 
-          <div className="mt-7 grid gap-3 sm:grid-cols-2">
+          <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {q.options.map((opt) => (
               <button
                 key={opt.value}
@@ -195,17 +197,17 @@ function ShadeQuizPage() {
                   setAnswers((prev) => ({ ...prev, [q.key]: opt.value }));
                   setStep((s) => s + 1);
                 }}
-                className="flex items-center gap-4 border border-border p-4 text-left transition-colors hover:border-charcoal hover:bg-charcoal/[0.03]"
+                className="flex items-center gap-4 border border-border p-6 text-left transition-colors hover:border-charcoal hover:bg-charcoal/[0.03] lg:flex-col lg:items-start lg:gap-5 lg:p-8"
               >
                 {opt.swatch && (
                   <span
-                    className="h-10 w-10 flex-shrink-0 rounded-full"
+                    className="h-12 w-12 flex-shrink-0 rounded-full lg:h-20 lg:w-20"
                     style={{ backgroundColor: opt.swatch }}
                   />
                 )}
                 <span>
-                  <span className="block text-sm text-charcoal">{opt.label}</span>
-                  {opt.hint && <span className="mt-0.5 block text-xs text-fog">{opt.hint}</span>}
+                  <span className="block text-base text-charcoal">{opt.label}</span>
+                  {opt.hint && <span className="mt-1 block text-sm text-fog">{opt.hint}</span>}
                 </span>
               </button>
             ))}
@@ -215,13 +217,14 @@ function ShadeQuizPage() {
             <button
               type="button"
               onClick={() => setStep((s) => s - 1)}
-              className="mt-7 text-[11px] uppercase tracking-[0.18em] text-fog hover:text-charcoal"
+              className="mt-8 text-[11px] uppercase tracking-[0.18em] text-fog hover:text-charcoal"
             >
               ← Previous question
             </button>
           )}
         </section>
       )}
+
 
       {done && (
         <section className="mt-10">
