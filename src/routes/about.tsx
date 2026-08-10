@@ -125,7 +125,10 @@ const GLANCE = [
 
 function AboutPage() {
   return (
-    <main>
+    <div className="min-h-screen bg-white text-charcoal">
+      <SiteHeader />
+      <main>
+
       {/* Hero */}
       <section className="relative overflow-hidden bg-charcoal text-ivory">
         <img
