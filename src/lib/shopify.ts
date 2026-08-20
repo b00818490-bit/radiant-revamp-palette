@@ -7,7 +7,7 @@ import { toast } from "sonner";
 export const SHOPIFY_API_VERSION = "2025-07";
 export const SHOPIFY_STORE_PERMANENT_DOMAIN = "greyoncosmetics.myshopify.com";
 export const SHOPIFY_STOREFRONT_URL = `https://${SHOPIFY_STORE_PERMANENT_DOMAIN}/api/${SHOPIFY_API_VERSION}/graphql.json`;
-export const SHOPIFY_STOREFRONT_TOKEN = "12abd9682c67f8e13b306e86ad92f8a6";
+export const SHOPIFY_STOREFRONT_TOKEN = "f7dd16d93fb56e4d56a2a941b109a94b";
 
 export interface ShopifyImage {
   url: string;
