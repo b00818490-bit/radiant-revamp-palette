@@ -88,8 +88,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Greyon — Clean color. Everyday care." },
       { name: "twitter:description", content: "Clean color and skincare made with pigment that performs. Shop best-sellers, find your shade, and build a routine you'll love." },
-      { property: "og:image", content: "https://www.greyon.co/social-cover.jpg" },
-      { name: "twitter:image", content: "https://www.greyon.co/social-cover.jpg" },
+      { property: "og:image", content: "https://cdn.shopify.com/s/files/1/0727/7998/9300/files/Look_1_0a25c191-bcc0-4c34-b26c-d499f0c94972.png" },
+      { name: "twitter:image", content: "https://cdn.shopify.com/s/files/1/0727/7998/9300/files/Look_1_0a25c191-bcc0-4c34-b26c-d499f0c94972.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
