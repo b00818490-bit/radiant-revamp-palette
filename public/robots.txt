@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://radiant-revamp-palette.lovable.app/sitemap.xml
+Sitemap: https://www.greyon.co/sitemap.xml

@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { policies } from "@/data/policies";
 
-const BASE_URL = "https://radiant-revamp-palette.lovable.app";
+const BASE_URL = "https://www.greyon.co";
 
 interface SitemapEntry {
   path: string;

@@ -19,8 +19,8 @@ import { applyCampaign } from "@/content/applyCampaign";
 export const Route = createFileRoute("/")({
   component: Home,
   head: () => ({
-    meta: [{ property: "og:url", content: "https://radiant-revamp-palette.lovable.app/" }],
-    links: [{ rel: "canonical", href: "https://radiant-revamp-palette.lovable.app/" }],
+    meta: [{ property: "og:url", content: "https://www.greyon.co/" }],
+    links: [{ rel: "canonical", href: "https://www.greyon.co/" }],
   }),
 });
 

@@ -26,7 +26,7 @@ export const Route = createFileRoute("/collection/$slug")({
   component: CollectionPage,
   head: ({ params }) => {
     const title = titleize(params.slug);
-    const url = `https://radiant-revamp-palette.lovable.app/collection/${params.slug}`;
+    const url = `https://www.greyon.co/collection/${params.slug}`;
     const description = `Shop Greyon ${title.toLowerCase()}. Clean, cruelty-free makeup for every Indian skin tone. Free shipping over ₹599.`;
     return {
       meta: [
