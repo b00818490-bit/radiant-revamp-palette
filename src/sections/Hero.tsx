@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { ArrowRight, Play } from "lucide-react";
 import type { SectionProps, SectionSchema } from "@/theme/types";
 
@@ -66,6 +67,25 @@ export const schema: SectionSchema = {
 };
 
 export function Section({ settings, blocks = [] }: SectionProps<Settings, BlockSettings>) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
+    el.muted = true;
+    const tryPlay = () => {
+      const p = el.play();
+      if (p) p.catch(() => undefined);
+    };
+    tryPlay();
+    el.addEventListener("canplay", tryPlay);
+    document.addEventListener("visibilitychange", tryPlay);
+    return () => {
+      el.removeEventListener("canplay", tryPlay);
+      document.removeEventListener("visibilitychange", tryPlay);
+    };
+  }, [settings.image]);
+
   return (
     <section
       className="relative overflow-hidden"
@@ -144,7 +164,6 @@ export function Section({ settings, blocks = [] }: SectionProps<Settings, BlockS
                 src={settings.image}
                 autoPlay
                 muted
-                defaultMuted
                 loop
                 playsInline
                 preload="auto"
