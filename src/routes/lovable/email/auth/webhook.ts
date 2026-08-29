@@ -13,7 +13,7 @@ const SITE_NAME = "Greyon Website"
 const SENDER_DOMAIN = "notify.webmail.greyon.co"
 const ROOT_DOMAIN = "webmail.greyon.co"
 const FROM_DOMAIN = "notify.webmail.greyon.co"
-const SITE_URL = `https://${ROOT_DOMAIN}`
+const SITE_URL = "https://www.greyon.co"
 
 // The SDK handler owns verification, dispatch, and retry semantics; this file
 // owns only the email decisions: subjects, templates, and per-type props.
