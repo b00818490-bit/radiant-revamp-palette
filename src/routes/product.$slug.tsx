@@ -52,7 +52,7 @@ export const Route = createFileRoute("/product/$slug")({
       .split("-")
       .map((s) => s[0]?.toUpperCase() + s.slice(1))
       .join(" ");
-    const url = `https://radiant-revamp-palette.lovable.app/product/${params.slug}`;
+    const url = `https://www.greyon.co/product/${params.slug}`;
     const description = `${name} by Greyon — clean, cruelty-free makeup for every Indian skin tone.`;
     return {
       meta: [
