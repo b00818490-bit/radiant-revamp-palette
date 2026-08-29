@@ -140,13 +140,19 @@ export function Section({ settings, blocks = [] }: SectionProps<Settings, BlockS
           {settings.image && (
             /\.(mp4|webm|mov)(\?|$)/i.test(settings.image) ? (
               <video
+                ref={videoRef}
                 src={settings.image}
                 autoPlay
                 muted
+                defaultMuted
                 loop
                 playsInline
+                preload="auto"
+                controls={false}
+                disablePictureInPicture
                 className="absolute inset-0 h-full w-full object-cover"
               />
+
             ) : (
               <img
                 src={settings.image}
