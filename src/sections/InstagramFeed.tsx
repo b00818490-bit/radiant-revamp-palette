@@ -89,15 +89,22 @@ export function Section({ settings, blocks = [] }: SectionProps<Settings, BlockS
     return () => el.removeEventListener("scroll", onScroll);
   }, [items.length]);
 
+  const activeRef = useRef(0);
+  useEffect(() => {
+    activeRef.current = active;
+  }, [active]);
+
   useEffect(() => {
     if (paused || items.length < 2) return;
     const id = window.setInterval(() => {
-      const next = (active + 1) % items.length;
+      const next = (activeRef.current + 1) % items.length;
+      activeRef.current = next;
       setActive(next);
       scrollToIndex(next);
-    }, 4000);
+    }, 3500);
     return () => window.clearInterval(id);
-  }, [active, paused, items.length, scrollToIndex]);
+  }, [paused, items.length, scrollToIndex]);
+
 
 
   return (
