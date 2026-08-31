@@ -91,6 +91,17 @@ const BEST_SELLER_SLUGS = ["best-sellers", "bestsellers", "best-selling"];
 const NEW_SLUGS = ["new", "new-arrivals"];
 const UNDER_200_SLUGS = ["under-300"];
 
+/** Display titles that differ from the slug-derived name. */
+const TITLE_OVERRIDES: Record<string, string> = {
+  "regular-moisturizing-lipstick": "Moisturizing Lipstick",
+  "premium-moisturizing-lipstick": "Moisturizing Lipstick",
+  "liquid-lip-gloss": "Lip Gloss",
+  "lip-gloss": "Lip Gloss",
+  "premium-matte-liquid-lipstick": "Premium Matte Liquid Lipstick",
+  "regular-matte-liquid-lipcolor": "Regular Matte Liquid Lipcolor",
+  "premium-matte-liquid-lipcolor": "Premium Matte Liquid Lipstick",
+};
+
 /** Search fallback for slugs Shopify has no collection for. */
 function buildQuery(slug: string): string | undefined {
   if (SHOPIFY_COLLECTIONS[slug] || SINGLE_PRODUCT_SLUGS[slug]) return undefined;
