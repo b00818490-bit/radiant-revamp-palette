@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Navigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Loader2, ShoppingBag, ChevronDown } from "lucide-react";
@@ -198,6 +198,19 @@ function CollectionPage() {
         return 0;
     }
   });
+
+  // A collection that resolves to exactly one product goes straight to that
+  // product's page — no intermediate click required (e.g. menu links for
+  // Premium Matte Liquid Lipstick, Moisturizing Lipstick, etc.).
+  if (!isLoading && !isUnder200 && sorted.length === 1) {
+    return (
+      <Navigate
+        to="/product/$slug"
+        params={{ slug: sorted[0].node.handle }}
+        replace
+      />
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background text-foreground">
