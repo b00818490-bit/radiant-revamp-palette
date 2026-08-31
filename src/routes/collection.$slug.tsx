@@ -101,7 +101,7 @@ const TITLE_OVERRIDES: Record<string, string> = {
   "liquid-lip-gloss": "Lip Gloss",
   "lip-gloss": "Lip Gloss",
   "premium-matte-liquid-lipstick": "Premium Matte Liquid Lipstick",
-  "regular-matte-liquid-lipcolor": "Regular Matte Liquid Lipcolor",
+  "regular-matte-liquid-lipcolor": "Regular Matte Liquid Lipstick",
   "premium-matte-liquid-lipcolor": "Premium Matte Liquid Lipstick",
   "premium-standard-matte-liquid-lipstick": "Premium Standard Matte Liquid Lipstick",
 };
