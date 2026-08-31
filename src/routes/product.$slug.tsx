@@ -427,7 +427,7 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
                   <img
                     src={g.url}
                     alt={g.altText ?? ""}
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-contain"
                     loading="lazy"
                   />
                 </button>
@@ -441,7 +441,7 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
               <img
                 src={mainImage.url}
                 alt={mainImage.altText ?? product.title}
-                className="h-full w-full object-cover"
+                className="h-full w-full object-contain"
               />
             )}
           </div>
@@ -462,7 +462,7 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
                   <img
                     src={g.url}
                     alt={g.altText ?? ""}
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-contain"
                     loading="lazy"
                   />
                 </button>
