@@ -230,12 +230,24 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
   const [activeImg, setActiveImg] = useState(0);
 
   // Switch gallery to the selected variant's image (e.g. the chosen shade)
+  const [variantImage, setVariantImage] = useState<{ url: string; altText?: string | null } | null>(null);
   useEffect(() => {
-    const variantUrl = selectedVariant?.image?.url;
-    if (!variantUrl) return;
-    const idx = images.findIndex((img) => img.url === variantUrl);
-    if (idx >= 0) setActiveImg(idx);
+    const vImg = selectedVariant?.image;
+    if (!vImg?.url) {
+      setVariantImage(null);
+      return;
+    }
+    const idx = images.findIndex((img) => img.url === vImg.url);
+    if (idx >= 0) {
+      setActiveImg(idx);
+      setVariantImage(null);
+    } else {
+      // Variant image not in gallery list — display it directly
+      setVariantImage(vImg);
+    }
   }, [selectedVariant, images]);
+
+  const mainImage = variantImage ?? images[activeImg];
   const addItem = useCartStore((s) => s.addItem);
   const isLoading = useCartStore((s) => s.isLoading);
 

@@ -155,7 +155,7 @@ const PRODUCT_FIELDS = `
   tags
   availableForSale
   priceRange { minVariantPrice { amount currencyCode } }
-  images(first: 8) { edges { node { url altText } } }
+  images(first: 100) { edges { node { url altText } } }
   variants(first: 20) {
     edges {
       node {
