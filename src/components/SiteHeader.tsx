@@ -82,7 +82,7 @@ const MEGA: MegaConfig[] = [
     label: "Lips",
     intro: {
       title: "Pigment that performs.",
-      body: "Matte liquid lipcolor, moisturizing bullets, gloss and balm.",
+      body: "Matte liquid lipstick, moisturizing bullets, gloss and balm.",
       href: "/collection/lips",
     },
     columns: [
@@ -165,7 +165,7 @@ const MEGA: MegaConfig[] = [
 ];
 
 const POPULAR = [
-  "Matte liquid lipcolor",
+  "Matte liquid lipstick",
   "Smoky black eyeliner",
   "Black curling mascara",
   "Vacuum precision kajal",

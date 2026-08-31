@@ -126,7 +126,7 @@ const CATEGORIES: Category[] = [
       },
       {
         q: "How do I choose the right lipstick shade?",
-        a: "Use our Lip Shade Finder quiz — a few quick questions about your skin tone, undertone and the finish you like, and it matches you to shades from the Premium Matte Liquid Lipcolor range.",
+        a: "Use our Lip Shade Finder quiz — a few quick questions about your skin tone, undertone and the finish you like, and it matches you to shades from the Premium Matte Liquid Lipstick range.",
       },
     ],
   },
