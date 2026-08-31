@@ -212,9 +212,36 @@ function PDP() {
   );
 }
 
+/**
+ * Greyon image filenames are grouped per shade: every image for a shade
+ * starts with the shade number ("02-Model.jpg", "2_xxx.jpg", "08_-4.jpg",
+ * "Model-13.jpg"). Variants carry the code in the title ("Rust Brown- LLS2").
+ * Extract the shade number and keep only images whose filename begins with
+ * that number (allowing a single leading zero), so each variant only shows
+ * its own gallery.
+ */
+function imagesForVariant(
+  allImages: Array<{ url: string; altText: string | null }>,
+  variant: ShopifyVariant | undefined,
+) {
+  if (!variant) return allImages;
+  const codeSource = `${variant.title} ${variant.selectedOptions
+    .map((o) => o.value)
+    .join(" ")}`;
+  const numMatch = /(\d{1,3})/.exec(codeSource);
+  if (!numMatch) return allImages;
+  const n = parseInt(numMatch[1], 10);
+  const re = new RegExp(`^0?${n}(?=[^0-9]|$)`);
+  const filtered = allImages.filter((img) => {
+    const filename = img.url.split("?")[0].split("/").pop() ?? "";
+    return re.test(filename);
+  });
+  return filtered.length > 0 ? filtered : allImages;
+}
+
 function ProductView({ product }: { product: ShopifyProductNode }) {
   const { variant: variantParam } = Route.useSearch();
-  const images = product.images.edges.map((e) => e.node);
+  const allImages = product.images.edges.map((e) => e.node);
   const variants = product.variants.edges.map((e) => e.node);
   const initialVariant =
     (variantParam
