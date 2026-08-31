@@ -148,7 +148,8 @@ function CollectionPage() {
   const isNew = NEW_SLUGS.includes(slug);
   const isUnder200 = UNDER_200_SLUGS.includes(slug);
   const title =
-    slug === "all"
+    TITLE_OVERRIDES[slug] ??
+    (slug === "all"
       ? "All products"
       : isBestSellers
         ? "Best sellers"
@@ -156,7 +157,7 @@ function CollectionPage() {
           ? "New arrivals"
           : isUnder200
             ? "Under ₹300"
-            : titleize(slug);
+            : titleize(slug));
   const [sort, setSort] = useState<"featured" | "price-asc" | "price-desc" | "title">("featured");
 
   const { data: allProducts = [], isLoading } = useQuery({
