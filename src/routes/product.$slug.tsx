@@ -262,8 +262,10 @@ function imagesForVariant(
 
 function ProductView({ product }: { product: ShopifyProductNode }) {
   const { variant: variantParam } = Route.useSearch();
-  const allImages = product.images.edges.map((e) => e.node);
-  const variants = product.variants.edges.map((e) => e.node);
+  // Memoized: a fresh array every render would retrigger the gallery effect
+  // below and snap the main photo back to the variant's first image.
+  const allImages = useMemo(() => product.images.edges.map((e) => e.node), [product]);
+  const variants = useMemo(() => product.variants.edges.map((e) => e.node), [product]);
   const initialVariant =
     (variantParam
       ? variants.find(
@@ -443,6 +445,30 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
               />
             )}
           </div>
+          {/* Thumbnails for mobile/tablet (desktop column is hidden below lg) */}
+          {images.length > 1 && (
+            <div className="col-span-12 flex lg:hidden gap-3 overflow-x-auto pb-1">
+              {images.map((g, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    setActiveImg(i);
+                    setVariantImage(null);
+                  }}
+                  className={`aspect-square w-20 shrink-0 overflow-hidden border-2 transition ${
+                    activeImg === i ? "border-berry" : "border-transparent"
+                  }`}
+                >
+                  <img
+                    src={g.url}
+                    alt={g.altText ?? ""}
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                  />
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Buy box */}
