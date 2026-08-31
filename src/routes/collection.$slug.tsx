@@ -80,6 +80,7 @@ const SHOPIFY_COLLECTIONS: Record<string, string[]> = {
 
 // Slugs that point at a single product rather than a Shopify collection.
 const SINGLE_PRODUCT_SLUGS: Record<string, string> = {
+  "premium-standard-matte-liquid-lipstick": "premium-matte-liquid-lipstick-standard-collection-copy",
   mascara: "mascara",
   "greyon-smoky-eyeliner": "greyon-smoky-eyeliner",
   "vacuum-precision-eyeliner-intense-black": "vacuum-precision-eyeliner-intense-black",
@@ -100,6 +101,7 @@ const TITLE_OVERRIDES: Record<string, string> = {
   "premium-matte-liquid-lipstick": "Premium Matte Liquid Lipstick",
   "regular-matte-liquid-lipcolor": "Regular Matte Liquid Lipcolor",
   "premium-matte-liquid-lipcolor": "Premium Matte Liquid Lipstick",
+  "premium-standard-matte-liquid-lipstick": "Premium Standard Matte Liquid Lipstick",
 };
 
 /** Search fallback for slugs Shopify has no collection for. */
