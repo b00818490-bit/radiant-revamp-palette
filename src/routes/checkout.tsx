@@ -130,6 +130,9 @@ function CheckoutPage() {
       toast.error("Your bag is empty");
       return;
     }
+    // Open the new tab during the user gesture so mobile browsers do not
+    // block it while profile and buyer details are being saved.
+    const checkoutWindow = window.open("about:blank", "_blank");
     if (session) {
       await supabase.from("profiles").upsert({
         id: session.user.id,
@@ -162,10 +165,11 @@ function CheckoutPage() {
         phone: form.phone || undefined,
       },
     });
-    const target = new URL(getCheckoutUrl() ?? url);
-    target.searchParams.set("channel", "online_store"); // required, else Shopify 404s the checkout
-    if (form.email) target.searchParams.set("checkout[email]", form.email);
-    window.open(target.toString(), "_blank");
+    // Shopify signs this URL; changing its host or query string can make the
+    // checkout invalid. Always use the latest URL exactly as returned.
+    const target = getCheckoutUrl() ?? url;
+    if (checkoutWindow) checkoutWindow.location.href = target;
+    else window.location.assign(target);
   };
 
   if (items.length === 0) {

@@ -365,7 +365,7 @@ export async function fetchCart(cartId: string): Promise<CartSnapshot | null | u
   const res = await storefrontApiRequest<{ cart: CartSnapshot | null }>(CART_QUERY, { id: cartId });
   if (!res) return undefined; // request failed — keep the local cart intact
   const cart = res.data?.cart ?? null;
-  return cart ? { ...cart, checkoutUrl: formatCheckoutUrl(cart.checkoutUrl) } : null;
+  return cart ? { ...cart, checkoutUrl: cart.checkoutUrl } : null;
 }
 
 
@@ -413,7 +413,7 @@ export async function updateCartBuyerIdentity(
     console.error("Buyer identity update failed:", payload.userErrors);
   }
   const cart = payload?.cart ?? null;
-  return cart ? { ...cart, checkoutUrl: formatCheckoutUrl(cart.checkoutUrl) } : null;
+  return cart ? { ...cart, checkoutUrl: cart.checkoutUrl } : null;
 }
 
 
@@ -460,16 +460,6 @@ const CART_LINES_REMOVE_MUTATION = `
   }
 `;
 
-function formatCheckoutUrl(checkoutUrl: string): string {
-  try {
-    const url = new URL(checkoutUrl);
-    url.searchParams.set("channel", "online_store");
-    return url.toString();
-  } catch {
-    return checkoutUrl;
-  }
-}
-
 type UserError = { field: string[] | null; message: string };
 function isCartNotFoundError(userErrors: UserError[]): boolean {
   return userErrors.some(
@@ -509,7 +499,7 @@ export async function createShopifyCart(
   if (!cart?.checkoutUrl) return null;
   const lineId = cart.lines.edges[0]?.node?.id;
   if (!lineId) return null;
-  return { cartId: cart.id, checkoutUrl: formatCheckoutUrl(cart.checkoutUrl), lineId };
+  return { cartId: cart.id, checkoutUrl: cart.checkoutUrl, lineId };
 }
 
 export async function addLineToShopifyCart(
