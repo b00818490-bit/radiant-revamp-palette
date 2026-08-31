@@ -169,7 +169,7 @@ export function Section({ settings, blocks = [] }: SectionProps<Settings, BlockS
                 preload="auto"
                 controls={false}
                 disablePictureInPicture
-                className="absolute inset-0 h-full w-full object-cover"
+                className="absolute inset-0 h-full w-full object-contain lg:object-cover"
               />
 
             ) : (
