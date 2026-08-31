@@ -89,10 +89,10 @@ const MEGA: MegaConfig[] = [
       {
         heading: "Lipsticks",
         links: [
-          { label: "Premium Matte Liquid Lipstick", slug: "premium-matte-liquid-lipstick" },
-          { label: "Regular Matte Liquid Lipcolor", slug: "regular-matte-liquid-lipcolor" },
-          { label: "Premium Moisturizing Lipstick", slug: "premium-moisturizing-lipstick" },
-          { label: "Regular Moisturizing Lipstick", slug: "regular-moisturizing-lipstick" },
+          { label: "Premium Matte Liquid Lipstick", slug: "premium-matte-liquid-lipcolor" },
+          { label: "Regular Matte Liquid Lipstick", slug: "regular-matte-liquid-lipcolor" },
+          { label: "Premium Standard Matte Liquid Lipstick", slug: "premium-matte-liquid-lipstick-standard-collection-copy" },
+          { label: "Moisturizing Lipstick", slug: "regular-moisturizing-lipstick" },
         ],
       },
       {
