@@ -364,7 +364,8 @@ export interface CartSnapshot {
 export async function fetchCart(cartId: string): Promise<CartSnapshot | null | undefined> {
   const res = await storefrontApiRequest<{ cart: CartSnapshot | null }>(CART_QUERY, { id: cartId });
   if (!res) return undefined; // request failed — keep the local cart intact
-  return res.data?.cart ?? null;
+  const cart = res.data?.cart ?? null;
+  return cart ? { ...cart, checkoutUrl: formatCheckoutUrl(cart.checkoutUrl) } : null;
 }
 
 
@@ -411,7 +412,8 @@ export async function updateCartBuyerIdentity(
   if (payload?.userErrors?.length) {
     console.error("Buyer identity update failed:", payload.userErrors);
   }
-  return payload?.cart ?? null;
+  const cart = payload?.cart ?? null;
+  return cart ? { ...cart, checkoutUrl: formatCheckoutUrl(cart.checkoutUrl) } : null;
 }
 
 
