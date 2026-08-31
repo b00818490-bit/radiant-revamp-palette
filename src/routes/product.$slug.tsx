@@ -228,6 +228,14 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
 
   const [qty, setQty] = useState(1);
   const [activeImg, setActiveImg] = useState(0);
+
+  // Switch gallery to the selected variant's image (e.g. the chosen shade)
+  useEffect(() => {
+    const variantUrl = selectedVariant?.image?.url;
+    if (!variantUrl) return;
+    const idx = images.findIndex((img) => img.url === variantUrl);
+    if (idx >= 0) setActiveImg(idx);
+  }, [selectedVariant, images]);
   const addItem = useCartStore((s) => s.addItem);
   const isLoading = useCartStore((s) => s.isLoading);
 
