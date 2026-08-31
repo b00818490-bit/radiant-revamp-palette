@@ -199,6 +199,19 @@ function CollectionPage() {
     }
   });
 
+  // A collection that resolves to exactly one product goes straight to that
+  // product's page — no intermediate click required (e.g. menu links for
+  // Premium Matte Liquid Lipstick, Moisturizing Lipstick, etc.).
+  if (!isLoading && !isUnder200 && sorted.length === 1) {
+    return (
+      <Navigate
+        to="/product/$slug"
+        params={{ slug: sorted[0].node.handle }}
+        replace
+      />
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
