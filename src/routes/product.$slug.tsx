@@ -262,8 +262,10 @@ function imagesForVariant(
 
 function ProductView({ product }: { product: ShopifyProductNode }) {
   const { variant: variantParam } = Route.useSearch();
-  const allImages = product.images.edges.map((e) => e.node);
-  const variants = product.variants.edges.map((e) => e.node);
+  // Memoized: a fresh array every render would retrigger the gallery effect
+  // below and snap the main photo back to the variant's first image.
+  const allImages = useMemo(() => product.images.edges.map((e) => e.node), [product]);
+  const variants = useMemo(() => product.variants.edges.map((e) => e.node), [product]);
   const initialVariant =
     (variantParam
       ? variants.find(
