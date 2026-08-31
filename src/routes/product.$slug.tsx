@@ -376,10 +376,10 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
           <div
             className={`${images.length > 1 ? "col-span-12 lg:col-span-10" : "col-span-12"} bg-muted aspect-square overflow-hidden`}
           >
-            {images[activeImg] && (
+            {mainImage && (
               <img
-                src={images[activeImg].url}
-                alt={images[activeImg].altText ?? product.title}
+                src={mainImage.url}
+                alt={mainImage.altText ?? product.title}
                 className="h-full w-full object-cover"
               />
             )}
