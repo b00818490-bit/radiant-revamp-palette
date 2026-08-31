@@ -279,8 +279,8 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
 
   // Only show images belonging to the selected variant (shade)
   const images = useMemo(
-    () => imagesForVariant(allImages, selectedVariant),
-    [allImages, selectedVariant],
+    () => imagesForVariant(allImages, variants, selectedVariant),
+    [allImages, variants, selectedVariant],
   );
 
   // Switch gallery to the selected variant's image (e.g. the chosen shade)
