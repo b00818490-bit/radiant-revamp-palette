@@ -105,44 +105,50 @@ const TITLE_OVERRIDES: Record<string, string> = {
 };
 
 /** Search fallback for slugs Shopify has no collection for. */
-function buildQuery(slug: string): string | undefined {
-  if (SHOPIFY_COLLECTIONS[slug] || SINGLE_PRODUCT_SLUGS[slug]) return undefined;
+function buildQuery(slug: string): string {
   const term = slug.replace(/-/g, " ");
-  return `product_type:${term} OR tag:${term} OR title:${term}`;
+  return `title:${JSON.stringify(term)} OR product_type:${JSON.stringify(term)} OR tag:${JSON.stringify(term)}`;
+}
+
+function dedupe(lists: ShopifyProduct[][]): ShopifyProduct[] {
+  const seen = new Set<string>();
+  const merged: ShopifyProduct[] = [];
+  for (const list of lists) {
+    for (const p of list) {
+      if (seen.has(p.node.id)) continue;
+      seen.add(p.node.id);
+      merged.push(p);
+    }
+  }
+  return merged;
 }
 
 async function loadCollection(slug: string): Promise<ShopifyProduct[]> {
-  const handles = SHOPIFY_COLLECTIONS[slug];
-  if (handles) {
-    const sortKey: CollectionSort = BEST_SELLER_SLUGS.includes(slug)
-      ? "BEST_SELLING"
-      : NEW_SLUGS.includes(slug)
-        ? "CREATED"
-        : "MANUAL";
-    const reverse = NEW_SLUGS.includes(slug);
-    const results = await Promise.all(
-      handles.map((h) => fetchCollectionByHandle(h, { sortKey, reverse })),
-    );
-    const seen = new Set<string>();
-    const merged: ShopifyProduct[] = [];
-    for (const c of results) {
-      for (const p of c?.products ?? []) {
-        if (seen.has(p.node.id)) continue;
-        seen.add(p.node.id);
-        merged.push(p);
-      }
-    }
-    return merged;
-  }
+  // 1) Mapped Shopify collection handles
+  const handles = SHOPIFY_COLLECTIONS[slug] ?? [slug];
+  const sortKey: CollectionSort = BEST_SELLER_SLUGS.includes(slug)
+    ? "BEST_SELLING"
+    : NEW_SLUGS.includes(slug)
+      ? "CREATED"
+      : "MANUAL";
+  const reverse = NEW_SLUGS.includes(slug);
+  const results = await Promise.all(
+    handles.map((h) =>
+      fetchCollectionByHandle(h, { sortKey, reverse }).catch(() => null),
+    ),
+  );
+  const fromCollections = dedupe(results.map((c) => c?.products ?? []));
+  if (fromCollections.length) return fromCollections;
 
-  const single = SINGLE_PRODUCT_SLUGS[slug];
-  if (single) {
-    const all = await fetchProducts(100);
-    return all.filter((p) => p.node.handle === single);
-  }
+  // 2) Slug points at a single product (explicit map, or the slug is the handle)
+  const single = SINGLE_PRODUCT_SLUGS[slug] ?? slug;
+  const product = await fetchProductByHandle(single).catch(() => null);
+  if (product) return [{ node: product }];
 
+  // 3) Last resort: a real Shopify search
   return fetchProducts(50, buildQuery(slug));
 }
+
 
 function CollectionPage() {
   const { slug } = Route.useParams();
