@@ -358,7 +358,10 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
               {images.map((g, i) => (
                 <button
                   key={i}
-                  onClick={() => setActiveImg(i)}
+                  onClick={() => {
+                    setActiveImg(i);
+                    setVariantImage(null);
+                  }}
                   className={`aspect-square overflow-hidden border-2 transition ${
                     activeImg === i ? "border-berry" : "border-transparent"
                   }`}
