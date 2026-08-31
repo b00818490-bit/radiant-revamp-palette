@@ -163,6 +163,7 @@ function CheckoutPage() {
       },
     });
     const target = new URL(getCheckoutUrl() ?? url);
+    target.searchParams.set("channel", "online_store"); // required, else Shopify 404s the checkout
     if (form.email) target.searchParams.set("checkout[email]", form.email);
     window.open(target.toString(), "_blank");
   };
