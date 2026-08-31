@@ -212,9 +212,37 @@ function PDP() {
   );
 }
 
+/**
+ * Greyon image filenames are grouped per shade: every image for a shade
+ * starts with the shade number ("02-Model.jpg", "2_xxx.jpg", "08_-4.jpg",
+ * "Model-13.jpg"). Variants carry the code in the title ("Rust Brown- LLS2").
+ * Extract the shade number and keep only images whose filename begins with
+ * that number (allowing a single leading zero), so each variant only shows
+ * its own gallery.
+ */
+function imagesForVariant(
+  allImages: Array<{ url: string; altText: string | null }>,
+  variant: ShopifyVariant | undefined,
+) {
+  if (!variant) return allImages;
+  const codeSource = `${variant.title} ${variant.selectedOptions
+    .map((o) => o.value)
+    .join(" ")}`;
+  const numMatch = /(\d{1,3})/.exec(codeSource);
+  if (!numMatch) return allImages;
+  const n = parseInt(numMatch[1], 10);
+  // Matches "02-Model.jpg", "2_x.jpg", "08_-4.jpg" at start, plus "Model-13.jpg"
+  const re = new RegExp(`(?:^|[^0-9])0?${n}(?=[^0-9]|$)`);
+  const filtered = allImages.filter((img) => {
+    const filename = img.url.split("?")[0].split("/").pop() ?? "";
+    return re.test(filename);
+  });
+  return filtered.length > 0 ? filtered : allImages;
+}
+
 function ProductView({ product }: { product: ShopifyProductNode }) {
   const { variant: variantParam } = Route.useSearch();
-  const images = product.images.edges.map((e) => e.node);
+  const allImages = product.images.edges.map((e) => e.node);
   const variants = product.variants.edges.map((e) => e.node);
   const initialVariant =
     (variantParam
@@ -229,11 +257,18 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
   const [qty, setQty] = useState(1);
   const [activeImg, setActiveImg] = useState(0);
 
+  // Only show images belonging to the selected variant (shade)
+  const images = useMemo(
+    () => imagesForVariant(allImages, selectedVariant),
+    [allImages, selectedVariant],
+  );
+
   // Switch gallery to the selected variant's image (e.g. the chosen shade)
   const [variantImage, setVariantImage] = useState<{ url: string; altText?: string | null } | null>(null);
   useEffect(() => {
     const vImg = selectedVariant?.image;
     if (!vImg?.url) {
+      setActiveImg(0);
       setVariantImage(null);
       return;
     }
@@ -243,11 +278,12 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
       setVariantImage(null);
     } else {
       // Variant image not in gallery list — display it directly
+      setActiveImg(0);
       setVariantImage(vImg);
     }
   }, [selectedVariant, images]);
 
-  const mainImage = variantImage ?? images[activeImg];
+  const mainImage = variantImage ?? images[Math.min(activeImg, images.length - 1)];
   const addItem = useCartStore((s) => s.addItem);
   const isLoading = useCartStore((s) => s.isLoading);
 
