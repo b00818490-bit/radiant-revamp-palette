@@ -7,6 +7,8 @@ import { Footer } from "@/components/Footer";
 import {
   fetchProducts,
   fetchCollectionByHandle,
+  fetchProductByHandle,
+
   formatMoney,
   type CollectionSort,
   type ShopifyProduct,
