@@ -445,6 +445,30 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
               />
             )}
           </div>
+          {/* Thumbnails for mobile/tablet (desktop column is hidden below lg) */}
+          {images.length > 1 && (
+            <div className="col-span-12 flex lg:hidden gap-3 overflow-x-auto pb-1">
+              {images.map((g, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    setActiveImg(i);
+                    setVariantImage(null);
+                  }}
+                  className={`aspect-square w-20 shrink-0 overflow-hidden border-2 transition ${
+                    activeImg === i ? "border-berry" : "border-transparent"
+                  }`}
+                >
+                  <img
+                    src={g.url}
+                    alt={g.altText ?? ""}
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                  />
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Buy box */}
