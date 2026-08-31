@@ -156,7 +156,7 @@ const PRODUCT_FIELDS = `
   availableForSale
   priceRange { minVariantPrice { amount currencyCode } }
   images(first: 100) { edges { node { url altText } } }
-  variants(first: 20) {
+  variants(first: 100) {
     edges {
       node {
         id
