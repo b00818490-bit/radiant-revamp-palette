@@ -266,16 +266,16 @@ export function SiteHeader({
                 to="/"
                 onMouseEnter={() => setOpenMega(null)}
                 activeOptions={{ exact: true }}
-                activeProps={{ className: "py-2 text-[#9E2A5C] transition-colors hover:text-[#9E2A5C]" }}
-                inactiveProps={{ className: "py-2 text-[#3B3B3D] transition-colors hover:text-[#9E2A5C]" }}
+                activeProps={{ className: "py-2 normal-case tracking-normal text-[#9E2A5C] transition-colors hover:text-[#9E2A5C]" }}
+                inactiveProps={{ className: "py-2 normal-case tracking-normal text-[#3B3B3D] transition-colors hover:text-[#9E2A5C]" }}
               >
                 Home
               </Link>
               <Link
                 to="/about"
                 onMouseEnter={() => setOpenMega(null)}
-                activeProps={{ className: "py-2 text-[#9E2A5C] transition-colors hover:text-[#9E2A5C]" }}
-                inactiveProps={{ className: "py-2 text-[#3B3B3D] transition-colors hover:text-[#9E2A5C]" }}
+                activeProps={{ className: "py-2 normal-case tracking-normal text-[#9E2A5C] transition-colors hover:text-[#9E2A5C]" }}
+                inactiveProps={{ className: "py-2 normal-case tracking-normal text-[#3B3B3D] transition-colors hover:text-[#9E2A5C]" }}
               >
                 Our Story
               </Link>
@@ -696,8 +696,8 @@ function MobileDrawer({ onClose }: { onClose: () => void }) {
                 to="/"
                 onClick={onClose}
                 activeOptions={{ exact: true }}
-                activeProps={{ className: "flex w-full items-center px-5 py-4 text-sm uppercase tracking-widest text-[#9E2A5C]" }}
-                inactiveProps={{ className: "flex w-full items-center px-5 py-4 text-sm uppercase tracking-widest text-[#3B3B3D] hover:text-[#9E2A5C]" }}
+                activeProps={{ className: "flex w-full items-center px-5 py-4 text-sm normal-case tracking-normal text-[#9E2A5C]" }}
+                inactiveProps={{ className: "flex w-full items-center px-5 py-4 text-sm normal-case tracking-normal text-[#3B3B3D] hover:text-[#9E2A5C]" }}
               >
                 Home
               </Link>
@@ -706,8 +706,8 @@ function MobileDrawer({ onClose }: { onClose: () => void }) {
               <Link
                 to="/about"
                 onClick={onClose}
-                activeProps={{ className: "flex w-full items-center px-5 py-4 text-sm uppercase tracking-widest text-[#9E2A5C]" }}
-                inactiveProps={{ className: "flex w-full items-center px-5 py-4 text-sm uppercase tracking-widest text-[#3B3B3D] hover:text-[#9E2A5C]" }}
+                activeProps={{ className: "flex w-full items-center px-5 py-4 text-sm normal-case tracking-normal text-[#9E2A5C]" }}
+                inactiveProps={{ className: "flex w-full items-center px-5 py-4 text-sm normal-case tracking-normal text-[#3B3B3D] hover:text-[#9E2A5C]" }}
               >
                 Our Story
               </Link>
