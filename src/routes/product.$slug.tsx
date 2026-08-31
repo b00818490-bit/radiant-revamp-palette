@@ -231,7 +231,8 @@ function imagesForVariant(
   const numMatch = /(\d{1,3})/.exec(codeSource);
   if (!numMatch) return allImages;
   const n = parseInt(numMatch[1], 10);
-  const re = new RegExp(`^0?${n}(?=[^0-9]|$)`);
+  // Matches "02-Model.jpg", "2_x.jpg", "08_-4.jpg" at start, plus "Model-13.jpg"
+  const re = new RegExp(`(?:^|[^0-9])0?${n}(?=[^0-9]|$)`);
   const filtered = allImages.filter((img) => {
     const filename = img.url.split("?")[0].split("/").pop() ?? "";
     return re.test(filename);
