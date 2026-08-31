@@ -33,7 +33,14 @@ export function Section({ settings, blocks = [] }: SectionProps<Settings, BlockS
   return (
     <div
       className="overflow-hidden py-2.5 text-[11px] uppercase tracking-[0.22em]"
-      style={{ backgroundColor: settings.background_color, color: settings.text_color }}
+      style={{
+        backgroundColor: settings.background_color,
+        color: settings.text_color,
+        maskImage:
+          "linear-gradient(to right, transparent 0, #000 32px, #000 calc(100% - 32px), transparent 100%)",
+        WebkitMaskImage:
+          "linear-gradient(to right, transparent 0, #000 32px, #000 calc(100% - 32px), transparent 100%)",
+      }}
     >
       <div
         className="flex whitespace-nowrap ticker-track"
