@@ -123,7 +123,7 @@ export const campaignContent: CampaignContent = {
   announcement_messages: [
     "Free shipping over ₹599",
     "Lab tested",
-    "Cruelty-free · Vegan formulas",
+    "Cruelty-free",
     "Easy returns within 3 days of delivery",
     "Premium Matte Liquid Lipstick — 12 shades",
   ],

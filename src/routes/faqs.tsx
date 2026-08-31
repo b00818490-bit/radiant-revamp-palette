@@ -140,7 +140,7 @@ const CATEGORIES: Category[] = [
       },
       {
         q: "What does Greyon stand for?",
-        a: "Inclusive shade ranges, honest claims, lab-tested and vegan formulas, and accessible pricing — beauty that works for every skin tone and every day.",
+        a: "Inclusive shade ranges, honest claims, lab-tested formulas, and accessible pricing — beauty that works for every skin tone and every day.",
       },
       {
         q: "How do I contact customer care?",
