@@ -228,6 +228,26 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
 
   const [qty, setQty] = useState(1);
   const [activeImg, setActiveImg] = useState(0);
+
+  // Switch gallery to the selected variant's image (e.g. the chosen shade)
+  const [variantImage, setVariantImage] = useState<{ url: string; altText?: string | null } | null>(null);
+  useEffect(() => {
+    const vImg = selectedVariant?.image;
+    if (!vImg?.url) {
+      setVariantImage(null);
+      return;
+    }
+    const idx = images.findIndex((img) => img.url === vImg.url);
+    if (idx >= 0) {
+      setActiveImg(idx);
+      setVariantImage(null);
+    } else {
+      // Variant image not in gallery list — display it directly
+      setVariantImage(vImg);
+    }
+  }, [selectedVariant, images]);
+
+  const mainImage = variantImage ?? images[activeImg];
   const addItem = useCartStore((s) => s.addItem);
   const isLoading = useCartStore((s) => s.isLoading);
 
@@ -338,7 +358,10 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
               {images.map((g, i) => (
                 <button
                   key={i}
-                  onClick={() => setActiveImg(i)}
+                  onClick={() => {
+                    setActiveImg(i);
+                    setVariantImage(null);
+                  }}
                   className={`aspect-square overflow-hidden border-2 transition ${
                     activeImg === i ? "border-berry" : "border-transparent"
                   }`}
@@ -356,10 +379,10 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
           <div
             className={`${images.length > 1 ? "col-span-12 lg:col-span-10" : "col-span-12"} bg-muted aspect-square overflow-hidden`}
           >
-            {images[activeImg] && (
+            {mainImage && (
               <img
-                src={images[activeImg].url}
-                alt={images[activeImg].altText ?? product.title}
+                src={mainImage.url}
+                alt={mainImage.altText ?? product.title}
                 className="h-full w-full object-cover"
               />
             )}
