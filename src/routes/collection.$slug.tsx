@@ -322,7 +322,7 @@ function ProductCard({ product }: { product: ShopifyProduct }) {
             src={img.url}
             alt={img.altText ?? node.title}
             loading="lazy"
-            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            className="h-full w-full object-contain transition-transform duration-700 group-hover:scale-105"
           />
         )}
         {node.variants.edges.length === 1 && firstVariant?.availableForSale && (
