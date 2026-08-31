@@ -213,25 +213,45 @@ function PDP() {
 }
 
 /**
- * Greyon image filenames are grouped per shade: every image for a shade
- * starts with the shade number ("02-Model.jpg", "2_xxx.jpg", "08_-4.jpg",
- * "Model-13.jpg"). Variants carry the code in the title ("Rust Brown- LLS2").
- * Extract the shade number and keep only images whose filename begins with
- * that number (allowing a single leading zero), so each variant only shows
- * its own gallery.
+ * Greyon's product images are grouped per variant: each variant's own image
+ * (from Shopify) marks the start of its block, and all following images up to
+ * the next variant's image belong to that variant. We slice the gallery by
+ * those anchor positions so a selected shade/flavour only shows its own
+ * photos. If the variant's image isn't part of the gallery, we fall back to
+ * matching the shade number in the filename ("02-Model.jpg", "Model-13.jpg"),
+ * and finally to the full gallery.
  */
 function imagesForVariant(
   allImages: Array<{ url: string; altText: string | null }>,
+  variants: ShopifyVariant[],
   variant: ShopifyVariant | undefined,
 ) {
-  if (!variant) return allImages;
+  if (!variant || variants.length <= 1) return allImages;
+
+  // Position-based grouping using each variant's own image as an anchor.
+  const anchors = variants
+    .map((v) => ({
+      v,
+      idx: v.image?.url ? allImages.findIndex((img) => img.url === v.image!.url) : -1,
+    }))
+    .filter((a) => a.idx >= 0)
+    .sort((a, b) => a.idx - b.idx);
+  const me = anchors.find((a) => a.v.id === variant.id);
+  if (me) {
+    const next = anchors.find((a) => a.idx > me.idx);
+    // Generic cover shots before the first variant image belong to the first variant.
+    const start = anchors[0]?.idx === me.idx ? 0 : me.idx;
+    const slice = allImages.slice(start, next ? next.idx : allImages.length);
+    if (slice.length > 0) return slice;
+  }
+
+  // Fallback: match the shade number from the variant title against filenames.
   const codeSource = `${variant.title} ${variant.selectedOptions
     .map((o) => o.value)
     .join(" ")}`;
   const numMatch = /(\d{1,3})/.exec(codeSource);
   if (!numMatch) return allImages;
   const n = parseInt(numMatch[1], 10);
-  // Matches "02-Model.jpg", "2_x.jpg", "08_-4.jpg" at start, plus "Model-13.jpg"
   const re = new RegExp(`(?:^|[^0-9])0?${n}(?=[^0-9]|$)`);
   const filtered = allImages.filter((img) => {
     const filename = img.url.split("?")[0].split("/").pop() ?? "";
