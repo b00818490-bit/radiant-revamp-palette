@@ -23,6 +23,7 @@ export interface ShopifyVariant {
   currentlyNotInStock?: boolean;
   sku?: string | null;
   selectedOptions: Array<{ name: string; value: string }>;
+  image?: { url: string; altText?: string | null } | null;
 }
 
 export interface ShopifyMetafield {
@@ -165,7 +166,7 @@ const PRODUCT_FIELDS = `
         availableForSale
         currentlyNotInStock
         sku
-
+        image { url altText }
         selectedOptions { name value }
       }
     }
