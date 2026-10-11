@@ -346,6 +346,7 @@ function SignIn() {
           </button>
         </form>
       )}
+      {mode === "signup" && <GoogleButton busy={busy} onClick={signInWithGoogle} />}
 
       {mode === "verify" && (
         <form onSubmit={verifyAndSetPassword} className="mt-8 space-y-4">
