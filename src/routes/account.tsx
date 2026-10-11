@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Footer } from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
+import { lovable } from "@/integrations/lovable/index";
 
 export const Route = createFileRoute("/account")({
   component: AccountPage,
