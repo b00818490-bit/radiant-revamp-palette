@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Footer } from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
+import { lovable } from "@/integrations/lovable/index";
 
 export const Route = createFileRoute("/account")({
   component: AccountPage,
@@ -91,6 +92,50 @@ function passwordProblem(pw: string): string | null {
   return null;
 }
 
+function GoogleIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4">
+      <path
+        fill="#4285F4"
+        d="M23.5 12.27c0-.85-.08-1.66-.22-2.45H12v4.64h6.46a5.52 5.52 0 0 1-2.39 3.62v3h3.87c2.26-2.09 3.56-5.17 3.56-8.81Z"
+      />
+      <path
+        fill="#34A853"
+        d="M12 24c3.24 0 5.96-1.07 7.94-2.91l-3.87-3c-1.07.72-2.44 1.15-4.07 1.15-3.13 0-5.78-2.11-6.73-4.96H1.29v3.1A12 12 0 0 0 12 24Z"
+      />
+      <path
+        fill="#FBBC05"
+        d="M5.27 14.28a7.2 7.2 0 0 1 0-4.56v-3.1H1.29a12 12 0 0 0 0 10.76l3.98-3.1Z"
+      />
+      <path
+        fill="#EA4335"
+        d="M12 4.77c1.76 0 3.34.6 4.59 1.79l3.44-3.44A11.98 11.98 0 0 0 1.29 6.62l3.98 3.1C6.22 6.88 8.87 4.77 12 4.77Z"
+      />
+    </svg>
+  );
+}
+
+function GoogleButton({ busy, onClick }: { busy: boolean; onClick: () => void }) {
+  return (
+    <>
+      <div className="my-5 flex items-center gap-3">
+        <span className="h-px flex-1 bg-border" />
+        <span className="text-[10px] uppercase tracking-[0.28em] text-fog">or</span>
+        <span className="h-px flex-1 bg-border" />
+      </div>
+      <button
+        type="button"
+        onClick={onClick}
+        disabled={busy}
+        className="flex w-full items-center justify-center gap-3 border border-border py-4 text-[11px] uppercase tracking-[0.2em] text-charcoal hover:border-berry hover:text-berry disabled:opacity-60"
+      >
+        {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <GoogleIcon />}
+        Continue with Google
+      </button>
+    </>
+  );
+}
+
 function SignIn() {
   const [mode, setMode] = useState<Mode>("signin");
   const [email, setEmail] = useState("");
@@ -101,6 +146,20 @@ function SignIn() {
   const [busy, setBusy] = useState(false);
 
   const cleanEmail = () => email.trim().toLowerCase();
+
+  const signInWithGoogle = async () => {
+    setBusy(true);
+    const result = await lovable.auth.signInWithOAuth("google", {
+      redirect_uri: window.location.origin,
+    });
+    if (result.error) {
+      setBusy(false);
+      toast.error("Couldn't start Google sign-in", { description: result.error.message });
+      return;
+    }
+    // When the flow redirects full-page, the session is set on return.
+    if (!result.redirected) setBusy(false);
+  };
 
   /* Existing customer — email + password, stays signed in on this device. */
   const signInWithPassword = async (e: React.FormEvent) => {
@@ -285,6 +344,7 @@ function SignIn() {
           </div>
         </form>
       )}
+      {mode === "signin" && <GoogleButton busy={busy} onClick={signInWithGoogle} />}
 
       {mode === "signup" && (
         <form onSubmit={startSignUp} className="mt-8 space-y-4">
@@ -330,6 +390,7 @@ function SignIn() {
           </button>
         </form>
       )}
+      {mode === "signup" && <GoogleButton busy={busy} onClick={signInWithGoogle} />}
 
       {mode === "verify" && (
         <form onSubmit={verifyAndSetPassword} className="mt-8 space-y-4">
