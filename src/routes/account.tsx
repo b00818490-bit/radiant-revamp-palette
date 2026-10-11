@@ -103,6 +103,20 @@ function SignIn() {
 
   const cleanEmail = () => email.trim().toLowerCase();
 
+  const signInWithGoogle = async () => {
+    setBusy(true);
+    const result = await lovable.auth.signInWithOAuth("google", {
+      redirect_uri: window.location.origin,
+    });
+    if (result.error) {
+      setBusy(false);
+      toast.error("Couldn't start Google sign-in", { description: result.error.message });
+      return;
+    }
+    // When the flow redirects full-page, the session is set on return.
+    if (!result.redirected) setBusy(false);
+  };
+
   /* Existing customer — email + password, stays signed in on this device. */
   const signInWithPassword = async (e: React.FormEvent) => {
     e.preventDefault();
