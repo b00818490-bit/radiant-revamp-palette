@@ -300,6 +300,7 @@ function SignIn() {
           </div>
         </form>
       )}
+      {mode === "signin" && <GoogleButton busy={busy} onClick={signInWithGoogle} />}
 
       {mode === "signup" && (
         <form onSubmit={startSignUp} className="mt-8 space-y-4">
