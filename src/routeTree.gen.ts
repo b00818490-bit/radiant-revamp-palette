@@ -20,6 +20,7 @@ import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductsSlugRouteImport } from './routes/products.$slug'
 import { Route as ProductSlugRouteImport } from './routes/product.$slug'
 import { Route as PoliciesSlugRouteImport } from './routes/policies.$slug'
 import { Route as CollectionSlugRouteImport } from './routes/collection.$slug'
@@ -81,6 +82,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductsSlugRoute = ProductsSlugRouteImport.update({
+  id: '/products/$slug',
+  path: '/products/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProductSlugRoute = ProductSlugRouteImport.update({
   id: '/product/$slug',
   path: '/product/$slug',
@@ -122,6 +128,7 @@ export interface FileRoutesByFullPath {
   '/collection/$slug': typeof CollectionSlugRoute
   '/policies/$slug': typeof PoliciesSlugRoute
   '/product/$slug': typeof ProductSlugRoute
+  '/products/$slug': typeof ProductsSlugRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
 }
@@ -140,6 +147,7 @@ export interface FileRoutesByTo {
   '/collection/$slug': typeof CollectionSlugRoute
   '/policies/$slug': typeof PoliciesSlugRoute
   '/product/$slug': typeof ProductSlugRoute
+  '/products/$slug': typeof ProductsSlugRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
 }
@@ -159,6 +167,7 @@ export interface FileRoutesById {
   '/collection/$slug': typeof CollectionSlugRoute
   '/policies/$slug': typeof PoliciesSlugRoute
   '/product/$slug': typeof ProductSlugRoute
+  '/products/$slug': typeof ProductsSlugRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
 }
@@ -179,6 +188,7 @@ export interface FileRouteTypes {
     | '/collection/$slug'
     | '/policies/$slug'
     | '/product/$slug'
+    | '/products/$slug'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
   fileRoutesByTo: FileRoutesByTo
@@ -197,6 +207,7 @@ export interface FileRouteTypes {
     | '/collection/$slug'
     | '/policies/$slug'
     | '/product/$slug'
+    | '/products/$slug'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
   id:
@@ -215,6 +226,7 @@ export interface FileRouteTypes {
     | '/collection/$slug'
     | '/policies/$slug'
     | '/product/$slug'
+    | '/products/$slug'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
   fileRoutesById: FileRoutesById
@@ -234,6 +246,7 @@ export interface RootRouteChildren {
   CollectionSlugRoute: typeof CollectionSlugRoute
   PoliciesSlugRoute: typeof PoliciesSlugRoute
   ProductSlugRoute: typeof ProductSlugRoute
+  ProductsSlugRoute: typeof ProductsSlugRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
 }
@@ -317,6 +330,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/products/$slug': {
+      id: '/products/$slug'
+      path: '/products/$slug'
+      fullPath: '/products/$slug'
+      preLoaderRoute: typeof ProductsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/product/$slug': {
       id: '/product/$slug'
       path: '/product/$slug'
@@ -370,6 +390,7 @@ const rootRouteChildren: RootRouteChildren = {
   CollectionSlugRoute: CollectionSlugRoute,
   PoliciesSlugRoute: PoliciesSlugRoute,
   ProductSlugRoute: ProductSlugRoute,
+  ProductsSlugRoute: ProductsSlugRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
 }
