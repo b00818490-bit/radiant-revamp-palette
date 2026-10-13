@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/popover";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Footer } from "@/components/Footer";
+import { Button } from "@/components/ui/button";
 import {
   fetchProductByHandle,
   fetchProducts,
@@ -61,6 +62,7 @@ export const Route = createFileRoute("/product/$slug")({
         { property: "og:title", content: `${name} — Greyon` },
         { property: "og:description", content: description },
         { property: "og:type", content: "product" },
+        { name: "twitter:card", content: "summary_large_image" },
         { property: "og:url", content: url },
       ],
       links: [{ rel: "canonical", href: url }],
@@ -232,7 +234,7 @@ function imagesForVariant(
   const anchors = variants
     .map((v) => ({
       v,
-      idx: v.image?.url ? allImages.findIndex((img) => img.url === v.image!.url) : -1,
+      idx: v.image?.url ? allImages.findIndex((img) => img.url === v.image?.url) : -1,
     }))
     .filter((a) => a.idx >= 0)
     .sort((a, b) => a.idx - b.idx);
@@ -473,37 +475,35 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
 
         {/* Buy box */}
         <div className="lg:col-span-5 lg:sticky lg:top-24 self-start">
-          {product.productType && (
-            <div className="text-[11px] uppercase tracking-[0.28em] text-berry mb-3">
-              {product.productType}
+          <div className="mb-6 inline-flex items-center gap-2 rounded-md border border-berry px-5 py-4 text-sm font-bold uppercase tracking-normal text-berry">
+            <Sparkles className="h-4 w-4" />
+            Lab tested
+          </div>
+          {reviewSummary && reviewSummary.count > 0 && (
+            <div className="mb-6 flex flex-wrap items-center gap-2 text-sm font-semibold text-charcoal">
+              <div className="flex text-berry" aria-hidden="true">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <Star key={star} className={`h-4 w-4 ${star <= Math.round(reviewSummary.rating / reviewSummary.scaleMax * 5) ? "fill-current" : ""}`} />
+                ))}
+              </div>
+              <span>{reviewSummary.rating.toFixed(1)}/{reviewSummary.scaleMax} ({reviewSummary.count} {reviewSummary.count === 1 ? "review" : "reviews"})</span>
             </div>
           )}
-          <h1 className="font-display text-5xl lg:text-6xl leading-[0.95] tracking-[-0.03em] text-charcoal">
+          <h1 className="font-display text-4xl lg:text-5xl leading-tight tracking-normal text-charcoal">
             {product.title}
           </h1>
-          {product.description && (
-            <>
-              <p className="mt-4 text-fog leading-relaxed">
-                {product.description.replace(/\s*Item\s+wt[:.]?\s*.*$/i, "").trim()}
-              </p>
-              {/Item\s+wt[:.]?\s*(.+)$/i.exec(product.description)?.[1] && (
-                <p className="mt-3 text-sm font-semibold text-charcoal">
-                  Item weight: {" "}
-                  {/Item\s+wt[:.]?\s*(.+)$/i.exec(product.description)?.[1].trim()}
-                </p>
-              )}
-            </>
-          )}
 
           <div className="mt-6 flex flex-wrap items-center gap-3">
-            <span className="text-2xl font-medium text-charcoal">
+            {compareAt && (
+              <span className="text-2xl font-semibold text-charcoal line-through">
+                {formatMoney(compareAt.amount, compareAt.currencyCode)}
+              </span>
+            )}
+            <span className="text-2xl font-bold text-destructive">
               {formatMoney(price.amount, price.currencyCode)}
             </span>
             {compareAt && (
               <>
-                <span className="text-lg text-fog line-through">
-                  {formatMoney(compareAt.amount, compareAt.currencyCode)}
-                </span>
                 <span className="bg-berry px-2 py-1 text-[11px] uppercase tracking-[0.18em] text-ivory">
                   Save {discountPct}%
                 </span>
@@ -514,9 +514,6 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
           <p className="mt-1 text-xs text-fog">Inclusive of all taxes</p>
           <div className="mt-3 flex flex-wrap gap-x-6 gap-y-1 text-[11px] uppercase tracking-[0.18em] text-fog">
             {selectedVariant?.sku && <span>SKU: {selectedVariant.sku}</span>}
-            <span>
-              {selectedVariant?.availableForSale ? "In stock" : "Out of stock"}
-            </span>
           </div>
 
           {/* Variants */}
@@ -524,9 +521,9 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
             <div className="mt-8 space-y-6">
               {product.options.map((option) => (
                 <div key={option.name}>
-                  <div className="mb-3 text-[11px] uppercase tracking-[0.22em] text-charcoal">
+                  <div className="mb-4 text-sm font-bold uppercase tracking-normal text-fog">
                     {option.name}:{" "}
-                    <span className="text-berry">
+                    <span className="text-charcoal">
                       {
                         selectedVariant?.selectedOptions.find((o) => o.name === option.name)
                           ?.value
@@ -548,8 +545,10 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
                         selectedVariant?.selectedOptions.find((o) => o.name === option.name)
                           ?.value === value;
                       return (
-                        <button
+                        <Button
                           key={value}
+                          variant="outline"
+                          aria-pressed={isActive}
                           disabled={!matchingVariant || !matchingVariant.availableForSale}
                           title={
                             matchingVariant && !matchingVariant.availableForSale
@@ -558,14 +557,14 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
                           }
                           onClick={() => matchingVariant && setSelectedVariant(matchingVariant)}
 
-                          className={`px-4 py-2 text-xs border transition ${
+                          className={`h-auto min-h-14 max-w-full whitespace-normal rounded-full px-6 py-4 text-sm font-bold tracking-normal border-2 transition ${
                             isActive
-                              ? "border-charcoal bg-charcoal text-ivory"
-                              : "border-border text-charcoal hover:border-charcoal"
+                              ? "border-berry bg-background text-berry hover:bg-background hover:text-berry"
+                              : "border-border bg-card text-fog hover:border-berry hover:bg-card hover:text-berry"
                           } disabled:opacity-40 disabled:cursor-not-allowed`}
                         >
                           {value}
-                        </button>
+                        </Button>
                       );
                     })}
                   </div>
@@ -574,29 +573,44 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
             </div>
           )}
 
+          <dl className="mt-8 space-y-5 rounded-md border border-berry/20 bg-background px-5 py-6 text-sm sm:text-base">
+            <div className="flex items-center justify-between gap-4">
+              <dt className="font-semibold text-fog">Availability</dt>
+              <dd className="text-right font-bold text-berry">
+                {selectedVariant?.availableForSale
+                  ? selectedVariant.currentlyNotInStock ? "Available to order" : "In stock"
+                  : "Sold out"}
+              </dd>
+            </div>
+            <div className="flex items-center justify-between gap-4">
+              <dt className="font-semibold text-fog">Dispatch</dt>
+              <dd className="text-right font-bold text-charcoal">1–2 business days</dd>
+            </div>
+          </dl>
+
           {/* Add to bag */}
-          <div className="mt-8 flex gap-3">
+          <div className="mt-8 flex flex-wrap gap-3">
             <div className="flex items-center border border-charcoal">
-              <button
+              <Button variant="ghost"
                 aria-label="Decrease quantity"
                 onClick={() => setQty(Math.max(1, qty - 1))}
                 className="h-14 w-12 flex items-center justify-center hover:bg-muted"
               >
                 <Minus className="h-4 w-4" />
-              </button>
+              </Button>
               <span className="w-10 text-center text-sm">{qty}</span>
-              <button
+              <Button variant="ghost"
                 aria-label="Increase quantity"
                 onClick={() => setQty(qty + 1)}
                 className="h-14 w-12 flex items-center justify-center hover:bg-muted"
               >
                 <Plus className="h-4 w-4" />
-              </button>
+              </Button>
             </div>
-            <button
+            <Button
               onClick={handleAdd}
               disabled={isLoading || !selectedVariant?.availableForSale}
-              className="flex-1 bg-berry text-ivory text-[13px] uppercase tracking-[0.18em] hover:bg-berry/90 transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+              className="order-3 h-auto min-h-16 w-full whitespace-normal rounded-md bg-berry px-4 py-4 text-base font-bold uppercase tracking-normal text-ivory hover:bg-berry/90 disabled:opacity-50"
             >
               {isLoading ? (
                 <Loader2 className="h-4 w-4 animate-spin" />
@@ -604,11 +618,11 @@ function ProductView({ product }: { product: ShopifyProductNode }) {
                 "Sold out"
               ) : (
                 <>
-                  Add to bag · {formatMoney(parseFloat(price.amount) * qty, price.currencyCode)}
                   <ShoppingBag className="h-4 w-4" />
+                  Add to bag — {formatMoney(parseFloat(price.amount) * qty, price.currencyCode)}
                 </>
               )}
-            </button>
+            </Button>
             <WishlistButton
               product={product}
               variant={selectedVariant}
